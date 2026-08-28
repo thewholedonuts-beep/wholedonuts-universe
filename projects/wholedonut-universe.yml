@@ -6,7 +6,45 @@ project_metadata:
   version: 1.0.0
   created: 2026-08-14
   owner: thewholedonuts-beep
-  description: Complete money funnel network system across 28 domains
+  description: Complete money funnel network system across the documented Whole Donuts, Nurtured Chef, and GitHub Pages domains
+
+domain_registry:
+  - domain: wholedonuts.org
+    registrar: porkbun
+    status: active
+    purpose: Primary brand domain
+  - domain: wholedonuts.buzz
+    registrar: porkbun
+    status: active
+    purpose: Marketing funnel domain
+  - domain: wholedonuts.app
+    registrar: porkbun
+    status: inactive
+    purpose: Application domain
+  - domain: wenevergonnaclose.com
+    registrar: porkbun
+    status: inactive
+    purpose: Campaign domain
+  - domain: thenurturedchef.com
+    registrar: porkbun
+    status: inactive
+    purpose: Nurtured Chef brand domain
+  - domain: thenurturedchef.foundation
+    registrar: porkbun
+    status: inactive
+    purpose: Nurtured Chef foundation domain
+  - domain: thenutur3dchef.com
+    registrar: porkbun
+    status: active
+    purpose: Content and resource funnel domain
+  - domain: thewholedonuts-beep.github.io
+    registrar: github-pages
+    status: inactive
+    purpose: Owner GitHub Pages site
+  - domain: thewholedonts-universe.github.io
+    registrar: github-pages
+    status: inactive
+    purpose: Repository GitHub Pages site
 
 networks:
   lead-generation-network:
@@ -105,7 +143,7 @@ deployment_schedule:
   phase_3:
     date: 2026-08-28
     tasks:
-      - Deploy to remaining 25 domains
+      - Deploy to additional documented domains
       - Scale funnels across network
       - Launch automation sequences
     status: scheduled

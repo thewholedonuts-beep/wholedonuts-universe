@@ -146,8 +146,8 @@ Each network operates independently but can share:
 
 ### Horizontal Scaling (Add Domains)
 ```bash
-# Add 25 more domains to the network
-for i in {4..28}; do
+# Add more domains to the network
+for i in {4..12}; do
   DOMAIN="domain$i.com"
   go run cmd/network-orchestrator/main.go \
     -cmd=deploy-funnel \

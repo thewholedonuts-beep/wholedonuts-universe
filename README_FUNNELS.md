@@ -138,7 +138,7 @@ manager.GetSSLBundle(ctx, domain)
 
 The YAML configuration defines:
 
-- **Domains**: All 28 domains with their status and assigned funnels
+- **Domains**: Porkbun-managed domains with their status, registrar, and assigned funnels
 - **Funnels**: Each funnel's configuration, steps, email providers, and tracking
 - **Steps**: Landing, checkout, and confirmation page routing
 

@@ -2,7 +2,7 @@
 # This file defines all money-making funnels across your domains
 
 domains:
-  - name: wholedonuts.org
+  - name: wholedonuts
     tld: org
     status: active
     registrar: porkbun
@@ -10,7 +10,7 @@ domains:
       - lead-capture-org
       - webinar-org
 
-  - name: wholedonuts.buzz
+  - name: wholedonuts
     tld: buzz
     status: active
     registrar: porkbun
@@ -18,7 +18,31 @@ domains:
       - checkout-buzz
       - upsell-buzz
 
-  - name: thenutur3dchef.com
+  - name: wholedonuts
+    tld: app
+    status: inactive
+    registrar: porkbun
+    funnels: []
+
+  - name: wenevergonnaclose
+    tld: com
+    status: inactive
+    registrar: porkbun
+    funnels: []
+
+  - name: thenurturedchef
+    tld: com
+    status: inactive
+    registrar: porkbun
+    funnels: []
+
+  - name: thenurturedchef
+    tld: foundation
+    status: inactive
+    registrar: porkbun
+    funnels: []
+
+  - name: thenutur3dchef
     tld: com
     status: active
     registrar: porkbun
