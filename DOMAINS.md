@@ -3,12 +3,12 @@
 ## Overview
 Centralized management system for all WholeDonut domains and subdomains.
 
-- **Total Domains:** 28
+- **Documented Domains:** 9
 - **Total Subdomains:** Hundreds
-- **Registrar:** Porkbun
+- **Registrars:** Porkbun, GitHub Pages
 - **Account:** wholedonuts
 
-## Primary Domains (Active)
+## Documented Domains
 
 ### wholedonuts.org
 - **Status:** Active
@@ -26,6 +26,38 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **DNS Provider:** Porkbun
 - **Last Updated:** 2026-08-14
 
+### wholedonuts.app
+- **Status:** Inactive
+- **Registrar:** Porkbun
+- **Purpose:** Application domain
+- **Subdomains:** Not assigned
+- **DNS Provider:** Porkbun
+- **Last Updated:** 2026-08-28
+
+### wenevergonnaclose.com
+- **Status:** Inactive
+- **Registrar:** Porkbun
+- **Purpose:** Campaign domain
+- **Subdomains:** Not assigned
+- **DNS Provider:** Porkbun
+- **Last Updated:** 2026-08-28
+
+### thenurturedchef.com
+- **Status:** Inactive
+- **Registrar:** Porkbun
+- **Purpose:** Nurtured Chef brand domain
+- **Subdomains:** Not assigned
+- **DNS Provider:** Porkbun
+- **Last Updated:** 2026-08-28
+
+### thenurturedchef.foundation
+- **Status:** Inactive
+- **Registrar:** Porkbun
+- **Purpose:** Nurtured Chef foundation domain
+- **Subdomains:** Not assigned
+- **DNS Provider:** Porkbun
+- **Last Updated:** 2026-08-28
+
 ### thenutur3dchef.com
 - **Status:** Active
 - **Registrar:** Porkbun
@@ -34,17 +66,35 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **DNS Provider:** Porkbun
 - **Last Updated:** 2026-08-14
 
+### thewholedonuts-beep.github.io
+- **Status:** Inactive
+- **Registrar:** GitHub Pages
+- **Purpose:** Owner GitHub Pages site
+- **Subdomains:** Not assigned
+- **DNS Provider:** GitHub Pages
+- **Last Updated:** 2026-08-28
+
+### thewholedonts-universe.github.io
+- **Status:** Inactive
+- **Registrar:** GitHub Pages
+- **Purpose:** Repository GitHub Pages site
+- **Subdomains:** Not assigned
+- **DNS Provider:** GitHub Pages
+- **Last Updated:** 2026-08-28
+
 ## Domain Registry
 
 | Domain | TLD | Status | Registrar | Purpose | Subdomains |
 |--------|-----|--------|-----------|---------|-----------|
 | wholedonuts | .org | Active | Porkbun | Primary Brand | Multiple |
 | wholedonuts | .buzz | Active | Porkbun | Marketing Funnel | Multiple |
+| wholedonuts | .app | Inactive | Porkbun | Application Domain | None |
+| wenevergonnaclose | .com | Inactive | Porkbun | Campaign Domain | None |
+| thenurturedchef | .com | Inactive | Porkbun | Brand Domain | None |
+| thenurturedchef | .foundation | Inactive | Porkbun | Foundation Domain | None |
 | thenutur3dchef | .com | Active | Porkbun | Content Funnel | Multiple |
-| | | | | | |
-| | | | | | |
-| | | | | | |
-| | | | | | |
+| thewholedonuts-beep.github | .io | Inactive | GitHub Pages | Owner Site | None |
+| thewholedonts-universe.github | .io | Inactive | GitHub Pages | Repository Site | None |
 
 ## Subdomain Structure
 
@@ -74,15 +124,14 @@ Centralized management system for all WholeDonut domains and subdomains.
 - See `dns/` directory for DNS records and routing
 
 ## Deployment Status
-- [x] Primary domains documented
-- [ ] All 28 domains catalogued
+- [x] Documented domains catalogued
 - [ ] All subdomains mapped
 - [ ] DNS configurations synced
 - [ ] Funnel system validated
 - [ ] CI/CD pipeline configured
 
 ## Next Steps
-1. Add remaining 25 domains to registry
+1. Map subdomain routing for the newly documented domains
 2. Map all subdomain routing
 3. Set up automated deployment
 4. Configure monitoring and alerts

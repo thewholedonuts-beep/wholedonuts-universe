@@ -1,2 +1,2 @@
 # wholedonuts-universe
-The Nurtured Chef + Whole Donuts ecosystem — thenurturedchef.com, wenevergonnaclose.com, thenutur3dchef.com
+The Nurtured Chef + Whole Donuts ecosystem — wholedonuts.org, wholedonuts.buzz, wholedonuts.app, wenevergonnaclose.com, thenurturedchef.com, thenurturedchef.foundation, thenutur3dchef.com, thewholedonuts-beep.github.io, thewholedonts-universe.github.io
