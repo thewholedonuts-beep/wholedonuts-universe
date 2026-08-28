@@ -50,18 +50,6 @@ domains:
       - content-chef
       - course-chef
 
-  - name: thewholedonuts-beep
-    tld: github.io
-    status: inactive
-    registrar: github-pages
-    funnels: []
-
-  - name: thewholedonts-universe
-    tld: github.io
-    status: inactive
-    registrar: github-pages
-    funnels: []
-
 funnels:
   lead-capture-org:
     name: Lead Capture - WholeDonut Org
