@@ -287,13 +287,9 @@ func (m *Manager) DeleteFunnelStep(ctx context.Context, funnelID, stepName strin
 	return nil
 }
 
-// GetSSLBundle retrieves SSL certificate for a domain
-func (m *Manager) GetSSLBundle(ctx context.Context, domain string) (*porkbun.SSLBundle, error) {
-	bundle, err := m.client.RetrieveSSLBundle(ctx, domain)
-	if err != nil {
-		return nil, fmt.Errorf("failed to retrieve SSL bundle for %s: %w", domain, err)
-	}
-	return &bundle, nil
+// GetSSLBundle retrieves SSL certificate info for a domain (not supported in porkbun v0.2.0)
+func (m *Manager) GetSSLBundle(ctx context.Context, domain string) (map[string]string, error) {
+	return nil, fmt.Errorf("SSL bundle retrieval is not supported in the current porkbun client version")
 }
 
 // ActivateFunnel changes funnel status to active
