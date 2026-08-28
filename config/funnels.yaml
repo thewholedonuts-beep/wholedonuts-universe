@@ -50,14 +50,14 @@ domains:
       - content-chef
       - course-chef
 
-  - name: thewholedonuts-beep.github
-    tld: io
+  - name: thewholedonuts-beep
+    tld: github.io
     status: inactive
     registrar: github-pages
     funnels: []
 
-  - name: thewholedonts-universe.github
-    tld: io
+  - name: thewholedonts-universe
+    tld: github.io
     status: inactive
     registrar: github-pages
     funnels: []

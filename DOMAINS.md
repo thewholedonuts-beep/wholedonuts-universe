@@ -93,8 +93,8 @@ Centralized management system for all WholeDonut domains and subdomains.
 | thenurturedchef | .com | Inactive | Porkbun | Brand Domain | None |
 | thenurturedchef | .foundation | Inactive | Porkbun | Foundation Domain | None |
 | thenutur3dchef | .com | Active | Porkbun | Content Funnel | Multiple |
-| thewholedonuts-beep.github | .io | Inactive | GitHub Pages | Owner Site | None |
-| thewholedonts-universe.github | .io | Inactive | GitHub Pages | Repository Site | None |
+| thewholedonuts-beep | .github.io | Inactive | GitHub Pages | Owner Site | None |
+| thewholedonts-universe | .github.io | Inactive | GitHub Pages | Repository Site | None |
 
 ## Subdomain Structure
 
