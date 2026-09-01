@@ -68,11 +68,14 @@ Additional controlled Edge checks passed:
 - with the controlled browser's Clipboard write unavailable, `Copy invitation
   link` visibly reported `The invitation link could not be copied. You can
   share https://wenevergonnaclose.com/ directly.` without preventing entry.
+- with Edge DevTools emulating cellular 3G (750ms latency, 50KB/s download,
+  25KB/s upload), the local static snapshot reached `document.readyState` of
+  `complete` in 3,629ms; CSS and app entry controls were loaded and DevTools
+  recorded no loading failures.
 
 This is actual Windows Edge execution against the immutable PR snapshot, with
 automated keyboard and touch emulation. It is not physical-device, iOS,
-Android, macOS, ChromeOS, Linux, network-constrained asset, or live-domain
-evidence.
+Android, macOS, ChromeOS, Linux, real-carrier network, or live-domain evidence.
 
 ## Controlled marker staging
 
