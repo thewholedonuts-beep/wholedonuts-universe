@@ -185,7 +185,70 @@ body:not(.entered) footer{display:none}
 .entry-welcome .welcome-result strong{color:var(--green)}
 .entry-result-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.4rem}
 .entry-result-actions .button{display:inline-flex;align-items:center}
+.progressive-next-note{margin:.35rem 0 0;font-size:.95rem;line-height:1.5}
 .gateway-status{min-height:1.5rem;margin:1rem 0 0;font-weight:800}
+.age-gate{
+  display:grid;
+  gap:1rem;
+  max-width:42rem;
+  margin:1.5rem 0 0;
+  padding:clamp(1.25rem,3vw,2rem);
+  border:2px solid var(--ink);
+  border-radius:1.25rem;
+  background:#fffaf0cc
+}
+.age-gate h2{margin:0;font:700 clamp(2rem,4vw,3.3rem)/1 Georgia,serif}
+.age-gate p{max-width:38rem;margin:0;line-height:1.5}
+.age-choice-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+.age-gate button{
+  min-height:3.6rem;
+  border:2px solid var(--ink);
+  border-radius:1rem;
+  padding:1rem;
+  background:#fffaf0;
+  color:var(--ink);
+  font-weight:900;
+  cursor:pointer
+}
+.age-gate button:hover,.age-gate button:focus{background:var(--gold)}
+#youth-age-form{
+  display:grid;
+  gap:.75rem;
+  padding:1rem;
+  border:2px solid var(--green);
+  border-radius:1rem;
+  background:#dce9d9
+}
+#youth-age-form input{max-width:16rem;padding:.75rem;border:2px solid var(--ink);border-radius:.6rem;font:inherit}
+#youth-age-note{font-size:.9rem}
+#under-13-notice{
+  display:grid;
+  gap:.75rem;
+  padding:1rem;
+  border:2px solid var(--berry);
+  border-radius:1rem;
+  background:#f5e5eb
+}
+#under-13-notice h3{margin:0;font:700 1.5rem/1 Georgia,serif;color:var(--berry)}
+.youth-path-note{
+  margin:0 0 1rem;
+  padding:.75rem;
+  border-left:4px solid var(--green);
+  background:#dce9d9;
+  font-weight:700;
+  line-height:1.5
+}
+body.youth-mode .rail,
+body.youth-mode #crumb-workshop,
+body.youth-mode #ambassador-path,
+body.youth-mode #award-signin,
+body.youth-mode #member-greeting,
+body.youth-mode #plusu-dashboard,
+body.youth-mode .journey-offers,
+body.youth-mode .virtual-store,
+body.youth-mode #donation-access-hub,
+body.youth-mode #awd,
+body.youth-mode #tnc{display:none!important}
 .launch-window{
   margin-top:1.5rem;
   padding:1rem;

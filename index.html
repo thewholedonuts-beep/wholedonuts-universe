@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="styles.css?v=universe-prototype1">
 </head>
 <body>
-  <a class="skip-link" href="#table">Skip the gateway and enter the table</a>
+  <a class="skip-link" href="#age-gate">Skip the figure field and choose an age path</a>
   <section class="universe-gateway" id="home" aria-labelledby="universe-gateway-title">
     <div class="entry-backdrop" aria-hidden="true">
       <div class="overflow-hand hand-left"><span></span><span></span><span></span><span></span></div>
@@ -35,9 +35,31 @@
         <p class="eyebrow">+U UNIVERSE · ANONYMOUS ENTRY</p>
         <h1 id="universe-gateway-title">One table.<br>Many subjects.</h1>
         <p class="universe-lede">A quiet start. No name, account, or profile.</p>
-        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title">
+        <section class="age-gate" id="age-gate" aria-labelledby="age-gate-title">
+          <p class="eyebrow">START HERE</p>
+          <h2 id="age-gate-title">Choose the path that fits.</h2>
+          <p>We use this choice only to show an age-appropriate, low-data start. It is not stored or verified.</p>
+          <div class="answer-grid age-choice-actions">
+            <button type="button" data-age-choice="adult">Adult (18+)</button>
+            <button type="button" data-age-choice="youth">Youth (13-17)</button>
+          </div>
+          <form id="youth-age-form" hidden>
+            <label for="youth-birth-date">Birth date</label>
+            <input id="youth-birth-date" type="date" inputmode="numeric" aria-describedby="youth-age-note" required>
+            <p id="youth-age-note">Used in this browser only to confirm this youth path, then immediately cleared. It is not stored, sent, or verified.</p>
+            <button type="submit">Continue to the youth path</button>
+          </form>
+          <div id="under-13-notice" hidden aria-live="polite">
+            <h3>This table is not set up for under 13.</h3>
+            <p>No birth date or other information was kept. Please ask a parent or guardian before using online community features.</p>
+            <button type="button" id="restart-age-gate">Start over</button>
+          </div>
+          <p id="age-gate-status" class="gateway-status" aria-live="polite"></p>
+        </section>
+        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title" hidden>
           <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
           <h2 id="welcome-title">Three questions. One useful start.</h2>
+          <p id="youth-path-note" class="youth-path-note" hidden>Your youth path stays anonymous and low-data. Payment, store, member, and ambassador paths are not shown here.</p>
           <div class="welcome-step" data-question="1" data-key="intent">
             <p>What do you need right now?</p>
             <div class="answer-grid">
@@ -69,6 +91,7 @@
               <a class="button primary" id="outcome-primary" href="#community-counter"></a>
               <a class="button" id="outcome-next" href="#home"></a>
             </div>
+            <p class="progressive-next-note">Try something. Keep what helps. Choose what is next, change direction, reset, or leave. Nothing is required.</p>
             <button type="button" id="restart-welcome">Ask me again</button>
           </div>
         </section>
@@ -239,8 +262,8 @@
             </div>
             <div class="dashboard-copy">
               <p id="dashboard-progress" aria-live="polite"></p>
-              <ul id="dashboard-unlocks" aria-label="Unlocked optional accessories"></ul>
-              <p><strong>Try next:</strong> open a course, visit a community subject, read the crumb protocol, or open the share invitation. These are voluntary exploration steps, not purchases or donations.</p>
+              <ul id="dashboard-unlocks" aria-label="Optional accessories shown during this visit"></ul>
+              <p><strong>Try, learn, choose a next path:</strong> open a course, visit a community subject, read the crumb protocol, or open the share invitation. Keep what helps; nothing is required. These are voluntary exploration steps, not purchases or donations.</p>
               <button id="reset-dashboard" type="button">Reset dashboard and restart welcome</button>
               <p class="dashboard-note">Only a short anonymous accessory list stays in this browser for continuity. Reset removes it; your +U pass, if any, is a device-local return link and not an identity or profile.</p>
             </div>
@@ -344,7 +367,7 @@
           <section class="journey-offers" id="journey-offers" aria-labelledby="journey-offers-title">
             <p class="eyebrow">YOUR NEXT BITE</p>
             <h3 id="journey-offers-title">Start with what fits today.</h3>
-            <p id="journey-offers-copy">Answer the three welcome questions and this space will shape itself around what you came for.</p>
+            <p id="journey-offers-copy">Try something, keep what helps, and choose what is next. Nothing is required.</p>
             <div class="journey-offer-actions">
               <a class="button primary" href="templates/plus-u-next-step-template.md">Get the free +U next-step template</a>
               <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>

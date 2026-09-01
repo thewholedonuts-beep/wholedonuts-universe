@@ -53,6 +53,20 @@ depend on support selection, payment, purchase, sharing recipients, referrals,
 or external tracking. A reset removes the local Dashboard record and restarts
 the welcome flow. A +U pass is a device-local return link, not an identity.
 
+## Try, learn, choose a next path
+
+The public experience follows a voluntary progression: **Try -> Learn -> Choose
+a next path.** A completed non-financial exploration action may show one
+relevant optional next route or a helpful explanation. It never allocates
+access, entitlement, rank, score, certification, financial value, or a locked
+essential resource. A person may skip, change direction, reset, or leave at
+any time; core public resources remain available without proving effort.
+
+Any continuity remains anonymous, minimal, and resettable in the browser. It
+must never use age choice, birth date, email, pass, QR, support, payment,
+purchase, recipient, social activity, referral, or sensitive information to
+show or withhold material.
+
 ## Fresh Launch Window
 
 The public entry may keep one versioned browser-local record with only a launch
