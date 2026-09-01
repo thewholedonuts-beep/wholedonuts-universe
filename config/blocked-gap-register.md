@@ -21,7 +21,7 @@ environment as supported.
 | Evidence area | Status | Required record |
 |---|---|---|
 | Windows Edge portrait captures | Executed before remediation | Edge headless captures at 320x568, 360x800, 390x844, and 412x915 prove the deployed overflow defect. |
-| Branch mobile after-evidence | Partially executed | Edge 152.0.4191.53 actual execution with automated one-point touch/keyboard emulation: all four required portrait widths had `scrollWidth == clientWidth`, zero DevTools errors, a zero-size hidden rail, non-intercepting backdrop, 4/4 scrolled bounds/touch transitions, keyboard focus/Enter progression, #awd/#tnc routes, and reduced-motion styles. Network-constrained asset evidence remains blocked. |
+| Branch mobile after-evidence | Partially executed | Edge 152.0.4191.53 actual execution with automated one-point touch/keyboard emulation: all four required portrait widths had `scrollWidth == clientWidth`, zero DevTools errors, a zero-size hidden rail, non-intercepting backdrop, 4/4 scrolled bounds/touch transitions, keyboard focus/Enter progression, #awd/#tnc routes, reduced-motion styles, and a 750ms/50KB/s emulated-3G local asset load with no failure. Physical-device/network evidence remains blocked. |
 | Landscape and desktop layouts | Unknown | Execute only where layout behavior differs; record viewport and browser. |
 | iOS, Android, macOS, ChromeOS, Linux | Unknown | Current evergreen browser evidence is required before marking support pass. |
 | Clipboard, localStorage, QR fallback | Controlled Edge evidence | Injected Storage `SecurityError` preserved core entry; unavailable Clipboard write showed a direct-share message; blocked QR request showed the private-link fallback. Physical-device/private-mode coverage remains unknown. |
