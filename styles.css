@@ -39,6 +39,9 @@ body{
     radial-gradient(circle at 76% 18%,#f8d87655,transparent 25rem),
     linear-gradient(135deg,#9dd5d8,#f5f0e6 56%,#e8d9b8)
 }
+body:not(.entered) .rail,
+body:not(.entered) main,
+body:not(.entered) footer{display:none}
 .entry-backdrop{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .overflow-hand{
   position:absolute;
@@ -158,40 +161,30 @@ body{
 .field-figure::before{content:'';position:absolute;top:-1.6rem;left:-.85rem;width:1.6rem;height:1.6rem;border:3px solid var(--ink);border-radius:50%;background:#fffaf0}
 .field-figure::after{content:'';position:absolute;top:1.3rem;left:-1.5rem;width:3rem;height:2.5rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);clip-path:polygon(0 0,100% 48%,0 100%,10% 48%)}
 .field-figure.one{left:18%;top:34%;transform:rotate(-10deg)}.field-figure.two{left:48%;top:20%;transform:rotate(8deg)}.field-figure.three{left:67%;top:46%;transform:rotate(-8deg)}.field-figure.four{left:37%;top:57%;transform:rotate(12deg)}.field-figure.five{left:10%;top:65%;transform:rotate(-15deg)}.field-figure.six{left:71%;top:70%;transform:rotate(10deg)}.field-figure.seven{left:47%;top:76%;transform:rotate(-4deg)}
-.gateway-choices{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:.8rem;
-  margin:1.5rem 0
+.entry-welcome{
+ max-width:42rem;
+ margin:1.5rem 0 0;
+ padding:0;
+ background:transparent;
+ color:var(--ink);
+ box-shadow:none
 }
-.gateway-choice{
-  min-height:8.5rem;
-  padding:1rem;
-  border:2px solid var(--ink);
-  border-radius:1rem;
-  color:var(--ink);
-  text-align:left;
-  text-decoration:none;
-  font:inherit;
-  cursor:pointer;
-  display:grid;
-  align-content:space-between;
-  gap:.7rem;
-  background:#fff;
-  box-shadow:4px 4px 0 #15130f55;
-  transition:transform .2s,box-shadow .2s
+.entry-welcome h2{max-width:15ch;margin:.3rem 0 1rem;font:700 clamp(2rem,4vw,3.3rem)/1 Georgia,serif}
+.entry-welcome .welcome-step>p{font-size:1.1rem}
+.entry-welcome .answer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.entry-welcome .answer-grid button,
+.entry-welcome .welcome-result button{
+ min-height:3.6rem;
+ border-color:var(--ink);
+ background:#fffaf0;
+ color:var(--ink)
 }
-.gateway-choice:hover,
-.gateway-choice:focus-visible{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
-.gateway-choice strong{font:700 clamp(1.25rem,2.3vw,1.7rem)/1.05 Georgia,serif}
-.gateway-choice span{font-weight:700;line-height:1.35}
-.gateway-choice.whole-donuts{background:#f1d5df}
-.gateway-choice.nurtured-chef{background:#dce9d9}
-.gateway-choice.new-school{background:#eadcf3}
-.gateway-choice.community{background:#f9e8ba}
-.gateway-choice.dashboard-choice{background:#dceef0}
-.gateway-note{font-size:.9rem;font-weight:700;line-height:1.5}
-.gateway-note a{color:var(--ink)}
+.entry-welcome .answer-grid button:hover,
+.entry-welcome .answer-grid button:focus{background:var(--gold)}
+.entry-welcome.complete{background:transparent;color:var(--ink)}
+.entry-welcome .welcome-result strong{color:var(--green)}
+.entry-result-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.4rem}
+.entry-result-actions .button{display:inline-flex;align-items:center}
 .gateway-status{min-height:1.5rem;margin:1rem 0 0;font-weight:800}
 .launch-window{
   margin-top:1.5rem;

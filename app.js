@@ -1,8 +1,6 @@
 const links=[...document.querySelectorAll('[data-branch]')];
 const store=document.querySelector('#branch-store');
 const navigationStatus=document.querySelector('#table-navigation-status');
-const startCommunityWelcome=document.querySelector('#start-community-welcome');
-const openGatewayDashboard=document.querySelector('#open-gateway-dashboard');
 const launchWindowStatus=document.querySelector('#launch-window-status');
 const launchWindowReset=document.querySelector('#reset-launch-window');
 const launchWindowKey='plusu-launch-window';
@@ -300,7 +298,7 @@ function completeLaunchInteraction(){
 }
 
 function isLaunchEligibleRoute(id){
-  return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library'].includes(id);
+  return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
 }
 
 if(launchWindowReset)launchWindowReset.addEventListener('click',()=>{
@@ -317,6 +315,7 @@ function focusRouteTarget(id){
 
 function syncBranch({focus=false}={}){
   const id=location.hash.slice(1);
+  if(id&&id!=='home')document.body.classList.add('entered');
   if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
   if(store){store.textContent='Return to the +U gateway';store.href='#home'}
@@ -347,17 +346,6 @@ function openGatewayRoute(id,message){
   location.hash=id;
   if(navigationStatus)navigationStatus.textContent=message;
 }
-
-if(startCommunityWelcome)startCommunityWelcome.addEventListener('click',()=>{
-  openGatewayRoute('welcome-gate','The three-question Community / Foundation welcome is ready.');
-});
-if(openGatewayDashboard)openGatewayDashboard.addEventListener('click',()=>{
-  if(dashboard&&!dashboard.hidden){
-    openGatewayRoute('plusu-dashboard','Opened your anonymous local +U Dashboard.');
-    return;
-  }
-  openGatewayRoute('welcome-gate','Complete the three-question welcome to open the anonymous local +U Dashboard.');
-});
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];
 const menuPanels=[...document.querySelectorAll('[data-course]')];
@@ -398,7 +386,43 @@ const gate=document.querySelector('#welcome-gate');
 const counter=document.querySelector('#community-counter');
 const steps=[...document.querySelectorAll('[data-question]')];
 const welcomeResult=document.querySelector('#welcome-result');
+const outcomePrimary=document.querySelector('#outcome-primary');
+const outcomeNext=document.querySelector('#outcome-next');
 const welcomeAnswers={};
+
+const counterCourses={
+  learn:'bites',
+  share:'bites',
+  help:'biggies',
+  explore:'bits'
+};
+const tableOutcomes={
+  learn:{
+    href:'#template-library',
+    action:'Open the +U Library',
+    detail:'Begin with the existing next-step template and guide.'
+  },
+  share:{
+    href:'#crumb-workshop',
+    action:'Open the reviewed Crumb Saver path',
+    detail:'Begin with the protocol, contribution template, and public contact guidance. This static site does not submit a crumb.'
+  },
+  help:{
+    href:'#ambassador-path',
+    action:'Open the Ambassador Path',
+    detail:'Begin with the existing community, skill, and project guidance without a promise of enrollment or benefit.'
+  },
+  explore:{
+    href:'world/',
+    action:'Open the Figure Studio',
+    detail:'Begin with the existing +U world and return to the table when ready.'
+  }
+};
+const branchNext={
+  awd:{href:'#awd',label:'Next: open Whole Donuts'},
+  tnc:{href:'#tnc',label:'Next: open The Nurtured Chef'},
+  table:{href:'#donuts-new-school',label:'Next: open Donuts New School'}
+};
 
 function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
@@ -407,7 +431,16 @@ function showQuestion(number){
 }
 function finishWelcome({scroll=true}={}){
   const branch=welcomeAnswers.branch;
-  const course=welcomeAnswers.course||'bits';
+  const intent=welcomeAnswers.intent||'explore';
+  const entry=welcomeAnswers.entry||'counter';
+  const course=counterCourses[intent]||'bits';
+  const outcome=entry==='counter'
+    ?{
+      href:'#community-counter',
+      action:'Open the guided Counter',
+      detail:'Begin the existing '+course.toUpperCase()+' menu course for '+intent+'.'
+    }
+    :tableOutcomes[intent];
   openCourse(course);
   saveJourney();
   gate.classList.add('complete');
@@ -415,17 +448,31 @@ function finishWelcome({scroll=true}={}){
   welcomeResult.hidden=false;
   counter.hidden=false;
   beginDashboard();
-  const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the whole +U table';
-  welcomeResult.querySelector('strong').textContent='Your seat is ready at '+branchWords+'.';
-  welcomeResult.querySelector('span').textContent='We opened '+course.toUpperCase()+' first. Change courses anytime.';
+  document.body.classList.add('entered');
+  const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the shared community table';
+  welcomeResult.querySelector('strong').textContent=outcome.action+'.';
+  welcomeResult.querySelector('span').textContent=outcome.detail+' Your selected experience: '+branchWords+'.';
+  if(outcomePrimary){
+    outcomePrimary.href=outcome.href;
+    outcomePrimary.textContent=outcome.action;
+  }
+  if(outcomeNext){
+    const next=branchNext[branch]||branchNext.table;
+    outcomeNext.href=next.href;
+    outcomeNext.textContent=next.label;
+    outcomeNext.hidden=false;
+  }
   showQuestion(4);
-  if(scroll)counter.scrollIntoView({behavior:'smooth',block:'start'});
+  if(scroll){
+    welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
+    if(outcomePrimary)outcomePrimary.focus({preventScroll:true});
+  }
 }
 function saveJourney(){
   const journey={
-    branch:welcomeAnswers.branch||'both',
-    course:welcomeAnswers.course||'bits',
-    intent:welcomeAnswers.intent||'wander'
+    branch:welcomeAnswers.branch||'table',
+    course:counterCourses[welcomeAnswers.intent]||'bits',
+    intent:welcomeAnswers.intent||'explore'
   };
   safeSet('plusu-welcome',JSON.stringify(journey));
   renderJourneyOffers(journey);
@@ -436,9 +483,9 @@ function renderJourneyOffers(journey){
   const branch=journey.branch==='awd'?'Whole Donuts':journey.branch==='tnc'?'The Nurtured Chef':'+U';
   const intent={
     learn:'a practical resource to explore',
-    make:'a small project to make real',
+    share:'a reviewed way to carry useful knowledge forward',
     help:'a way to support the community',
-    wander:'room to look around at your own pace'
+    explore:'room to look around at your own pace'
   }[journey.intent]||'a next step that fits today';
   journeyOfferTitle.textContent=branch+' picks, made for your '+journey.course+' appetite.';
   journeyOfferCopy.textContent='Start with '+intent+'. Your free next-step template is ready whenever you are.';
@@ -448,9 +495,9 @@ function renderVirtualStore(journey,branch,intent){
   if(!virtualStoreTitle||!virtualStoreCopy||!featuredProductTitle||!featuredProductCopy)return;
   const featured={
     learn:['Open Water Poster','A calm wall piece for keeping a good question close.'],
-    make:['Table Tote','For tools, notes, and the work you are ready to make real.'],
+    share:['Table Tote','For tools, notes, and the work you are ready to make real.'],
     help:['4 ALL Everyday Tee','A soft, simple way to show that there is room at the table.'],
-    wander:['Counter Mug','For slow starts, fresh air, and finding your next step at your own pace.']
+    explore:['Counter Mug','For slow starts, fresh air, and finding your next step at your own pace.']
   }[journey.intent]||['Everyday Tee','Soft, simple, and ready for the long way home.'];
   virtualStoreTitle.textContent='Made by +U, 4 ALL - a little '+branch+' for your '+journey.course+' appetite.';
   virtualStoreCopy.textContent='Since you came here for '+intent+', we pulled a few gentle ideas toward that direction. Browse at your own pace; this is a future Shopify + Printful collection, with no merchandise order or payment collected here.';
@@ -490,6 +537,7 @@ function resetWelcome(){
   welcomeResult.hidden=true;
   counter.hidden=true;
   if(dashboard)dashboard.hidden=true;
+  document.body.classList.remove('entered');
   gate.classList.remove('complete');
   showQuestion(1);
   gate.scrollIntoView({behavior:'smooth'});
@@ -612,4 +660,4 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
 });
 
 addEventListener('hashchange',()=>syncBranch({focus:true}));
-syncBranch();
+syncBranch({focus:location.hash.length>1});

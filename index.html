@@ -34,18 +34,45 @@
       <div class="universe-copy">
         <p class="eyebrow">+U UNIVERSE · ANONYMOUS ENTRY</p>
         <h1 id="universe-gateway-title">One table.<br>Many subjects.</h1>
-        <p class="universe-lede">Enter anonymously. Choose a real part of the table.</p>
-        <div class="gateway-choices" aria-label="Choose a verified +U entry">
-          <a class="gateway-choice whole-donuts" href="#awd"><strong>Whole Donuts</strong><span>Open its community section.</span></a>
-          <a class="gateway-choice nurtured-chef" href="#tnc"><strong>The Nurtured Chef</strong><span>Open its food and care section.</span></a>
-          <button class="gateway-choice community" id="start-community-welcome" type="button"><strong>Community Counter</strong><span>Start the three-question guide.</span></button>
-          <a class="gateway-choice new-school" href="#donuts-new-school"><strong>Donuts New School</strong><span>Visionaries &amp; Pioneers learning.</span></a>
-          <a class="gateway-choice" href="#template-library"><strong>+U Library</strong><span>Open free learning templates.</span></a>
-          <a class="gateway-choice" href="#crumb-workshop"><strong>Crumb Saver</strong><span>Read the reviewed path.</span></a>
-          <a class="gateway-choice" href="world/"><strong>Figure Studio</strong><span>Open the existing +U world.</span></a>
-          <button class="gateway-choice dashboard-choice" id="open-gateway-dashboard" type="button"><strong>+U Dashboard</strong><span>Complete welcome to open it.</span></button>
-        </div>
-        <p class="gateway-status" id="table-navigation-status" aria-live="polite">Choose a verified entry to continue anonymously.</p>
+        <p class="universe-lede">A quiet start. No name, account, or profile.</p>
+        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title">
+          <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
+          <h2 id="welcome-title">Three questions. One useful start.</h2>
+          <div class="welcome-step" data-question="1" data-key="intent">
+            <p>What do you need right now?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="learn">Learn</button>
+              <button type="button" data-answer="share">Share from experience</button>
+              <button type="button" data-answer="help">Help</button>
+              <button type="button" data-answer="explore">Explore</button>
+            </div>
+          </div>
+          <div class="welcome-step" data-question="2" data-key="branch" hidden>
+            <p>Which experience feels relevant?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="awd">Whole Donuts</button>
+              <button type="button" data-answer="tnc">The Nurtured Chef</button>
+              <button type="button" data-answer="table">The shared community table</button>
+            </div>
+          </div>
+          <div class="welcome-step" data-question="3" data-key="entry" hidden>
+            <p>How would you like to begin?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="counter">Guided Counter</button>
+              <button type="button" data-answer="table">Shared Table</button>
+            </div>
+          </div>
+          <div class="welcome-result" id="welcome-result" aria-live="polite" hidden>
+            <strong>Your first useful start is ready.</strong>
+            <span></span>
+            <div class="entry-result-actions">
+              <a class="button primary" id="outcome-primary" href="#community-counter"></a>
+              <a class="button" id="outcome-next" href="#home"></a>
+            </div>
+            <button type="button" id="restart-welcome">Ask me again</button>
+          </div>
+        </section>
+        <p class="gateway-status" id="table-navigation-status" aria-live="polite">Answer three questions to enter the table anonymously.</p>
       </div>
     </div>
   </section>
@@ -134,7 +161,7 @@
         </section>
       </section>
 
-      <section class="ambassador-path" aria-labelledby="ambassador-path-title">
+      <section class="ambassador-path" id="ambassador-path" aria-labelledby="ambassador-path-title">
         <p class="eyebrow">THE +U AMBASSADOR PATH</p>
         <h2 id="ambassador-path-title">Your resilience is a credential.</h2>
         <p>Artists, tradespeople, organizers, business leaders, neighbors rebuilding after hard times, and people still finding their footing all bring knowledge worth carrying forward. +U recognizes what you have learned and gives you a place to grow it, share it, or take it wherever your own path leads.</p>
@@ -172,42 +199,6 @@
       <section class="member-greeting" id="member-greeting" hidden aria-live="polite">
         <strong id="member-greeting-title">Welcome back.</strong>
         <span id="member-greeting-copy">Your place at the table is here when you are ready.</span>
-      </section>
-
-      <section class="welcome-gate" id="welcome-gate" aria-labelledby="welcome-title">
-        <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
-        <h2 id="welcome-title">Three questions. Then your seat is ready.</h2>
-        <div class="welcome-step" data-question="1" data-key="branch">
-          <p>What sounds good right now?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="awd">Whole Donuts</button>
-            <button type="button" data-answer="tnc">The Nurtured Chef</button>
-            <button type="button" data-answer="both">Surprise me with +U</button>
-          </div>
-        </div>
-        <div class="welcome-step" data-question="2" data-key="course" hidden>
-          <p>How hungry are you?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="bits">Just a bit</button>
-            <button type="button" data-answer="bites">Give me a plate</button>
-            <button type="button" data-answer="biggies">Bring the bib</button>
-            <button type="button" data-answer="bombs">Dessert first</button>
-          </div>
-        </div>
-        <div class="welcome-step" data-question="3" data-key="intent" hidden>
-          <p>What would feel good today?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="learn">Learn something</button>
-            <button type="button" data-answer="make">Make something</button>
-            <button type="button" data-answer="help">Help something</button>
-            <button type="button" data-answer="wander">Just wander</button>
-          </div>
-        </div>
-        <div class="welcome-result" id="welcome-result" aria-live="polite" hidden>
-          <strong>Your seat is ready.</strong>
-          <span>Welcome to +U.</span>
-          <button type="button" id="restart-welcome">Ask me again</button>
-        </div>
       </section>
 
       <div class="counter" id="community-counter" aria-label="Today's community menu" hidden>
