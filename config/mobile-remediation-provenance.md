@@ -12,6 +12,12 @@ This private record supports PR #14 and is excluded from the Pages artifact.
 
 ## Verified gaps
 
+- **Canonical identity:** `WholeDonuts` is
+  `thewholedonuts-beep/wholedonuts-sunshine` in the desktop application.
+  Treat Sunshine and WholeDonuts as one preserve-first source system; do not
+  duplicate-count, separately import, or assign contradictory ownership to
+  its history. Its application, data, infrastructure, and operational
+  dependencies remain archive-preserved pending disposition.
 - Original Movement trifold image files remain unrecovered.
 - No canonical mobile-first source layout was recovered; the PR changes only
   the confirmed rail reservation and root overflow defect.
