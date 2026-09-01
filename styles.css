@@ -170,6 +170,17 @@ body:not(.entered) footer{display:none}
  box-shadow:none
 }
 .entry-welcome h2{max-width:15ch;margin:.3rem 0 1rem;font:700 clamp(2rem,4vw,3.3rem)/1 Georgia,serif}
+.visually-hidden{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important
+}
 .entry-welcome .welcome-step>p{font-size:1.1rem}
 .entry-welcome .answer-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .entry-welcome .answer-grid button,
@@ -199,6 +210,60 @@ body:not(.entered) footer{display:none}
 }
 .age-gate h2{margin:0;font:700 clamp(2rem,4vw,3.3rem)/1 Georgia,serif}
 .age-gate p{max-width:38rem;margin:0;line-height:1.5}
+.figure-choice-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.75rem
+}
+.figure-choice{
+  display:grid;
+  justify-items:center;
+  gap:.65rem;
+  min-height:11rem;
+  border:2px solid var(--ink);
+  border-radius:1rem;
+  padding:1rem;
+  background:transparent;
+  color:var(--ink);
+  font:800 1rem/1.2 Inter,ui-sans-serif,system-ui,sans-serif;
+  cursor:pointer
+}
+.figure-choice:hover,.figure-choice:focus{background:#ffffff99}
+.figure-choice-art{
+  position:relative;
+  display:block;
+  width:4rem;
+  height:6rem;
+  border-left:3px solid var(--ink)
+}
+.figure-choice-art::before{
+  content:'';
+  position:absolute;
+  top:-.1rem;
+  left:-.95rem;
+  width:1.8rem;
+  height:1.8rem;
+  border:3px solid var(--ink);
+  border-radius:50%
+}
+.figure-choice-art::after{
+  content:'';
+  position:absolute;
+  top:2rem;
+  left:-1.65rem;
+  width:3.2rem;
+  height:3.4rem;
+  border-top:3px solid var(--ink);
+  border-bottom:3px solid var(--ink);
+  clip-path:polygon(0 0,100% 48%,0 100%,10% 48%)
+}
+.figure-choice-art span{position:absolute;bottom:0;left:0;width:2.3rem;border-top:3px solid var(--ink);transform-origin:left center}
+.figure-choice-standing{transform:scale(.9)}
+.figure-choice-reaching{transform:rotate(-8deg) scale(1.05)}
+.figure-choice-reaching span{transform:rotate(-35deg)}
+.figure-choice-seated{height:4.3rem;margin-top:1.7rem;transform:rotate(12deg) scale(.85)}
+.figure-choice-seated span{transform:rotate(45deg)}
+.figure-choice-text{font-size:.9rem}
 .age-choice-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
 .age-gate button{
   min-height:3.6rem;
@@ -211,7 +276,7 @@ body:not(.entered) footer{display:none}
   cursor:pointer
 }
 .age-gate button:hover,.age-gate button:focus{background:var(--gold)}
-#youth-age-form{
+#age-eligibility-form{
   display:grid;
   gap:.75rem;
   padding:1rem;
@@ -219,7 +284,7 @@ body:not(.entered) footer{display:none}
   border-radius:1rem;
   background:#dce9d9
 }
-#youth-age-form input{max-width:16rem;padding:.75rem;border:2px solid var(--ink);border-radius:.6rem;font:inherit}
+#age-eligibility-form input{max-width:16rem;padding:.75rem;border:2px solid var(--ink);border-radius:.6rem;font:inherit}
 #youth-age-note{font-size:.9rem}
 #under-13-notice{
   display:grid;
@@ -230,6 +295,15 @@ body:not(.entered) footer{display:none}
   background:#f5e5eb
 }
 #under-13-notice h3{margin:0;font:700 1.5rem/1 Georgia,serif;color:var(--berry)}
+#pace-support{
+  display:grid;
+  gap:.75rem;
+  padding:1rem;
+  border:2px solid var(--ink);
+  border-radius:1rem;
+  background:#ffffff99
+}
+#pace-support h3{margin:0;font:700 1.5rem/1 Georgia,serif}
 .youth-path-note{
   margin:0 0 1rem;
   padding:.75rem;
@@ -951,6 +1025,9 @@ footer a{color:var(--ink);font-weight:900}
   .entry-jack{opacity:.3}
   .universe-shell{grid-template-columns:1fr;padding:1.5rem;border-radius:1.25rem}
   .stick-field{width:min(13rem,65vw);height:17rem}
+  .figure-choice-grid{grid-template-columns:1fr}
+  .figure-choice{min-height:6rem;grid-template-columns:4rem 1fr;align-items:center;text-align:left}
+  .figure-choice-art{margin:auto}
   .course-tabs{grid-template-columns:repeat(2,1fr)}
   .dashboard-grid{grid-template-columns:1fr}
   .course-grid,

@@ -398,7 +398,8 @@ const outcomePrimary=document.querySelector('#outcome-primary');
 const outcomeNext=document.querySelector('#outcome-next');
 const ageGate=document.querySelector('#age-gate');
 const ageGateStatus=document.querySelector('#age-gate-status');
-const youthAgeForm=document.querySelector('#youth-age-form');
+const ageEligibility=document.querySelector('#age-eligibility');
+const youthAgeForm=document.querySelector('#age-eligibility-form');
 const youthBirthDate=document.querySelector('#youth-birth-date');
 const under13Notice=document.querySelector('#under-13-notice');
 const youthPathNote=document.querySelector('#youth-path-note');
@@ -458,22 +459,26 @@ function showAgeGate(message=''){
   document.body.classList.remove('adult-mode','youth-mode','entered');
   if(ageGate)ageGate.hidden=false;
   if(gate)gate.hidden=true;
-  if(youthAgeForm)youthAgeForm.hidden=true;
+  if(ageEligibility)ageEligibility.hidden=true;
   if(under13Notice)under13Notice.hidden=true;
   if(youthBirthDate)youthBirthDate.value='';
   if(youthPathNote)youthPathNote.hidden=true;
   if(ageGateStatus)ageGateStatus.textContent=message;
 }
-function beginWelcome(mode){
-  ageMode=mode;
-  document.body.classList.toggle('adult-mode',mode==='adult');
-  document.body.classList.toggle('youth-mode',mode==='youth');
+function beginWelcome(){
   if(ageGate)ageGate.hidden=true;
   if(gate)gate.hidden=false;
-  if(youthPathNote)youthPathNote.hidden=mode!=='youth';
+  if(youthPathNote)youthPathNote.hidden=true;
   showQuestion(1);
-  const firstQuestion=steps[0];
-  if(firstQuestion)firstQuestion.querySelector('button').focus();
+  focusQuestion(1);
+}
+function showAgeEligibility(){
+  if(gate)gate.hidden=true;
+  if(ageEligibility)ageEligibility.hidden=false;
+  if(under13Notice)under13Notice.hidden=true;
+  if(youthBirthDate)youthBirthDate.value='';
+  if(ageGateStatus)ageGateStatus.textContent='';
+  if(youthBirthDate)youthBirthDate.focus();
 }
 function ageFromDate(value){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
@@ -485,19 +490,20 @@ function ageFromDate(value){
   if(today.getMonth()<month-1||(today.getMonth()===month-1&&today.getDate()<day))age-=1;
   return age>=0?age:null;
 }
-document.querySelectorAll('[data-age-choice]').forEach(button=>button.addEventListener('click',()=>{
-  if(button.dataset.ageChoice==='adult'){
-    beginWelcome('adult');
-    return;
-  }
-  if(youthAgeForm)youthAgeForm.hidden=false;
-  if(ageGateStatus)ageGateStatus.textContent='Enter a birth date only to calculate this local youth-path eligibility; it will be cleared immediately.';
-  if(youthBirthDate)youthBirthDate.focus();
+document.querySelectorAll('[data-entry-choice]').forEach(button=>button.addEventListener('click',()=>{
+  welcomeAnswers.intent=button.dataset.entryChoice;
+  if(ageGate)ageGate.hidden=true;
+  if(gate)gate.hidden=false;
+  showQuestion(2);
+  focusQuestion(2);
 }));
 if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
   event.preventDefault();
   const age=ageFromDate(youthBirthDate?youthBirthDate.value:'');
-  if(youthBirthDate)youthBirthDate.value='';
+  if(youthBirthDate){
+    youthBirthDate.value='';
+    youthBirthDate.blur();
+  }
   if(age===null){
     if(ageGateStatus)ageGateStatus.textContent='Enter a valid birth date to calculate eligibility. It was not kept.';
     return;
@@ -509,11 +515,12 @@ if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
     if(ageGateStatus)ageGateStatus.textContent='The birth date was used only for this local calculation and was cleared.';
     return;
   }
-  if(age>17){
-    if(ageGateStatus)ageGateStatus.textContent='This youth path is for ages 13-17. Choose Adult (18+) to continue. The birth date was cleared.';
-    return;
-  }
-  beginWelcome('youth');
+  ageMode=age>17?'adult':'youth';
+  document.body.classList.toggle('adult-mode',ageMode==='adult');
+  document.body.classList.toggle('youth-mode',ageMode==='youth');
+  if(ageEligibility)ageEligibility.hidden=true;
+  if(youthPathNote)youthPathNote.hidden=ageMode!=='youth';
+  finishWelcome();
 });
 const restartAgeGate=document.querySelector('#restart-age-gate');
 if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
@@ -522,6 +529,11 @@ function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
   const progress=document.querySelector('#welcome-progress');
   if(progress)progress.textContent=number<=3?'Question '+number+' of 3':'Welcome to your table';
+}
+function focusQuestion(number){
+  const step=steps.find(item=>Number(item.dataset.question)===number);
+  const button=step&&step.querySelector('button');
+  if(button)button.focus();
 }
 function finishWelcome({scroll=true}={}){
   const branch=welcomeAnswers.branch;
@@ -565,6 +577,9 @@ function finishWelcome({scroll=true}={}){
   if(scroll){
     welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
     if(outcomePrimary)outcomePrimary.focus({preventScroll:true});
+    if(outcomePrimary)requestAnimationFrame(()=>outcomePrimary.focus({preventScroll:true}));
+    if(outcomePrimary)setTimeout(()=>outcomePrimary.focus({preventScroll:true}),0);
+    if(outcomePrimary)setTimeout(()=>outcomePrimary.focus({preventScroll:true}),50);
   }
 }
 function saveJourney(){
@@ -612,7 +627,11 @@ document.querySelectorAll('[data-answer]').forEach(button=>{
     const step=button.closest('[data-question]');
     welcomeAnswers[step.dataset.key]=button.dataset.answer;
     const next=Number(step.dataset.question)+1;
-    if(next>3)finishWelcome();else showQuestion(next);
+    if(next>3)showAgeEligibility();
+    else{
+      showQuestion(next);
+      focusQuestion(next);
+    }
     completeLaunchInteraction();
   });
 });
