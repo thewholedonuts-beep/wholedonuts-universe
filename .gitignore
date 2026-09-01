@@ -1,0 +1,14 @@
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+
+# Local build and coverage artifacts
+bin/
+coverage.out
+coverage.html

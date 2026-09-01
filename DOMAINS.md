@@ -35,12 +35,13 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **Last Updated:** 2026-08-28
 
 ### wenevergonnaclose.com
-- **Status:** Inactive
+- **Status:** Pending GitHub Pages and DNS cutover
 - **Registrar:** Porkbun
-- **Purpose:** Campaign domain
-- **Subdomains:** Not assigned
-- **DNS Provider:** Porkbun
-- **Last Updated:** 2026-08-28
+- **Purpose:** Public +U entry at the repository root
+- **Subdomains:** `www` as required by the GitHub Pages configuration
+- **DNS Provider:** Porkbun (to be configured for GitHub Pages)
+- **Repository configuration:** Root `CNAME` declares this domain; it does not
+  confirm that Pages or DNS is enabled.
 
 ### thenurturedchef.com
 - **Status:** Inactive
@@ -74,13 +75,14 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **DNS Provider:** GitHub Pages
 - **Last Updated:** 2026-08-28
 
-### thewholedonts-universe.github.io
-- **Status:** Inactive
+### thewholedonuts-beep.github.io/wholedonuts-universe
+- **Status:** Pending GitHub Pages configuration
 - **Registrar:** GitHub Pages
-- **Purpose:** Repository GitHub Pages site
+- **Purpose:** Repository Pages endpoint before the custom domain cutover
 - **Subdomains:** Not assigned
 - **DNS Provider:** GitHub Pages
-- **Last Updated:** 2026-08-28
+- **Repository configuration:** Enable publication from `main` at the
+  repository root in GitHub Settings before treating this endpoint as live.
 
 ## Domain Registry
 
@@ -89,12 +91,12 @@ Centralized management system for all WholeDonut domains and subdomains.
 | wholedonuts | .org | Active | Porkbun | Primary Brand | Multiple |
 | wholedonuts | .buzz | Active | Porkbun | Marketing Funnel | Multiple |
 | wholedonuts | .app | Inactive | Porkbun | Application Domain | None |
-| wenevergonnaclose | .com | Inactive | Porkbun | Campaign Domain | None |
+| wenevergonnaclose | .com | Pending Pages/DNS cutover | Porkbun | Public +U entry | `www` pending configuration |
 | thenurturedchef | .com | Inactive | Porkbun | Brand Domain | None |
 | thenurturedchef | .foundation | Inactive | Porkbun | Foundation Domain | None |
 | thenutur3dchef | .com | Active | Porkbun | Content Funnel | Multiple |
 | thewholedonuts-beep | .github.io | Inactive | GitHub Pages | Owner Site | None |
-| thewholedonts-universe | .github.io | Inactive | GitHub Pages | Repository Site | None |
+| thewholedonuts-beep.github.io/wholedonuts-universe | N/A | Pending Pages configuration | GitHub Pages | Repository Pages endpoint | None |
 
 ## Subdomain Structure
 
@@ -125,6 +127,9 @@ Centralized management system for all WholeDonut domains and subdomains.
 
 ## Deployment Status
 - [x] Documented domains catalogued
+- [x] `wenevergonnaclose.com` declared in the repository root `CNAME`
+- [ ] GitHub Pages enabled for the `main` branch repository root
+- [ ] Custom domain verified in GitHub Pages and DNS
 - [ ] All subdomains mapped
 - [ ] DNS configurations synced
 - [ ] Funnel system validated
