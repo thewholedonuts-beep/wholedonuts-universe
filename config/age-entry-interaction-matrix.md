@@ -37,8 +37,9 @@ the in-memory youth session.
 
 1. Root shows only the anonymous figure field, hands/jacks visual language,
    age gate, and no expanded ecosystem surfaces.
-2. A direction figure reveals the subject touch, then the start-mode touch;
-   the age screen appears only after those three voluntary touches.
+2. A direction figure reveals the subject touch, then the start-mode touch,
+   then a presentation-pace touch. The `=U` target opens the age screen only
+   after all four voluntary touches.
 3. Adult calculation opens all 24 existing outcomes with a focused primary
    action. Youth date input clears after every eligibility attempt; ages 13-17 show
    the youth notice; under 13 shows only the local stop state.
@@ -49,5 +50,6 @@ the in-memory youth session.
    optional local presentation state controls essential resources.
 6. The root shows only the neutral anonymous figure field, four accessible
    direction figures, concise anonymous-entry text, and the skip link. The
-   subject/start questions remain hidden until a direction is selected; age is
-   requested only after the selected route is ready to enter.
+   subject/start/pace questions remain hidden until a direction is selected;
+   the sparse `=U` positive-path target opens the age screen only after the
+   selected route is ready to enter.

@@ -31,13 +31,11 @@ body{
   position:relative;
   overflow:hidden;
   min-height:100svh;
-  margin-left:var(--rail);
-  padding:clamp(2rem,5vw,5rem);
+  margin-left:0;
+  padding:clamp(1rem,3vw,3rem);
   display:grid;
   align-items:center;
-  background:
-    radial-gradient(circle at 76% 18%,#f8d87655,transparent 25rem),
-    linear-gradient(135deg,#9dd5d8,#f5f0e6 56%,#e8d9b8)
+  background:#f5f0e6
 }
 body:not(.entered) .rail,
 body:not(.entered) main,
@@ -106,13 +104,13 @@ body:not(.entered) footer{display:none}
   grid-template-columns:minmax(13rem,22rem) minmax(0,1fr);
   align-items:center;
   gap:clamp(1.5rem,5vw,5rem);
-  width:min(100%,76rem);
+  width:min(100%,88rem);
   margin:0 auto;
   padding:clamp(1.5rem,4vw,4rem);
-  border:2px solid var(--ink);
-  border-radius:2rem;
-  background:#fffaf0d9;
-  box-shadow:12px 12px 0 var(--ink)
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none
 }
 .universe-figure{
   position:relative;
@@ -156,7 +154,7 @@ body:not(.entered) footer{display:none}
 .universe-copy{max-width:46rem}
 .universe-copy h1{font:700 clamp(3.4rem,8vw,7.5rem)/.86 Georgia,serif;margin:.3rem 0 1.2rem;letter-spacing:-.06em}
 .universe-lede{max-width:42rem;font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.55}
-.stick-field{position:relative;width:min(100%,22rem);height:28rem;margin:auto;border:3px solid var(--ink);border-radius:50%;background:linear-gradient(160deg,#f8d876,#fffaf0 58%,#dceef0)}
+.stick-field{position:relative;width:min(100%,22rem);height:28rem;margin:auto;border:0;border-radius:0;background:transparent}
 .field-figure{position:absolute;width:3.2rem;height:6rem;border-left:3px solid var(--ink);transform-origin:center bottom}
 .field-figure::before{content:'';position:absolute;top:-1.6rem;left:-.85rem;width:1.6rem;height:1.6rem;border:3px solid var(--ink);border-radius:50%;background:#fffaf0}
 .field-figure::after{content:'';position:absolute;top:1.3rem;left:-1.5rem;width:3rem;height:2.5rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);clip-path:polygon(0 0,100% 48%,0 100%,10% 48%)}
@@ -304,6 +302,9 @@ body:not(.entered) footer{display:none}
   background:#ffffff99
 }
 #pace-support h3{margin:0;font:700 1.5rem/1 Georgia,serif}
+#positive-path{display:grid;justify-items:center;gap:1rem;margin-top:1.5rem;text-align:center}
+#positive-path p{margin:0;max-width:30rem;font:700 1.2rem/1.4 Georgia,serif}
+#begin-positive-path{border:0;background:transparent;color:var(--ink);font:900 clamp(4rem,12vw,8rem)/1 Georgia,serif;cursor:pointer}
 .youth-path-note{
   margin:0 0 1rem;
   padding:.75rem;

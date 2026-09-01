@@ -56,7 +56,17 @@
             </button>
           </div>
           <p class="figure-choice-text">Choose a direction. The next two touches choose a subject and a starting place. No choice identifies you.</p>
-          <p class="figure-choice-text">Use your browser's reading and reduced-motion settings at any pace.</p>
+        </section>
+        <div class="welcome-step" data-question="4" data-key="pace" hidden>
+          <p>Choose your pace.</p>
+          <div class="answer-grid">
+            <button type="button" data-answer="guided">Guide me</button>
+            <button type="button" data-answer="steady">I will take my time</button>
+          </div>
+        </div>
+        <section id="positive-path" hidden aria-live="polite">
+          <p>Create your positive path now. Press =U and let us guide you.</p>
+          <button type="button" id="begin-positive-path" aria-label="Begin my positive path">=U</button>
         </section>
         <section class="age-gate" id="age-eligibility" aria-labelledby="age-eligibility-title" hidden>
           <h2 id="age-eligibility-title">Age eligibility</h2>
