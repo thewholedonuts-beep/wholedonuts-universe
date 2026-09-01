@@ -35,14 +35,17 @@ path exists.
 | Comfort tee | An approved `+U` mark or Made by +U, 4 ALL expression. | Future concept; not for sale; awaiting approved artwork. |
 | Crewneck | An approved Made by +U, 4 ALL expression placed after review. | Future concept; not for sale; awaiting approved artwork. |
 | Hoodie | An approved anonymous-figure or `+U` mark direction. | Future concept; not for sale; awaiting approved artwork. |
+| +U Neck Line | A `+U` neckline or neck-placement expression for a future comfort-wear piece, such as a tee, crewneck, or hoodie. Final garment type, artwork, print or embroidery method, placement, sizing, materials, pricing, vendor, and fulfillment await human-approved designs and print proof. | New planned concept; not for sale; awaiting approved artwork. |
 | Jogger or lounge layer | An approved hands-and-jacks mark or neutral approved placement direction. | Future concept; not for sale; awaiting approved artwork. |
 | Tote | An approved `+U` or Made by +U, 4 ALL placement direction. | Future concept; not for sale; awaiting approved artwork. |
 | Mug | An approved `+U` or anonymous-figure placement direction. | Future concept; not for sale; awaiting approved artwork. |
 | Poster | An approved hands-and-jacks or anonymous-figure visual direction. | Future concept; not for sale; awaiting approved artwork. |
 
-“+U neck” is intentionally absent: no reachable committed source, asset,
-issue, or pull request established its exact wording or whether it means
-necklace, neckwear, or another item.
+**+U Neck Line** is owner-directed new planning language, not a recovered
+original product. It means a future `+U` neckline or neck-placement expression,
+not a necklace or neckwear item. It follows the same intake, rights, brand
+approval, placement, and human print-proof workflow as every other future
+concept.
 
 ## Required evidence before any public claim or activation
 
@@ -57,4 +60,3 @@ that provider's terms. The +U ecosystem site must not collect customer details,
 upload customer data, or retain order exports. Cash App and Chime remain
 optional support routes only; neither is merchandise payment, checkout, or
 fulfillment.
-

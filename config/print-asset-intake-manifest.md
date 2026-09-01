@@ -12,6 +12,11 @@ product-specific rights record was found in the reachable Universe, WHNutz,
 merch-platform, or Sunshine histories. Every future candidate is therefore
 **awaiting owner-provided import**.
 
+The owner-directed **+U Neck Line** is a new planned neckline or
+neck-placement expression, not a recovered original item or necklace/neckwear
+product. It remains awaiting owner-provided artwork and must complete this same
+intake, rights, brand-approval, placement, and human print-proof process.
+
 The recovered filenames `MovementTrifoldOUTSIDE.png` and
 `MovementTrifoldINSIDE.png` are missing original brochure references, not
 recovered merchandise artwork or approved print assets. Do not repurpose,
@@ -63,4 +68,3 @@ that time.
 No provider is selected here. Do not connect Printify, Printful, Shopify, or
 any other service; create product IDs; upload assets; send customer data; or
 enable checkout based on this manifest.
-
