@@ -318,7 +318,7 @@
             <p class="eyebrow">DONATION ACCESS HUB</p>
             <h3 id="donation-access-title">Choose your purpose before you leave the table.</h3>
             <p>This is a voluntary support interface, not a payment processor or fund-transfer system. It never starts automatic payments, recurring billing, transfers, allocations, or background use of a payment method.</p>
-            <p><strong>Provider availability:</strong> Cash App and Chime are the only future provider set for this operating model. Cash App to <strong>$wholedonuts</strong> is the only configured optional exit today. Chime remains unavailable until a verified public destination is provided, so no Chime payment link appears here.</p>
+            <p><strong>Provider availability:</strong> Cash App and Chime to <strong>$wholedonuts</strong> are the only allowed manual provider routes for this operating model. Cash App has a consent-gated optional external exit. Chime has no universal public payment URL, so it is available only as an official-app instruction and copy control after the same confirmation.</p>
 
             <fieldset class="donation-purpose">
               <legend>1. What is your optional support for?</legend>
@@ -329,14 +329,19 @@
 
             <p class="donation-status" id="donation-status" aria-live="polite">Choose a purpose to review the optional payment details.</p>
             <div class="donation-disclosure" id="donation-disclosure" hidden>
-              <p><strong>Optional support payment:</strong> Cash App to <strong>$wholedonuts</strong>. This is not a store purchase, does not include merchandise, and does not create any tax-deductible receipt, investment return, currency value, ownership, or guaranteed benefit.</p>
-              <p>For a payment question, contact <a href="mailto:thewholedonuts@gmail.com?subject=Optional%20support%20payment%20question">thewholedonuts@gmail.com</a> with the payment reference. This interface cannot issue a refund; Cash App and the responsible payee handle optional support-payment questions under their terms. Store purchases, fulfillment, and refunds are handled by the separate merchant or store provider.</p>
-              <label class="donation-confirmation"><input id="donation-confirmation" type="checkbox"> I chose this purpose, reviewed the payee, and want to reveal the optional Cash App payment link.</label>
-              <button id="reveal-donation-link" type="button" disabled>Reveal optional payment link</button>
+              <p><strong>Optional manual support routes:</strong> Cash App to <strong>$wholedonuts</strong>, or Chime by opening the official Chime app and entering <strong>$wholedonuts</strong> as the ChimeSign. This is not a store purchase, does not include merchandise, and does not create any tax-deductible receipt, investment return, currency value, ownership, or guaranteed benefit.</p>
+              <p>For a payment question, contact <a href="mailto:thewholedonuts@gmail.com?subject=Optional%20support%20payment%20question">thewholedonuts@gmail.com</a> with the payment reference. This interface cannot issue a refund; the selected provider and responsible payee handle optional support-payment questions under their terms. Store purchases, fulfillment, and refunds are handled by the separate merchant or store provider.</p>
+              <label class="donation-confirmation"><input id="donation-confirmation" type="checkbox"> I chose this purpose, reviewed the payee, and want to reveal the optional manual payment choices.</label>
+              <button id="reveal-donation-link" type="button" disabled>Reveal optional payment choices</button>
             </div>
             <div class="donation-exit" id="donation-exit" hidden>
               <p id="donation-exit-copy"></p>
               <a class="button primary" id="donation-processor-link" target="_blank" rel="noopener noreferrer">Continue to optional Cash App payment ↗</a>
+              <div class="chime-manual-route">
+                <p><strong>Optional manual Chime app:</strong> Open the official Chime app and enter <strong>$wholedonuts</strong> as the ChimeSign. This site does not open Chime, initiate a payment, or start a transfer.</p>
+                <button id="copy-chime-sign" type="button" disabled>Copy $wholedonuts for Chime</button>
+                <p class="chime-copy-status" id="chime-copy-status" aria-live="polite"></p>
+              </div>
             </div>
             <p class="impact-stewardship"><strong>Impact stewardship:</strong> your selected purpose is shown before any optional exit, and no automatic allocation occurs. Impact updates or claims are published only after responsible human review and accounting. We do not promise a particular use, tax treatment, or outcome for every dollar.</p>
 
@@ -358,7 +363,7 @@
           </section>
 
           <div class="fine-print">
-            <strong>At the register, plain and clear:</strong> +U passes, Dashboard accessories, and recognition are not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support is never automatic and is separate from store purchases. The Dashboard is anonymous and local to this browser; its accessories come only from voluntary non-financial exploration, never support, payments, purchases, recipient sharing, referral activity, or external tracking. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass, last-visit time, and minimal Dashboard accessory progress in this browser; opening a `?u=` link restores a pass but does not create an identity or profile. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
+            <strong>At the register, plain and clear:</strong> +U passes, Dashboard accessories, and recognition are not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support through Cash App or manual Chime is never automatic, never processed by this site, and separate from store purchases. The Dashboard is anonymous and local to this browser; its accessories come only from voluntary non-financial exploration, never support, payments, purchases, recipient sharing, referral activity, or external tracking. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass, last-visit time, and minimal Dashboard accessory progress in this browser; opening a `?u=` link restores a pass but does not create an identity or profile. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
             <details><summary>Community table agreement</summary><p>Participate lawfully and respectfully. Community information is general information, not medical, legal, financial, or professional advice. No harassment, exploitation, impersonation, unsafe activity, or promises of guaranteed results. External links and community contributions remain the responsibility of their providers and authors.</p></details>
           </div>
         </section>

@@ -554,6 +554,26 @@ main{margin-left:var(--rail)}
   background:#dfe9de
 }
 .donation-exit p{margin:0 0 .75rem;line-height:1.5}
+.chime-manual-route{
+  display:grid;
+  gap:.7rem;
+  max-width:56rem;
+  padding-top:1rem;
+  border-top:1px solid #15130f55
+}
+.chime-manual-route p{margin:0;line-height:1.5}
+.chime-manual-route button{
+  justify-self:start;
+  border:2px solid var(--green);
+  border-radius:.7rem;
+  padding:.8rem 1rem;
+  background:#fff;
+  color:var(--ink);
+  font-weight:900;
+  cursor:pointer
+}
+.chime-manual-route button:disabled{cursor:not-allowed;opacity:.55}
+.chime-copy-status{min-height:1.5rem;font-weight:800}
 .impact-stewardship{
   max-width:58rem;
   margin:1rem 0 0;

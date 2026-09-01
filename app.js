@@ -118,6 +118,9 @@ const donationExitCopy=document.querySelector('#donation-exit-copy');
 const donationProcessorLink=document.querySelector('#donation-processor-link');
 const donationStatus=document.querySelector('#donation-status');
 const donationProcessorUrl='https://cash.app/$wholedonuts';
+const chimeSign='$wholedonuts';
+const copyChimeSignButton=document.querySelector('#copy-chime-sign');
+const chimeCopyStatus=document.querySelector('#chime-copy-status');
 const shareInvitationButton=document.querySelector('#share-invitation');
 const copyInvitationButton=document.querySelector('#copy-invitation');
 const shareInvitationStatus=document.querySelector('#share-invitation-status');
@@ -131,6 +134,8 @@ function selectedDonationPurpose(){
 function resetDonationExit(){
   if(donationExit)donationExit.hidden=true;
   if(donationProcessorLink)donationProcessorLink.removeAttribute('href');
+  if(copyChimeSignButton)copyChimeSignButton.disabled=true;
+  if(chimeCopyStatus)chimeCopyStatus.textContent='';
 }
 
 function syncDonationHub(){
@@ -157,9 +162,24 @@ if(revealDonationLink)revealDonationLink.addEventListener('click',()=>{
   }
   if(donationProcessorLink)donationProcessorLink.href=donationProcessorUrl;
   if(donationExit)donationExit.hidden=false;
-  if(donationExitCopy)donationExitCopy.textContent='You selected '+purpose+'. Cash App and $wholedonuts are the optional processor and payee shown before you leave this site.';
-  if(donationStatus)donationStatus.textContent='The optional payment link is ready. Nothing has been paid, transferred, or scheduled.';
+  if(copyChimeSignButton)copyChimeSignButton.disabled=false;
+  if(donationExitCopy)donationExitCopy.textContent='You selected '+purpose+'. Cash App and Chime to $wholedonuts are optional manual choices shown before you leave this site.';
+  if(donationStatus)donationStatus.textContent='The optional manual choices are ready. Nothing has been paid, transferred, or scheduled.';
   if(donationProcessorLink)donationProcessorLink.focus();
+});
+
+if(copyChimeSignButton)copyChimeSignButton.addEventListener('click',async()=>{
+  if(copyChimeSignButton.disabled)return;
+  if(!navigator.clipboard||!navigator.clipboard.writeText){
+    if(chimeCopyStatus)chimeCopyStatus.textContent='Copy is unavailable in this browser. Enter $wholedonuts manually in the official Chime app. Copying does not initiate a payment or transfer.';
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(chimeSign);
+    if(chimeCopyStatus)chimeCopyStatus.textContent='$wholedonuts copied for manual entry in the official Chime app. Copying does not initiate a payment or transfer.';
+  }catch(e){
+    if(chimeCopyStatus)chimeCopyStatus.textContent='The ChimeSign could not be copied. Enter $wholedonuts manually in the official Chime app. Copying does not initiate a payment or transfer.';
+  }
 });
 
 function setShareInvitationStatus(message){

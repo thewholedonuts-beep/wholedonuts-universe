@@ -16,8 +16,10 @@ action.
 
 1. A person chooses an optional support purpose.
 2. The page identifies the processor and payee before any exit.
-3. The person affirms a final action before an external processor link appears.
-4. The external provider handles the payment experience under its own terms.
+3. The person affirms a final action before a manual provider route appears.
+4. Cash App may then show its external link; Chime may only show its official-app
+   entry instruction and a user-initiated ChimeSign copy control.
+5. The external provider handles the payment experience under its own terms.
 
 Optional support contributions are not store purchases. Store product,
 fulfillment, refund, tax, and merchant-of-record terms must remain with the
@@ -25,13 +27,16 @@ separate store provider.
 
 ## Provider availability
 
-The provider set is Cash App and Chime only. Cash App to `$wholedonuts` is the
-only currently configured optional support exit and must remain behind the
-purpose, disclosure, and final-action gate. Chime is a future manual provider;
-do not create a Chime link, sign, placeholder, or payable destination until a
-verified public destination is supplied. Do not add providers or account
-language outside this set. Provider selection must not identify a person or
-initiate a payment or transfer.
+The provider set is Cash App and Chime only. Both use `$wholedonuts` as the
+manual support destination and must remain behind the purpose, disclosure, and
+final-action gate. Cash App may use its consent-gated external URL. Chime does
+not expose a universal public static payment URL: the page may instruct a
+person to open the official Chime app and enter `$wholedonuts` as the
+ChimeSign, with an explicitly clicked copy control. Do not create a Chime URL,
+QR service, embed, payable link, account integration, or stored Chime data.
+Copying must clearly state that it does not initiate payment or transfer. Do
+not add providers or account language outside this set. Provider selection must
+not identify a person or initiate a payment or transfer.
 
 ## Impact stewardship
 
