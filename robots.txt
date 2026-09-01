@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /config/
+Disallow: /CNAME
+Disallow: /auth-config.js
+Disallow: /storefront-config.js
+
+Sitemap: https://wenevergonnaclose.com/sitemap.xml

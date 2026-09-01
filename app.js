@@ -1,5 +1,11 @@
 const links=[...document.querySelectorAll('[data-branch]')];
 const store=document.querySelector('#branch-store');
+const navigationStatus=document.querySelector('#table-navigation-status');
+const launchWindowStatus=document.querySelector('#launch-window-status');
+const launchWindowReset=document.querySelector('#reset-launch-window');
+const launchWindowKey='plusu-launch-window';
+const launchWindowLimit=1000;
+const launchWindowDuration=12*60*60*1000;
 const stores={
   awd:['Explore Whole Donuts','#awd'],
   tnc:['Explore The Nurtured Chef','#tnc']
@@ -231,16 +237,114 @@ function safeRemove(key){
   try{localStorage.removeItem(key)}catch(e){memoryStore.delete(key)}
 }
 
-function syncBranch(){
+function launchWindowState(){
+  const saved=safeGet(launchWindowKey);
+  if(!saved)return null;
+  try{
+    const state=JSON.parse(saved);
+    const startedAt=Date.parse(state.startedAt);
+    if(!state||state.v!==1||!Number.isFinite(startedAt)||!Number.isInteger(state.count)||state.count<0||state.count>launchWindowLimit)return null;
+    return state;
+  }catch(e){return null}
+}
+
+function localMidnightAfter(startedAt){
+  const midnight=new Date(startedAt);
+  midnight.setHours(24,0,0,0);
+  return midnight.getTime();
+}
+
+function renderLaunchWindow(state=launchWindowState()){
+  if(!launchWindowStatus)return;
+  if(!state){
+    launchWindowStatus.textContent='No local Launch Window is active until you choose an eligible exploration step.';
+    return;
+  }
+  launchWindowStatus.textContent=state.count+' of '+launchWindowLimit+' completed local exploration steps in this browser. This local window resets at the earliest of 12 hours, local midnight, or the next eligible step after '+launchWindowLimit+'.';
+}
+
+function resetLaunchPresentation(message){
+  safeRemove(launchWindowKey);
+  resetWelcome();
+  donationPurposeInputs.forEach(input=>input.checked=false);
+  syncDonationHub();
+  history.replaceState(null,'','#home');
+  focusRouteTarget('home');
+  if(navigationStatus)navigationStatus.textContent=message;
+  renderLaunchWindow();
+}
+
+function prepareLaunchInteraction(){
+  const now=Date.now();
+  let state=launchWindowState();
+  if(state&&(now-Date.parse(state.startedAt)>=launchWindowDuration||now>=localMidnightAfter(Date.parse(state.startedAt))||state.count>=launchWindowLimit)){
+    resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
+    return false;
+  }
+  if(!state){
+    state={v:1,startedAt:new Date(now).toISOString(),count:0};
+    safeSet(launchWindowKey,JSON.stringify(state));
+    renderLaunchWindow(state);
+  }
+  return true;
+}
+
+function completeLaunchInteraction(){
+  const state=launchWindowState();
+  if(!state)return;
+  state.count+=1;
+  safeSet(launchWindowKey,JSON.stringify(state));
+  renderLaunchWindow(state);
+}
+
+function isLaunchEligibleRoute(id){
+  return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
+}
+
+if(launchWindowReset)launchWindowReset.addEventListener('click',()=>{
+  resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
+});
+
+function focusRouteTarget(id){
+  const target=document.getElementById(id);
+  if(!target)return;
+  target.tabIndex=-1;
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  target.focus({preventScroll:true});
+}
+
+function syncBranch({focus=false}={}){
   const id=location.hash.slice(1);
+  if(id&&id!=='home')document.body.classList.add('entered');
+  if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
-  if(stores[id]){store.textContent=stores[id][0]+' ↗';store.href=stores[id][1]}
-  else{store.textContent='Open the menu';store.href='#home'}
-  if(id==='donation-access-hub'&&counter){
+  if(store){store.textContent='Return to the +U gateway';store.href='#home'}
+  if((id==='donation-access-hub'||id==='donuts-new-school')&&counter){
     counter.hidden=false;
-    openCourse('bombs');
+    if(id==='donation-access-hub')openCourse('bombs');
   }
   if(stores[id])unlockDashboardAccessory('pin');
+  if(focus&&id){
+    focusRouteTarget(id);
+    if(navigationStatus)navigationStatus.textContent=stores[id]
+      ?'Opened the '+stores[id][0]+' section.'
+      :id==='donuts-new-school'
+        ?'Opened Donuts New School: Visionaries & Pioneers.'
+      :'Opened the requested table section.';
+    if(isLaunchEligibleRoute(id))completeLaunchInteraction();
+  }
+}
+
+function openGatewayRoute(id,message){
+  if(isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
+  if(location.hash.slice(1)===id){
+    focusRouteTarget(id);
+    if(navigationStatus)navigationStatus.textContent=message;
+    completeLaunchInteraction();
+    return;
+  }
+  location.hash=id;
+  if(navigationStatus)navigationStatus.textContent=message;
 }
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];
@@ -256,17 +360,23 @@ function openCourse(id,{focus=false,recordEffort=false}={}){
   menuPanels.forEach(panel=>panel.hidden=panel.dataset.course!==id);
   if(recordEffort)unlockDashboardAccessory('notebook');
 }
-menuButtons.forEach(button=>button.addEventListener('click',()=>openCourse(button.dataset.menu,{recordEffort:true})));
+menuButtons.forEach(button=>button.addEventListener('click',()=>{
+  if(!prepareLaunchInteraction())return;
+  openCourse(button.dataset.menu,{recordEffort:true});
+  completeLaunchInteraction();
+}));
 menuButtons.forEach((button,index)=>button.addEventListener('keydown',event=>{
   const {key}=event;
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(key))return;
   event.preventDefault();
+  if(!prepareLaunchInteraction())return;
   let nextIndex=index;
   if(key==='Home')nextIndex=0;
   else if(key==='End')nextIndex=menuButtons.length-1;
   else if(key==='ArrowLeft')nextIndex=(index-1+menuButtons.length)%menuButtons.length;
   else nextIndex=(index+1)%menuButtons.length;
   openCourse(menuButtons[nextIndex].dataset.menu,{focus:true,recordEffort:true});
+  completeLaunchInteraction();
 }));
 
 const dateLabel=document.querySelector('#daily-date');
@@ -276,7 +386,43 @@ const gate=document.querySelector('#welcome-gate');
 const counter=document.querySelector('#community-counter');
 const steps=[...document.querySelectorAll('[data-question]')];
 const welcomeResult=document.querySelector('#welcome-result');
+const outcomePrimary=document.querySelector('#outcome-primary');
+const outcomeNext=document.querySelector('#outcome-next');
 const welcomeAnswers={};
+
+const counterCourses={
+  learn:'bites',
+  share:'bites',
+  help:'biggies',
+  explore:'bits'
+};
+const tableOutcomes={
+  learn:{
+    href:'#template-library',
+    action:'Open the +U Library',
+    detail:'Begin with the existing next-step template and guide.'
+  },
+  share:{
+    href:'#crumb-workshop',
+    action:'Open the reviewed Crumb Saver path',
+    detail:'Begin with the protocol, contribution template, and public contact guidance. This static site does not submit a crumb.'
+  },
+  help:{
+    href:'#ambassador-path',
+    action:'Open the Ambassador Path',
+    detail:'Begin with the existing community, skill, and project guidance without a promise of enrollment or benefit.'
+  },
+  explore:{
+    href:'world/',
+    action:'Open the Figure Studio',
+    detail:'Begin with the existing +U world and return to the table when ready.'
+  }
+};
+const branchNext={
+  awd:{href:'#awd',label:'Next: open Whole Donuts'},
+  tnc:{href:'#tnc',label:'Next: open The Nurtured Chef'},
+  table:{href:'#donuts-new-school',label:'Next: open Donuts New School'}
+};
 
 function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
@@ -285,7 +431,16 @@ function showQuestion(number){
 }
 function finishWelcome({scroll=true}={}){
   const branch=welcomeAnswers.branch;
-  const course=welcomeAnswers.course||'bits';
+  const intent=welcomeAnswers.intent||'explore';
+  const entry=welcomeAnswers.entry||'counter';
+  const course=counterCourses[intent]||'bits';
+  const outcome=entry==='counter'
+    ?{
+      href:'#community-counter',
+      action:'Open the guided Counter',
+      detail:'Begin the existing '+course.toUpperCase()+' menu course for '+intent+'.'
+    }
+    :tableOutcomes[intent];
   openCourse(course);
   saveJourney();
   gate.classList.add('complete');
@@ -293,17 +448,31 @@ function finishWelcome({scroll=true}={}){
   welcomeResult.hidden=false;
   counter.hidden=false;
   beginDashboard();
-  const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the whole +U table';
-  welcomeResult.querySelector('strong').textContent='Your seat is ready at '+branchWords+'.';
-  welcomeResult.querySelector('span').textContent='We opened '+course.toUpperCase()+' first. Change courses anytime.';
+  document.body.classList.add('entered');
+  const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the shared community table';
+  welcomeResult.querySelector('strong').textContent=outcome.action+'.';
+  welcomeResult.querySelector('span').textContent=outcome.detail+' Your selected experience: '+branchWords+'.';
+  if(outcomePrimary){
+    outcomePrimary.href=outcome.href;
+    outcomePrimary.textContent=outcome.action;
+  }
+  if(outcomeNext){
+    const next=branchNext[branch]||branchNext.table;
+    outcomeNext.href=next.href;
+    outcomeNext.textContent=next.label;
+    outcomeNext.hidden=false;
+  }
   showQuestion(4);
-  if(scroll)counter.scrollIntoView({behavior:'smooth',block:'start'});
+  if(scroll){
+    welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
+    if(outcomePrimary)outcomePrimary.focus({preventScroll:true});
+  }
 }
 function saveJourney(){
   const journey={
-    branch:welcomeAnswers.branch||'both',
-    course:welcomeAnswers.course||'bits',
-    intent:welcomeAnswers.intent||'wander'
+    branch:welcomeAnswers.branch||'table',
+    course:counterCourses[welcomeAnswers.intent]||'bits',
+    intent:welcomeAnswers.intent||'explore'
   };
   safeSet('plusu-welcome',JSON.stringify(journey));
   renderJourneyOffers(journey);
@@ -314,9 +483,9 @@ function renderJourneyOffers(journey){
   const branch=journey.branch==='awd'?'Whole Donuts':journey.branch==='tnc'?'The Nurtured Chef':'+U';
   const intent={
     learn:'a practical resource to explore',
-    make:'a small project to make real',
+    share:'a reviewed way to carry useful knowledge forward',
     help:'a way to support the community',
-    wander:'room to look around at your own pace'
+    explore:'room to look around at your own pace'
   }[journey.intent]||'a next step that fits today';
   journeyOfferTitle.textContent=branch+' picks, made for your '+journey.course+' appetite.';
   journeyOfferCopy.textContent='Start with '+intent+'. Your free next-step template is ready whenever you are.';
@@ -326,9 +495,9 @@ function renderVirtualStore(journey,branch,intent){
   if(!virtualStoreTitle||!virtualStoreCopy||!featuredProductTitle||!featuredProductCopy)return;
   const featured={
     learn:['Open Water Poster','A calm wall piece for keeping a good question close.'],
-    make:['Table Tote','For tools, notes, and the work you are ready to make real.'],
+    share:['Table Tote','For tools, notes, and the work you are ready to make real.'],
     help:['4 ALL Everyday Tee','A soft, simple way to show that there is room at the table.'],
-    wander:['Counter Mug','For slow starts, fresh air, and finding your next step at your own pace.']
+    explore:['Counter Mug','For slow starts, fresh air, and finding your next step at your own pace.']
   }[journey.intent]||['Everyday Tee','Soft, simple, and ready for the long way home.'];
   virtualStoreTitle.textContent='Made by +U, 4 ALL - a little '+branch+' for your '+journey.course+' appetite.';
   virtualStoreCopy.textContent='Since you came here for '+intent+', we pulled a few gentle ideas toward that direction. Browse at your own pace; this is a future Shopify + Printful collection, with no merchandise order or payment collected here.';
@@ -340,10 +509,12 @@ function renderVirtualStore(journey,branch,intent){
 }
 document.querySelectorAll('[data-answer]').forEach(button=>{
   button.addEventListener('click',()=>{
+    if(!prepareLaunchInteraction())return;
     const step=button.closest('[data-question]');
     welcomeAnswers[step.dataset.key]=button.dataset.answer;
     const next=Number(step.dataset.question)+1;
     if(next>3)finishWelcome();else showQuestion(next);
+    completeLaunchInteraction();
   });
 });
 
@@ -366,6 +537,7 @@ function resetWelcome(){
   welcomeResult.hidden=true;
   counter.hidden=true;
   if(dashboard)dashboard.hidden=true;
+  document.body.classList.remove('entered');
   gate.classList.remove('complete');
   showQuestion(1);
   gate.scrollIntoView({behavior:'smooth'});
@@ -393,6 +565,9 @@ function syncPassFromQuery(){
   const params=new URLSearchParams(location.search);
   const incoming=params.get('u');
   if(!incoming)return 'none';
+  // A +U pass is only a device-local return link and must never become a target identifier.
+  const robots=document.querySelector('#page-robots');
+  if(robots)robots.content='noindex,nofollow';
   const pass=incoming.trim();
   if(!validPass(pass))return 'invalid';
   const existing=safeGet('plusu-pass');
@@ -484,5 +659,5 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
   }
 });
 
-addEventListener('hashchange',syncBranch);
-syncBranch();
+addEventListener('hashchange',()=>syncBranch({focus:true}));
+syncBranch({focus:location.hash.length>1});

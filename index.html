@@ -3,12 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="+U Movement — walk into the community table, choose your next step, and carry the brochure companion with you.">
-  <title>+U Movement | Three Questions, One Community Table</title>
-  <link rel="stylesheet" href="styles.css?v=movement4">
+  <meta name="description" content="+U Universe is an anonymous community table for exploring Whole Donuts, The Nurtured Chef, Donuts New School, practical guides, and reviewed knowledge.">
+  <meta id="page-robots" name="robots" content="index,follow">
+  <link rel="canonical" href="https://wenevergonnaclose.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="+U Universe | One Table, Many Subjects">
+  <meta property="og:description" content="An anonymous community table for learning, building, and carrying useful knowledge forward.">
+  <meta property="og:url" content="https://wenevergonnaclose.com/">
+  <meta name="twitter:card" content="summary">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"+U Universe","url":"https://wenevergonnaclose.com/","description":"An anonymous community table for learning, building, and carrying useful knowledge forward."}
+  </script>
+  <title>+U Universe | One Table, Many Subjects</title>
+  <link rel="stylesheet" href="styles.css?v=universe-prototype1">
 </head>
 <body>
-  <section class="world-entry" aria-labelledby="world-entry-title">
+  <a class="skip-link" href="#table">Skip the gateway and enter the table</a>
+  <section class="universe-gateway" id="home" aria-labelledby="universe-gateway-title">
     <div class="entry-backdrop" aria-hidden="true">
       <div class="overflow-hand hand-left"><span></span><span></span><span></span><span></span></div>
       <div class="overflow-hand hand-right"><span></span><span></span><span></span><span></span></div>
@@ -16,12 +27,54 @@
       <span class="entry-jack jack-two"></span>
       <span class="entry-jack jack-three"></span>
     </div>
-    <div class="world-entry-copy">
-      <p class="eyebrow">WHOLE DONUTS PRESENTS</p>
-      <h1 id="world-entry-title">Walk into the field.</h1>
-      <p>Start where you are. Give your next creation a name, choose your figure, and step into the +U world before entering the community table.</p>
+    <div class="universe-shell">
+      <div class="stick-field" role="img" aria-label="A field of anonymous faceless stick figures">
+        <span class="field-figure one"></span><span class="field-figure two"></span><span class="field-figure three"></span><span class="field-figure four"></span><span class="field-figure five"></span><span class="field-figure six"></span><span class="field-figure seven"></span><span class="universe-plus">+U</span>
+      </div>
+      <div class="universe-copy">
+        <p class="eyebrow">+U UNIVERSE · ANONYMOUS ENTRY</p>
+        <h1 id="universe-gateway-title">One table.<br>Many subjects.</h1>
+        <p class="universe-lede">A quiet start. No name, account, or profile.</p>
+        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title">
+          <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
+          <h2 id="welcome-title">Three questions. One useful start.</h2>
+          <div class="welcome-step" data-question="1" data-key="intent">
+            <p>What do you need right now?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="learn">Learn</button>
+              <button type="button" data-answer="share">Share from experience</button>
+              <button type="button" data-answer="help">Help</button>
+              <button type="button" data-answer="explore">Explore</button>
+            </div>
+          </div>
+          <div class="welcome-step" data-question="2" data-key="branch" hidden>
+            <p>Which experience feels relevant?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="awd">Whole Donuts</button>
+              <button type="button" data-answer="tnc">The Nurtured Chef</button>
+              <button type="button" data-answer="table">The shared community table</button>
+            </div>
+          </div>
+          <div class="welcome-step" data-question="3" data-key="entry" hidden>
+            <p>How would you like to begin?</p>
+            <div class="answer-grid">
+              <button type="button" data-answer="counter">Guided Counter</button>
+              <button type="button" data-answer="table">Shared Table</button>
+            </div>
+          </div>
+          <div class="welcome-result" id="welcome-result" aria-live="polite" hidden>
+            <strong>Your first useful start is ready.</strong>
+            <span></span>
+            <div class="entry-result-actions">
+              <a class="button primary" id="outcome-primary" href="#community-counter"></a>
+              <a class="button" id="outcome-next" href="#home"></a>
+            </div>
+            <button type="button" id="restart-welcome">Ask me again</button>
+          </div>
+        </section>
+        <p class="gateway-status" id="table-navigation-status" aria-live="polite">Answer three questions to enter the table anonymously.</p>
+      </div>
     </div>
-    <iframe class="world-frame" src="world/" title="Whole Donuts interactive stick-figure world"></iframe>
   </section>
 
   <aside class="rail" aria-label="+U menu">
@@ -33,10 +86,16 @@
   </aside>
 
   <main>
-    <section id="home" class="panel hero" aria-labelledby="home-title">
+    <section id="table" class="panel hero" aria-labelledby="home-title">
       <p class="eyebrow">THE COMMUNITY COUNTER · <span id="daily-date">TODAY</span></p>
       <h1 id="home-title">Pull up a seat.</h1>
       <p class="lede">Welcome in. Today’s menu is made by community: no judgment—just try, learn, and leave a crumb for the next person.</p>
+      <section class="launch-window" aria-labelledby="launch-window-title">
+        <p class="eyebrow">FRESH LAUNCH</p><h2 id="launch-window-title">A local window for a fresh start.</h2>
+        <p id="launch-window-status" aria-live="polite">No local Launch Window is active until you choose an eligible exploration step.</p>
+        <button id="reset-launch-window" type="button">Reset this browser's Fresh Launch</button>
+        <p class="launch-window-note">Local only: resets welcome and Dashboard presentation at 12 hours, local midnight, or before the next eligible step after 1,000 interactions. A device-local +U pass stays put.</p>
+      </section>
 
       <section class="welcome-scene" aria-label="Stick figures welcoming you">
         <div class="stick-group" aria-hidden="true">
@@ -73,32 +132,36 @@
         </div>
         <p><a class="library-guide-link" href="WHOLE_DONUTS_GUIDE.md">Read the whole Whole Donuts guide</a></p>
         <p class="template-library-note">Bring any useful crumb, no matter where you gathered it. Choose what fits, skip what does not, and rewrite every prompt in your own words. No account is needed to use a template.</p>
-        <section class="crumb-workshop" aria-labelledby="crumb-workshop-title">
-          <p class="eyebrow">THE CRUMB WORKSHOP</p>
-          <h3 id="crumb-workshop-title">Leave something useful for the next person.</h3>
-          <p>Share an original lesson, a resource you have permission to recommend, or a source worth reviewing. Every crumb enters a reviewed queue; nothing is published, paid, or allocated automatically.</p>
+        <section class="crumb-workshop" id="crumb-workshop" aria-labelledby="crumb-workshop-title">
+          <p class="eyebrow">THE SEO CRUMB SAVER</p>
+          <h3 id="crumb-workshop-title">Every crumb becomes part of the whole.</h3>
+          <p>Useful public guides, templates, invitations, and community pages are discoverable ways into the table. A crumb is reviewed knowledge or content, not a visitor profile, scraped social data, or an automatic submission. Share only original or permitted useful material; approved crumbs require rights, safety, source, usefulness, attribution, and history review before human publication.</p>
+          <p class="crumb-availability"><strong>Crumb Saver submission is not configured in this prototype.</strong> This page does not accept or store a crumb, so it cannot discard one. Prepare a contribution with the <a href="templates/plus-u-share-a-crumb-template.md">share-a-crumb template</a>, read the <a href="CRUMB_PROTOCOL.md">reviewed protocol</a>, or <a href="mailto:thewholedonuts@gmail.com?subject=Crumb%20Saver%20reviewed%20channel">ask about the reviewed channel</a>.</p>
           <form id="crumb-form">
-            <label for="crumb-category">Where could it help?</label>
-            <select id="crumb-category" name="category" required>
-              <option value="">Choose a place</option>
-              <option value="world">Whole Donuts world</option>
-              <option value="library">+U Library</option>
-              <option value="ambassador">Ambassador Path</option>
-              <option value="support">Community support</option>
-            </select>
-            <label for="crumb-source">Source link, if there is one</label>
-            <input id="crumb-source" name="source" type="url" placeholder="https://example.com">
-            <label for="crumb-content">Your crumb</label>
-            <textarea id="crumb-content" name="content" rows="5" maxlength="2000" required placeholder="What is useful, who could it help, and how should someone begin?"></textarea>
-            <label class="crumb-consent"><input id="crumb-rights" name="rights" type="checkbox" required> I wrote this or have permission to share and recommend it.</label>
-            <button type="submit">Send this crumb for review</button>
+            <fieldset class="crumb-fields" disabled>
+              <legend>Submission fields become available after approved runtime configuration</legend>
+              <label for="crumb-category">Where could it help?</label>
+              <select id="crumb-category" name="category" required>
+                <option value="">Choose a place</option>
+                <option value="world">Whole Donuts world</option>
+                <option value="library">+U Library</option>
+                <option value="ambassador">Ambassador Path</option>
+                <option value="support">Community support</option>
+              </select>
+              <label for="crumb-source">Source link, if there is one</label>
+              <input id="crumb-source" name="source" type="url" placeholder="https://example.com">
+              <label for="crumb-content">Your crumb</label>
+              <textarea id="crumb-content" name="content" rows="5" maxlength="2000" required placeholder="What is useful, who could it help, and how should someone begin?"></textarea>
+              <label class="crumb-consent"><input id="crumb-rights" name="rights" type="checkbox" required> I wrote this or have permission to share and recommend it.</label>
+              <button type="button">Submission channel unavailable</button>
+            </fieldset>
           </form>
           <p id="crumb-status" aria-live="polite"></p>
           <p class="crumb-note">We do not publish private, identifying, financial, health, or harmful information. Read the <a href="CRUMB_PROTOCOL.md" data-dashboard-effort="compass">crumb protocol</a>.</p>
         </section>
       </section>
 
-      <section class="ambassador-path" aria-labelledby="ambassador-path-title">
+      <section class="ambassador-path" id="ambassador-path" aria-labelledby="ambassador-path-title">
         <p class="eyebrow">THE +U AMBASSADOR PATH</p>
         <h2 id="ambassador-path-title">Your resilience is a credential.</h2>
         <p>Artists, tradespeople, organizers, business leaders, neighbors rebuilding after hard times, and people still finding their footing all bring knowledge worth carrying forward. +U recognizes what you have learned and gives you a place to grow it, share it, or take it wherever your own path leads.</p>
@@ -109,7 +172,7 @@
           </article>
           <article>
             <h3>Earn your invitation</h3>
-            <p>When you complete a recognized level or receive a Dedication Award, your private QR opens your member path and records the achievement to your verified account.</p>
+            <p>A private +U return link can help this browser find its way back to the table. It is not an account, identity, profile, or record of achievement.</p>
           </article>
           <article>
             <h3>Lead from where you stand</h3>
@@ -138,47 +201,23 @@
         <span id="member-greeting-copy">Your place at the table is here when you are ready.</span>
       </section>
 
-      <section class="welcome-gate" id="welcome-gate" aria-labelledby="welcome-title">
-        <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
-        <h2 id="welcome-title">Three questions. Then your seat is ready.</h2>
-        <div class="welcome-step" data-question="1" data-key="branch">
-          <p>What sounds good right now?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="awd">Whole Donuts</button>
-            <button type="button" data-answer="tnc">The Nurtured Chef</button>
-            <button type="button" data-answer="both">Surprise me with +U</button>
-          </div>
-        </div>
-        <div class="welcome-step" data-question="2" data-key="course" hidden>
-          <p>How hungry are you?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="bits">Just a bit</button>
-            <button type="button" data-answer="bites">Give me a plate</button>
-            <button type="button" data-answer="biggies">Bring the bib</button>
-            <button type="button" data-answer="bombs">Dessert first</button>
-          </div>
-        </div>
-        <div class="welcome-step" data-question="3" data-key="intent" hidden>
-          <p>What would feel good today?</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="learn">Learn something</button>
-            <button type="button" data-answer="make">Make something</button>
-            <button type="button" data-answer="help">Help something</button>
-            <button type="button" data-answer="wander">Just wander</button>
-          </div>
-        </div>
-        <div class="welcome-result" id="welcome-result" aria-live="polite" hidden>
-          <strong>Your seat is ready.</strong>
-          <span>Welcome to +U.</span>
-          <button type="button" id="restart-welcome">Ask me again</button>
-        </div>
-      </section>
-
       <div class="counter" id="community-counter" aria-label="Today's community menu" hidden>
         <div class="counter-head">
           <div><p class="eyebrow">BEFORE THE FIRST CRUMB DROPS</p><h2>+U changes everything.</h2></div>
           <p>Tap a course. Order only what fits.</p>
         </div>
+
+        <section class="donuts-new-school" id="donuts-new-school" aria-labelledby="donuts-new-school-title">
+          <p class="eyebrow">DONUTS NEW SCHOOL</p>
+          <h3 id="donuts-new-school-title">Visionaries &amp; Pioneers</h3>
+          <p>Bring a question, a useful skill, or a project worth building. Donuts New School is a non-exclusive +U learning subject for people who want to learn, make, share useful work, and carry community knowledge forward.</p>
+          <div class="new-school-actions">
+            <a href="#template-library">Explore free +U learning guides</a>
+            <a href="CRUMB_PROTOCOL.md" data-dashboard-effort="compass">Read the reviewed Crumb Protocol</a>
+            <a href="#welcome-gate">Start the anonymous welcome</a>
+          </div>
+          <p class="new-school-note">It is not enrollment, a credential, certification, identity requirement, financial opportunity, donation reward, or automated path. The Dashboard remains anonymous and local to this browser after the voluntary welcome.</p>
+        </section>
 
         <section class="plusu-dashboard" id="plusu-dashboard" aria-labelledby="plusu-dashboard-title" hidden>
           <p class="eyebrow">YOUR +U DASHBOARD</p>
@@ -363,7 +402,7 @@
           </section>
 
           <div class="fine-print">
-            <strong>At the register, plain and clear:</strong> +U passes, Dashboard accessories, and recognition are not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support through Cash App or manual Chime is never automatic, never processed by this site, and separate from store purchases. The Dashboard is anonymous and local to this browser; its accessories come only from voluntary non-financial exploration, never support, payments, purchases, recipient sharing, referral activity, or external tracking. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass, last-visit time, and minimal Dashboard accessory progress in this browser; opening a `?u=` link restores a pass but does not create an identity or profile. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
+            <strong>At the register, plain and clear:</strong> +U passes, Dashboard accessories, and recognition are not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support through Cash App or manual Chime is never automatic, never processed by this site, and separate from store purchases. The Dashboard and Fresh Launch Window are anonymous and local to this browser; their accessories and interaction count come only from voluntary non-financial exploration, never support, payments, purchases, recipient sharing, referral activity, page loads, or external tracking. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass, last-visit time, minimal Dashboard accessory progress, and a versioned Fresh Launch start time and interaction count in this browser; opening a `?u=` link restores a pass but does not create an identity or profile. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
             <details><summary>Community table agreement</summary><p>Participate lawfully and respectfully. Community information is general information, not medical, legal, financial, or professional advice. No harassment, exploitation, impersonation, unsafe activity, or promises of guaranteed results. External links and community contributions remain the responsibility of their providers and authors.</p></details>
           </div>
         </section>
@@ -378,13 +417,13 @@
       <section class="brochure" aria-labelledby="brochure-title">
         <div class="brochure-head">
           <p class="eyebrow">MOVEMENT · PRINT + DIGITAL COMPANION</p>
-          <h2 id="brochure-title">Bring the brochure and the site into the same flow.</h2>
-          <p>The Movement trifold works as the printable front door for +U, Whole Donuts, and The Nurtured Chef. Use it to discover, choose a branch, act, and respond.</p>
+          <h2 id="brochure-title">Recovered trifold references.</h2>
+          <p>The original Movement trifold image files are not present in this repository or public site. These are provenance notes only, not replacement artwork or printable brochures.</p>
         </div>
         <div class="brochure-grid">
           <article class="brochure-card">
             <h3>Outside spread</h3>
-            <p><strong>MovementTrifoldOUTSIDE.png</strong></p>
+            <p><strong>Missing original asset: MovementTrifoldOUTSIDE.png</strong></p>
             <ul>
               <li><strong>Back panel:</strong> About Movement, values, and stay connected footer</li>
               <li><strong>Spine:</strong> vertical Movement wordmark with chef logo and stripe texture</li>
@@ -393,7 +432,7 @@
           </article>
           <article class="brochure-card">
             <h3>Inside spread</h3>
-            <p><strong>MovementTrifoldINSIDE.png</strong></p>
+            <p><strong>Missing original asset: MovementTrifoldINSIDE.png</strong></p>
             <ul>
               <li><strong>Get involved:</strong> four programs and free footer</li>
               <li><strong>Our story:</strong> quote, founding story, and 5K+/365/Free stats bar</li>
@@ -403,20 +442,12 @@
         </div>
         <div class="brochure-meta">
           <article>
-            <h3>Print order</h3>
-            <ol>
-              <li>Print both spreads at 11×8.5 in landscape on duplex stock.</li>
-              <li>Use the outside image for side 1 and the inside image for side 2.</li>
-              <li>Fold the right panel in first, then fold the left panel over it.</li>
-            </ol>
+            <h3>Asset boundary</h3>
+            <p>Do not print, recreate, or publish a substitute as the original. A rights-reviewed original file and its provenance are required before a future public release.</p>
           </article>
           <article>
-            <h3>Public sharing</h3>
-            <ul>
-              <li>Post the inside spread on social media so the QR stays scan-ready.</li>
-              <li>Email both spreads as a digital brochure attachment.</li>
-              <li>Use the brochure beside this site as a presentation and response tool.</li>
-            </ul>
+            <h3>Current public route</h3>
+            <p>Use the verified +U entry and its direct links while the original assets remain unavailable.</p>
             <p><strong>Public contact:</strong> <a href="mailto:thewholedonuts@gmail.com">thewholedonuts@gmail.com</a></p>
           </article>
         </div>
@@ -428,9 +459,9 @@
       <h2 id="awd-title">Every appetite belongs.</h2>
       <p>Explore the Whole Donuts universe, community, and store. Come back to the Counter whenever you want another course.</p>
       <div class="actions">
-        <a class="button primary" href="#awd">Open Whole Donuts</a>
-        <a class="button primary" href="#awd">Community &amp; cause</a>
-        <a class="button store" href="#awd">Browse the .buzz store</a>
+        <a class="button primary" href="#home">Return to the +U gateway</a>
+        <a class="button primary" href="#welcome-gate">Start the Community welcome</a>
+        <a class="button store" href="https://wholedonuts.buzz" target="_blank" rel="noopener noreferrer">Visit the Whole Donuts store ↗</a>
         <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
       <a class="back" href="#home">← Return to the Counter</a>
@@ -441,20 +472,20 @@
       <h2 id="tnc-title">Always treated by TNC.</h2>
       <p>Choose the chef experience, the foundation, or the Nutur3d Chef store. Everything returns to the community table.</p>
       <div class="actions">
-        <a class="button primary" href="#tnc">Open The Nurtured Chef</a>
-        <a class="button primary" href="#tnc">Foundation &amp; cause</a>
-        <a class="button store" href="#tnc">Browse the chef store</a>
+        <a class="button primary" href="#home">Return to the +U gateway</a>
+        <a class="button primary" href="#welcome-gate">Start the Community welcome</a>
+        <a class="button store" href="https://thenutur3dchef.com" target="_blank" rel="noopener noreferrer">Visit the Nutur3d Chef store ↗</a>
         <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
       <a class="back" href="#home">← Return to the Counter</a>
     </section>
   </main>
 
-  <footer><span>+U Movement · Today’s menu and brochure are made by community.</span><a id="branch-store" href="#home">Open the menu</a></footer>
+  <footer><span>+U Movement · Today’s menu and brochure are made by community.</span><a id="branch-store" href="#home">Return to the +U gateway</a></footer>
   <noscript><p class="noscript-note">JavaScript is off, so the welcome gate and private +U pass tools are unavailable. You can still use the branch links and brochure guidance on this page.</p></noscript>
   <script src="auth-config.js"></script>
   <script src="storefront-config.js"></script>
   <script type="module" src="auth.js"></script>
-  <script src="app.js?v=movement4"></script>
+  <script src="app.js?v=universe-prototype1"></script>
 </body>
 </html>

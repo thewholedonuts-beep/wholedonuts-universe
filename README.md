@@ -13,25 +13,38 @@ The repository root contains the static GitHub Pages bundle for
   the visitor's browser. A valid `?u=` link can restore a pass, and QR images
   are requested only when the visitor explicitly asks for one.
 
-The custom domain is declared in this repository, but it is not evidence that
-GitHub Pages or DNS is already active. `wenevergonnaclose.com` remains attached
-to the legacy Sunshine Pages site until the controlled Universe cutover. The manual
-[`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages only the
-public static files; it excludes Go operations configuration and local
-credentials. Its `include_cname` input defaults to `false`, so the first
-Universe Pages deployment is URL-only. `CNAME` remains in source for the final
-cutover and is included only when that input is explicitly enabled after the
-domain has moved to Universe. GitHub Actions deployments manage custom domains
-in **Settings -> Pages**, not from the artifact's `CNAME` file.
+  The Fresh Launch Window stores only a versioned local start timestamp and
+  completed anonymous interaction count: `{"v":1,"startedAt":"...","count":0}`.
+  It counts successful local exploration steps, not visits, identities, page
+  loads, pass values, recipients, sharing outcomes, support, payment, or
+  purchase actions. Before the next eligible interaction at 12 hours, local
+  midnight, or 1,000 local interactions, it resets the welcome and Dashboard
+  presentation without removing the device-local +U pass. This is a per-browser
+  limit, never a global public metric.
 
-To prepare and cut over, set **Settings -> Pages** to **GitHub Actions**, run
-the workflow with `include_cname: false` to validate the Universe Pages URL,
-set and verify `wenevergonnaclose.com` in Pages, and configure the DNS records
-GitHub Pages displays. Do not detach the current legacy attachment until the
-Universe URL and GitHub TXT verification are ready. After the transfer, run the
-workflow with `include_cname: true` if the deployed artifact should retain the
-source declaration. Enable HTTPS enforcement only after GitHub verifies the
-domain.
+  The `?u=` value is a private device-local +U return link only. It does not
+  authenticate an operator, grant access, identify a person, activate a target,
+  count a contribution, or carry SEO data. Daily SEO and learning targets remain
+  outside the public site in access-controlled operations and require explicit
+  human activation and release review.
+
+  The public SEO Crumb Saver treats deliberate public pages, guides, templates,
+  and canonical invitations as discovery entry points for reviewed knowledge. It
+  does not collect a visitor profile or submit material from this static site.
+  The root uses canonical, robots, sitemap, social-preview, and factual WebSite
+  metadata; `?u=` pass URLs change to `noindex,nofollow` in the browser and retain
+  the canonical root. The non-deployed [SEO Crumb Saver operating model](config/seo-crumb-saver-operating-model.md)
+  requires human review of aggregate visibility and prohibits tracking, scraping,
+  credentials, rank manipulation, and automatic publishing.
+
+The controlled cutover is complete: `wenevergonnaclose.com` is attached to
+Universe GitHub Pages and the legacy Sunshine repository is archived. The
+manual [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages
+only the public static files and excludes Go operations configuration and local
+credentials. Its `include_cname` input remains a deliberate release control;
+GitHub Actions deployments manage the custom-domain association in
+**Settings -> Pages**, not from the artifact's `CNAME` file. Any future domain
+or DNS change requires a separate reviewed operational change.
 
 ## Operations tooling
 
@@ -63,6 +76,12 @@ responsibilities, and reward eligibility require decisions by the responsible
 entity and configured providers. See the non-deployed
 [Donation Access Hub operating model](config/donation-access-operating-model.md)
 for operational constraints.
+
+The public Crumb Saver protocol and contribution template remain available, but
+the current static Pages configuration contains no approved submission runtime.
+Its form is visibly unavailable and accepts no text, so it cannot discard a
+submission. Do not link a separate Crumb Saver endpoint unless its owner
+supplies and verifies it.
 
 ## Consolidation and learning
 
