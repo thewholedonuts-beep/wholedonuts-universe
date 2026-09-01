@@ -24,7 +24,7 @@ environment as supported.
 | Branch mobile after-evidence | Partially executed | Edge 152.0.4191.53 actual execution with automated one-point touch/keyboard emulation: all four required portrait widths had `scrollWidth == clientWidth`, zero DevTools errors, a zero-size hidden rail, non-intercepting backdrop, 4/4 scrolled bounds/touch transitions, keyboard focus/Enter progression, #awd/#tnc routes, and reduced-motion styles. Network-constrained asset evidence remains blocked. |
 | Landscape and desktop layouts | Unknown | Execute only where layout behavior differs; record viewport and browser. |
 | iOS, Android, macOS, ChromeOS, Linux | Unknown | Current evergreen browser evidence is required before marking support pass. |
-| Clipboard, localStorage, QR fallback | Partially simulated | Confirm visible fallback/status and storage-denied/private-mode behavior without blocking anonymous entry. |
+| Clipboard, localStorage, QR fallback | Controlled Edge evidence | Injected Storage `SecurityError` preserved core entry; unavailable Clipboard write showed a direct-share message; blocked QR request showed the private-link fallback. Physical-device/private-mode coverage remains unknown. |
 
 Record actual browser execution separately from automated DOM simulation.
 Untestable items remain blocked; they cannot be promoted to a release pass.
