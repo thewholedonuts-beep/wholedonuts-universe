@@ -39,6 +39,55 @@ function renderStorefrontHandoff(){
 }
 renderStorefrontHandoff();
 
+const donationPurposeInputs=[...document.querySelectorAll('input[name="donation-purpose"]')];
+const donationDisclosure=document.querySelector('#donation-disclosure');
+const donationConfirmation=document.querySelector('#donation-confirmation');
+const revealDonationLink=document.querySelector('#reveal-donation-link');
+const donationExit=document.querySelector('#donation-exit');
+const donationExitCopy=document.querySelector('#donation-exit-copy');
+const donationProcessorLink=document.querySelector('#donation-processor-link');
+const donationStatus=document.querySelector('#donation-status');
+const donationProcessorUrl='https://cash.app/$wholedonuts';
+
+function selectedDonationPurpose(){
+  const selected=donationPurposeInputs.find(input=>input.checked);
+  return selected?selected.value:null;
+}
+
+function resetDonationExit(){
+  if(donationExit)donationExit.hidden=true;
+  if(donationProcessorLink)donationProcessorLink.removeAttribute('href');
+}
+
+function syncDonationHub(){
+  const purpose=selectedDonationPurpose();
+  if(donationDisclosure)donationDisclosure.hidden=!purpose;
+  if(donationConfirmation)donationConfirmation.checked=false;
+  if(revealDonationLink)revealDonationLink.disabled=true;
+  resetDonationExit();
+  if(donationStatus)donationStatus.textContent=purpose
+    ?'You selected '+purpose+'. Review the payee and affirm the final action to reveal the optional payment link.'
+    :'Choose a purpose to review the optional payment details.';
+}
+
+donationPurposeInputs.forEach(input=>input.addEventListener('change',syncDonationHub));
+if(donationConfirmation)donationConfirmation.addEventListener('change',()=>{
+  if(revealDonationLink)revealDonationLink.disabled=!donationConfirmation.checked||!selectedDonationPurpose();
+  resetDonationExit();
+});
+if(revealDonationLink)revealDonationLink.addEventListener('click',()=>{
+  const purpose=selectedDonationPurpose();
+  if(!purpose||!donationConfirmation||!donationConfirmation.checked){
+    if(donationStatus)donationStatus.textContent='Choose a purpose and affirm the final action before continuing.';
+    return;
+  }
+  if(donationProcessorLink)donationProcessorLink.href=donationProcessorUrl;
+  if(donationExit)donationExit.hidden=false;
+  if(donationExitCopy)donationExitCopy.textContent='You selected '+purpose+'. Cash App and $wholedonuts are the optional processor and payee shown before you leave this site.';
+  if(donationStatus)donationStatus.textContent='The optional payment link is ready. Nothing has been paid, transferred, or scheduled.';
+  if(donationProcessorLink)donationProcessorLink.focus();
+});
+
 function safeGet(key){
   try{return localStorage.getItem(key)}catch(e){return memoryStore.has(key)?memoryStore.get(key):null}
 }
@@ -54,6 +103,10 @@ function syncBranch(){
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
   if(stores[id]){store.textContent=stores[id][0]+' ↗';store.href=stores[id][1]}
   else{store.textContent='Open the menu';store.href='#home'}
+  if(id==='donation-access-hub'&&counter){
+    counter.hidden=false;
+    openCourse('bombs');
+  }
 }
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];

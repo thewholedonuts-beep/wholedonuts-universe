@@ -441,6 +441,69 @@ main{margin-left:var(--rail)}
 .journey-offers p{line-height:1.5}
 .journey-offer-actions{display:flex;flex-wrap:wrap;gap:.7rem}
 .journey-offers-note{font-size:.82rem}
+.donation-access-hub{
+  margin-top:1.2rem;
+  padding:1.4rem;
+  border:2px solid var(--berry);
+  border-radius:1rem;
+  background:linear-gradient(135deg,#f5e5eb,#fffaf0 62%,#e8d9b8);
+  color:var(--ink)
+}
+.donation-access-hub h3{font:700 clamp(2rem,4vw,3.25rem)/1 Georgia,serif;margin:.25rem 0;color:var(--berry)}
+.donation-access-hub>p{max-width:56rem;line-height:1.55}
+.donation-purpose{
+  display:grid;
+  gap:.7rem;
+  margin:1rem 0;
+  padding:1rem;
+  border:1px solid #15130f55;
+  border-radius:.8rem;
+  background:#fffdf8cc
+}
+.donation-purpose legend{padding:0 .35rem;font-weight:900}
+.donation-purpose label,
+.donation-confirmation{display:flex;gap:.6rem;align-items:flex-start;line-height:1.45;font-weight:700}
+.donation-purpose input,
+.donation-confirmation input{margin-top:.25rem;accent-color:var(--berry)}
+.donation-status{min-height:1.5rem;font-weight:800}
+.donation-disclosure{
+  display:grid;
+  gap:.75rem;
+  max-width:58rem;
+  padding:1rem;
+  border:2px solid var(--ink);
+  border-radius:.8rem;
+  background:var(--cream)
+}
+.donation-disclosure p{margin:0;line-height:1.55}
+.donation-disclosure a{color:var(--ink);font-weight:900}
+.donation-disclosure button{
+  justify-self:start;
+  border:0;
+  border-radius:.7rem;
+  padding:.8rem 1rem;
+  background:var(--berry);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer
+}
+.donation-disclosure button:disabled{cursor:not-allowed;opacity:.55}
+.donation-exit{
+  margin-top:1rem;
+  padding:1rem;
+  border:2px solid var(--green);
+  border-radius:.8rem;
+  background:#dfe9de
+}
+.donation-exit p{margin:0 0 .75rem;line-height:1.5}
+.rewards-center{
+  margin-top:1rem;
+  padding:1rem;
+  border-left:5px solid var(--gold);
+  background:#fffdf8cc
+}
+.rewards-center h4{margin:0;font:700 1.5rem Georgia,serif}
+.rewards-center p{max-width:56rem;margin:.5rem 0 0;line-height:1.5}
 .fine-print{margin-top:1.2rem;font-size:.78rem;line-height:1.55;opacity:.78}
 .fine-print details{margin-top:.6rem}
 .choices{

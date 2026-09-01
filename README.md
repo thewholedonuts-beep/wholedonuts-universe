@@ -39,3 +39,27 @@ The Go 1.21 funnel and domain operations project remains in `cmd/`, `pkg/`,
 site. See [SETUP.md](SETUP.md) and [README_FUNNELS.md](README_FUNNELS.md) for
 operational setup; keep credentials in local environment files or GitHub
 Actions secrets, never in the repository.
+
+## Donation Access Hub and Rewards Center
+
+The public Donation Access Hub is an interface and policy, not a payment
+processor, wallet, fund-transfer system, automatic billing system, or
+automatic allocation system. A visitor must select a voluntary support purpose,
+review the processor and payee, and affirm a final action before an external
+payment link is revealed. Store purchases remain separate merchant
+transactions, not donations.
+
+Real accounting, charity or tax treatment, refunds, merchant-of-record
+responsibilities, and reward eligibility require decisions by the responsible
+entity and configured providers. See the non-deployed
+[Donation Access Hub operating model](config/donation-access-operating-model.md)
+for operational constraints.
+
+## Consolidation and learning
+
+Universe is the verified system of record for material that has completed
+intake; it does not claim that all legacy or private material has migrated.
+The non-deployed [consolidation and learning model](config/consolidation-learning-model.md)
+defines classification, preserve-before-remove provenance, reviewed learning
+loops, and staged legacy retirement. It prohibits automatic publishing,
+deletion, payment, credential import, and private-data import.

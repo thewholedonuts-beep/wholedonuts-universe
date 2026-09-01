@@ -76,7 +76,7 @@
         <section class="crumb-workshop" aria-labelledby="crumb-workshop-title">
           <p class="eyebrow">THE CRUMB WORKSHOP</p>
           <h3 id="crumb-workshop-title">Leave something useful for the next person.</h3>
-          <p>Share an original lesson, a resource you have permission to recommend, or a source worth reviewing. Every crumb is reviewed before it is added to the public experience.</p>
+          <p>Share an original lesson, a resource you have permission to recommend, or a source worth reviewing. Every crumb enters a reviewed queue; nothing is published, paid, or allocated automatically.</p>
           <form id="crumb-form">
             <label for="crumb-category">Where could it help?</label>
             <select id="crumb-category" name="category" required>
@@ -217,8 +217,8 @@
         <section class="course" id="course-bombs" data-course="bombs" role="tabpanel" aria-labelledby="course-tab-bombs" hidden>
           <h3>BOMBS <small>· desserts &amp; the register</small></h3>
           <div class="course-grid">
-            <article class="dish"><strong>Whole Donuts goods window</strong><p><a href="#awd">Explore Whole Donuts</a><br><a href="https://cash.app/$wholedonuts">Support Whole Donuts</a></p></article>
-            <article class="dish"><strong>TNC goods window</strong><p><a href="#tnc">Explore The Nurtured Chef</a><br><a href="https://cash.app/$wholedonuts">Support Whole Donuts</a></p></article>
+            <article class="dish"><strong>Whole Donuts goods window</strong><p><a href="https://wholedonuts.buzz" target="_blank" rel="noopener noreferrer">Visit the Whole Donuts store ↗</a><br><a href="#donation-access-hub">Open the Donation Access Hub</a></p></article>
+            <article class="dish"><strong>TNC goods window</strong><p><a href="https://thenutur3dchef.com" target="_blank" rel="noopener noreferrer">Visit the chef store ↗</a><br><a href="#donation-access-hub">Open the Donation Access Hub</a></p></article>
             <article class="dish" id="free-merch"><strong>Free tools &amp; information</strong><p>Community drops will appear here when available. No purchase is required to sit at the table.</p></article>
           </div>
 
@@ -280,14 +280,44 @@
             <p id="journey-offers-copy">Answer the three welcome questions and this space will shape itself around what you came for.</p>
             <div class="journey-offer-actions">
               <a class="button primary" href="templates/plus-u-next-step-template.md">Get the free +U next-step template</a>
-              <a class="button store" href="https://cash.app/$wholedonuts">Support Whole Donuts</a>
+              <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
             </div>
-            <p class="journey-offers-note"><strong>Keep the table growing:</strong> support can be money, time, skills, materials, or a useful connection. Every contribution helps us pick up the crumbs, turn them into practical support, and make room for the next person. Financial gifts directly support sustainable Whole Donuts growth.</p>
+            <p class="journey-offers-note"><strong>Keep the table growing:</strong> support can be money, time, skills, materials, or a useful connection. Optional support contributions are separate from store purchases and never required for access or recognition.</p>
             <p class="journey-offers-note">Your answers guide this page on this device. Signed-in members can choose to carry that journey forward.</p>
           </section>
 
+          <section class="donation-access-hub" id="donation-access-hub" aria-labelledby="donation-access-title">
+            <p class="eyebrow">DONATION ACCESS HUB</p>
+            <h3 id="donation-access-title">Choose your purpose before you leave the table.</h3>
+            <p>This is a voluntary support interface, not a payment processor or fund-transfer system. It never starts automatic payments, recurring billing, transfers, allocations, or background use of a payment method.</p>
+
+            <fieldset class="donation-purpose">
+              <legend>1. What is your optional support for?</legend>
+              <label><input type="radio" name="donation-purpose" value="Whole Donuts community work"> Whole Donuts community work</label>
+              <label><input type="radio" name="donation-purpose" value="The Nurtured Chef community work"> The Nurtured Chef community work</label>
+              <label><input type="radio" name="donation-purpose" value="General +U table support"> General +U table support</label>
+            </fieldset>
+
+            <p class="donation-status" id="donation-status" aria-live="polite">Choose a purpose to review the optional payment details.</p>
+            <div class="donation-disclosure" id="donation-disclosure" hidden>
+              <p><strong>Optional support payment:</strong> Cash App to <strong>$wholedonuts</strong>. This is not a store purchase, does not include merchandise, and does not create any tax-deductible receipt, investment return, currency value, ownership, or guaranteed benefit.</p>
+              <p>For a payment question, contact <a href="mailto:thewholedonuts@gmail.com?subject=Optional%20support%20payment%20question">thewholedonuts@gmail.com</a> with the payment reference. This interface cannot issue a refund; Cash App and the responsible payee handle optional support-payment questions under their terms. Store purchases, fulfillment, and refunds are handled by the separate merchant or store provider.</p>
+              <label class="donation-confirmation"><input id="donation-confirmation" type="checkbox"> I chose this purpose, reviewed the payee, and want to reveal the optional Cash App payment link.</label>
+              <button id="reveal-donation-link" type="button" disabled>Reveal optional payment link</button>
+            </div>
+            <div class="donation-exit" id="donation-exit" hidden>
+              <p id="donation-exit-copy"></p>
+              <a class="button primary" id="donation-processor-link" target="_blank" rel="noopener noreferrer">Continue to optional Cash App payment ↗</a>
+            </div>
+
+            <section class="rewards-center" aria-labelledby="rewards-center-title">
+              <h4 id="rewards-center-title">Rewards Center</h4>
+              <p>Recognition and access acknowledge participation; they are not cash, currency, ownership, an investment, a prize, a gift card, or a guaranteed benefit. They never depend on making a charitable donation or optional support payment.</p>
+            </section>
+          </section>
+
           <div class="fine-print">
-            <strong>At the register, plain and clear:</strong> +U passes are community identifiers, not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Purchases are optional and handled by the linked payment/store provider under its terms. Store availability, fulfillment, refunds, taxes, and product details must be confirmed before purchase. This page stores only the +U pass and last-visit time in this browser; opening a `?u=` link restores that pass in this browser, and clearing browser storage removes it. If you request a QR image, the encoded link is sent to a third-party QR image service to render it. Do not submit private, health, financial, or children’s information here.
+            <strong>At the register, plain and clear:</strong> +U passes and recognition are community identifiers, not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support is never automatic and is separate from store purchases. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass and last-visit time in this browser; opening a `?u=` link restores that pass in this browser, and clearing browser storage removes it. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
             <details><summary>Community table agreement</summary><p>Participate lawfully and respectfully. Community information is general information, not medical, legal, financial, or professional advice. No harassment, exploitation, impersonation, unsafe activity, or promises of guaranteed results. External links and community contributions remain the responsibility of their providers and authors.</p></details>
           </div>
         </section>
@@ -355,7 +385,7 @@
         <a class="button primary" href="#awd">Open Whole Donuts</a>
         <a class="button primary" href="#awd">Community &amp; cause</a>
         <a class="button store" href="#awd">Browse the .buzz store</a>
-        <a class="button store" href="https://cash.app/$wholedonuts">Pay $wholedonuts ↗</a>
+        <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
       <a class="back" href="#home">← Return to the Counter</a>
     </section>
@@ -368,7 +398,7 @@
         <a class="button primary" href="#tnc">Open The Nurtured Chef</a>
         <a class="button primary" href="#tnc">Foundation &amp; cause</a>
         <a class="button store" href="#tnc">Browse the chef store</a>
-        <a class="button store" href="https://cash.app/$wholedonuts">Pay $wholedonuts ↗</a>
+        <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
       <a class="back" href="#home">← Return to the Counter</a>
     </section>

@@ -18,6 +18,14 @@ Every submission begins as `pending`. A reviewer checks that it is useful, accur
 
 Approved crumbs are added deliberately to the relevant part of the public experience. Nothing is copied or published automatically from an outside source.
 
+## Learning loop
+
+Contributions are intentional and reviewed for source, rights, privacy, and
+fit before publication. Approved material is published only to the relevant
+subject or domain with source attribution and revision history retained.
+Feedback and observed impact guide later improvements; they do not trigger
+automatic publishing, deletion, payment, allocation, or rewards.
+
 ## Boundaries
 
 Do not submit private, identifying, financial, health, legal, or emergency information about yourself or anyone else. Do not submit copyrighted content you do not have permission to share, unsafe instructions, harassment, or claims of guaranteed outcomes.
