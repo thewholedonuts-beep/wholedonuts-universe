@@ -396,6 +396,9 @@ const steps=[...document.querySelectorAll('[data-question]')];
 const welcomeResult=document.querySelector('#welcome-result');
 const outcomePrimary=document.querySelector('#outcome-primary');
 const outcomeNext=document.querySelector('#outcome-next');
+const ageResultConfirmation=document.querySelector('#age-result-confirmation');
+const ageResultStatus=document.querySelector('#age-result-status');
+const continueToOutcome=document.querySelector('#continue-to-outcome');
 const ageGate=document.querySelector('#age-gate');
 const ageGateStatus=document.querySelector('#age-gate-status');
 const ageEligibility=document.querySelector('#age-eligibility');
@@ -524,7 +527,7 @@ if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
   document.body.classList.toggle('youth-mode',ageMode==='youth');
   if(ageEligibility)ageEligibility.hidden=true;
   if(youthPathNote)youthPathNote.hidden=ageMode!=='youth';
-  finishWelcome();
+  finishWelcome({ageConfirmed:true});
 });
 const restartAgeGate=document.querySelector('#restart-age-gate');
 if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
@@ -539,7 +542,7 @@ function focusQuestion(number){
   const button=step&&step.querySelector('button');
   if(button)button.focus();
 }
-function finishWelcome({scroll=true}={}){
+function finishWelcome({scroll=true,ageConfirmed=false}={}){
   const branch=welcomeAnswers.branch;
   const intent=welcomeAnswers.intent||'explore';
   const entry=welcomeAnswers.entry||'counter';
@@ -577,15 +580,32 @@ function finishWelcome({scroll=true}={}){
     outcomeNext.textContent=next.label;
     outcomeNext.hidden=false;
   }
-  showQuestion(4);
+  if(ageResultConfirmation)ageResultConfirmation.hidden=!ageConfirmed;
+  if(ageResultStatus&&ageConfirmed)ageResultStatus.textContent='Age path selected locally. Your birth date was cleared and your selected path is ready.';
+  showQuestion(5);
   if(scroll){
     welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
-    if(outcomePrimary)outcomePrimary.focus({preventScroll:true});
-    if(outcomePrimary)requestAnimationFrame(()=>outcomePrimary.focus({preventScroll:true}));
-    if(outcomePrimary)setTimeout(()=>outcomePrimary.focus({preventScroll:true}),0);
-    if(outcomePrimary)setTimeout(()=>outcomePrimary.focus({preventScroll:true}),50);
+    focusRenderedOutcome();
   }
 }
+function focusRenderedOutcome(){
+  const target=outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')?outcomePrimary:null;
+  const fallback=continueToOutcome&&continueToOutcome.isConnected&&!continueToOutcome.hidden&&!continueToOutcome.disabled?continueToOutcome:null;
+  const focus=()=>{
+    if(target)target.focus({preventScroll:true});
+    if(target&&document.activeElement===target)return;
+    if(fallback)fallback.focus({preventScroll:true});
+  };
+  requestAnimationFrame(()=>requestAnimationFrame(focus));
+  setTimeout(focus,0);
+  setTimeout(focus,50);
+}
+if(continueToOutcome)continueToOutcome.addEventListener('click',()=>{
+  if(outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')){
+    outcomePrimary.focus({preventScroll:true});
+    outcomePrimary.click();
+  }
+});
 function saveJourney(){
   const journey={
     branch:welcomeAnswers.branch||'table',

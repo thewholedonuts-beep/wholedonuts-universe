@@ -194,6 +194,9 @@ body:not(.entered) footer{display:none}
 .entry-welcome .welcome-result strong{color:var(--green)}
 .entry-result-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.4rem}
 .entry-result-actions .button{display:inline-flex;align-items:center}
+.age-result-confirmation{display:grid;gap:.5rem;margin-top:.5rem}
+.age-result-confirmation p{margin:0;font-weight:800}
+.age-result-confirmation button{justify-self:start}
 .progressive-next-note{margin:.35rem 0 0;font-size:.95rem;line-height:1.5}
 .gateway-status{min-height:1.5rem;margin:1rem 0 0;font-weight:800}
 .age-gate{
