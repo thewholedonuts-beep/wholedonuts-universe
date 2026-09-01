@@ -1017,17 +1017,16 @@ footer a{color:var(--ink);font-weight:900}
 .brochure ol{margin:.5rem 0 0;padding-left:1.2rem}
 .noscript-note{margin:0;padding:1rem 1.2rem;background:var(--berry);color:#fff;font-weight:700}
 @media(max-width:760px){
-  :root{--rail:5rem}
-  .rail{padding:1rem .5rem}
-  .rail nav small{display:none}
-  .rail nav a{padding:.7rem .5rem}
+  :root{--rail:0}
+  .rail{display:none}
   .panel{padding:6rem 1.2rem 5rem}
-  .universe-gateway{margin-left:var(--rail);padding:1rem}
+  .universe-gateway{width:100%;min-width:0;margin-left:0;padding:1rem;overflow:visible}
   .overflow-hand{transform:scale(.72)}
   .hand-left{top:-5rem;left:-4rem;transform:rotate(-30deg) scale(.72)}
   .hand-right{right:-5rem;bottom:-6rem;transform:rotate(42deg) scale(.72)}
   .entry-jack{opacity:.3}
-  .universe-shell{grid-template-columns:1fr;padding:1.5rem;border-radius:1.25rem}
+  .universe-shell{width:100%;min-width:0;grid-template-columns:1fr;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+  .universe-copy{width:100%;min-width:0;overflow-wrap:anywhere}
   .stick-field{width:min(13rem,65vw);height:17rem}
   .figure-choice-grid{grid-template-columns:1fr}
   .figure-choice{min-height:6rem;grid-template-columns:4rem 1fr;align-items:center;text-align:left}
@@ -1051,7 +1050,8 @@ footer a{color:var(--ink);font-weight:900}
   .pass-actions button{width:100%}
   .choice{min-height:9rem}
   footer{left:var(--rail)}
-  .answer-grid{grid-template-columns:1fr 1fr}
+  .answer-grid{grid-template-columns:1fr}
+  .answer-grid button,.figure-choice{min-height:44px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
