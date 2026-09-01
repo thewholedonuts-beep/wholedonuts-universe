@@ -32,22 +32,40 @@
         <span class="field-figure one"></span><span class="field-figure two"></span><span class="field-figure three"></span><span class="field-figure four"></span><span class="field-figure five"></span><span class="field-figure six"></span><span class="field-figure seven"></span><span class="universe-plus">+U</span>
       </div>
       <div class="universe-copy">
-        <p class="eyebrow">+U UNIVERSE · ANONYMOUS ENTRY</p>
-        <h1 id="universe-gateway-title">One table.<br>Many subjects.</h1>
-        <p class="universe-lede">A quiet start. No name, account, or profile.</p>
+        <p class="eyebrow visually-hidden">+U UNIVERSE · ANONYMOUS ENTRY</p>
+        <h1 id="universe-gateway-title" class="visually-hidden">+U Universe anonymous entry</h1>
+        <p class="universe-lede visually-hidden">A quiet start. No name, account, or profile.</p>
         <section class="age-gate" id="age-gate" aria-labelledby="age-gate-title">
-          <p class="eyebrow">START HERE</p>
-          <h2 id="age-gate-title">Choose the path that fits.</h2>
-          <p>We use this choice only to show an age-appropriate, low-data start. It is not stored or verified.</p>
-          <div class="answer-grid age-choice-actions">
-            <button type="button" data-age-choice="adult">Adult (18+)</button>
-            <button type="button" data-age-choice="youth">Youth (13-17)</button>
+          <h2 id="age-gate-title">Choose a figure to begin.</h2>
+          <div class="figure-choice-grid" role="group" aria-label="Choose an anonymous entry path">
+            <button class="figure-choice" type="button" data-entry-choice="learn" aria-label="Learn">
+              <span class="figure-choice-art figure-choice-standing" aria-hidden="true"><span></span></span>
+              <span>Learn</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="share" aria-label="Share from experience">
+              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
+              <span>Share from experience</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="help" aria-label="Help">
+              <span class="figure-choice-art figure-choice-seated" aria-hidden="true"><span></span></span>
+              <span>Help</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="explore" aria-label="Explore">
+              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
+              <span>Explore</span>
+            </button>
           </div>
-          <form id="youth-age-form" hidden>
+          <p class="figure-choice-text">Choose a direction. The next two touches choose a subject and a starting place. No choice identifies you.</p>
+          <p class="figure-choice-text">Use your browser's reading and reduced-motion settings at any pace.</p>
+        </section>
+        <section class="age-gate" id="age-eligibility" aria-labelledby="age-eligibility-title" hidden>
+          <h2 id="age-eligibility-title">Age eligibility</h2>
+          <p>This local age screen is not identity verification. A birth date is used only in this browser to choose an age-appropriate path, then cleared immediately.</p>
+          <form id="age-eligibility-form">
             <label for="youth-birth-date">Birth date</label>
             <input id="youth-birth-date" type="date" inputmode="numeric" aria-describedby="youth-age-note" required>
-            <p id="youth-age-note">Used in this browser only to confirm this youth path, then immediately cleared. It is not stored, sent, or verified.</p>
-            <button type="submit">Continue to the youth path</button>
+            <p id="youth-age-note">It is not stored, sent, or attached to a profile, pass, or account.</p>
+            <button type="submit">Enter</button>
           </form>
           <div id="under-13-notice" hidden aria-live="polite">
             <h3>This table is not set up for under 13.</h3>
@@ -60,7 +78,7 @@
           <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
           <h2 id="welcome-title">Three questions. One useful start.</h2>
           <p id="youth-path-note" class="youth-path-note" hidden>Your youth path stays anonymous and low-data. Payment, store, member, and ambassador paths are not shown here.</p>
-          <div class="welcome-step" data-question="1" data-key="intent">
+          <div class="welcome-step" data-question="1" data-key="intent" hidden>
             <p>What do you need right now?</p>
             <div class="answer-grid">
               <button type="button" data-answer="learn">Learn</button>
