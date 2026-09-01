@@ -14,7 +14,8 @@ The repository root contains the static GitHub Pages bundle for
   are requested only when the visitor explicitly asks for one.
 
 The custom domain is declared in this repository, but it is not evidence that
-GitHub Pages or DNS is already active. The manual
+GitHub Pages or DNS is already active. `wenevergonnaclose.com` remains attached
+to the legacy Sunshine Pages site until the controlled Universe cutover. The manual
 [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages only the
 public static files; it excludes Go operations configuration and local
 credentials. Its `include_cname` input defaults to `false`, so the first
