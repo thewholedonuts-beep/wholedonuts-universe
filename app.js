@@ -403,6 +403,8 @@ const youthAgeForm=document.querySelector('#age-eligibility-form');
 const youthBirthDate=document.querySelector('#youth-birth-date');
 const under13Notice=document.querySelector('#under-13-notice');
 const youthPathNote=document.querySelector('#youth-path-note');
+const positivePath=document.querySelector('#positive-path');
+const beginPositivePath=document.querySelector('#begin-positive-path');
 const welcomeAnswers={};
 let ageMode=null;
 
@@ -459,6 +461,8 @@ function showAgeGate(message=''){
   document.body.classList.remove('adult-mode','youth-mode','entered');
   if(ageGate)ageGate.hidden=false;
   if(gate)gate.hidden=true;
+  steps.forEach(step=>step.hidden=true);
+  if(positivePath)positivePath.hidden=true;
   if(ageEligibility)ageEligibility.hidden=true;
   if(under13Notice)under13Notice.hidden=true;
   if(youthBirthDate)youthBirthDate.value='';
@@ -528,7 +532,7 @@ if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
 function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
   const progress=document.querySelector('#welcome-progress');
-  if(progress)progress.textContent=number<=3?'Question '+number+' of 3':'Welcome to your table';
+  if(progress)progress.textContent=number<=4?'Touch '+number+' of 4':'Your positive path is ready';
 }
 function focusQuestion(number){
   const step=steps.find(item=>Number(item.dataset.question)===number);
@@ -627,7 +631,11 @@ document.querySelectorAll('[data-answer]').forEach(button=>{
     const step=button.closest('[data-question]');
     welcomeAnswers[step.dataset.key]=button.dataset.answer;
     const next=Number(step.dataset.question)+1;
-    if(next>3)showAgeEligibility();
+    if(next>4){
+      steps.forEach(step=>step.hidden=true);
+      if(positivePath)positivePath.hidden=false;
+      if(beginPositivePath)beginPositivePath.focus();
+    }
     else{
       showQuestion(next);
       focusQuestion(next);
@@ -768,4 +776,5 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
 });
 
 addEventListener('hashchange',()=>syncBranch({focus:true}));
+if(beginPositivePath)beginPositivePath.addEventListener('click',showAgeEligibility);
 syncBranch({focus:location.hash.length>1});
