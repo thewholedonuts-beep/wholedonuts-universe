@@ -94,7 +94,7 @@
             <button type="submit">Send this crumb for review</button>
           </form>
           <p id="crumb-status" aria-live="polite"></p>
-          <p class="crumb-note">We do not publish private, identifying, financial, health, or harmful information. Read the <a href="CRUMB_PROTOCOL.md">crumb protocol</a>.</p>
+          <p class="crumb-note">We do not publish private, identifying, financial, health, or harmful information. Read the <a href="CRUMB_PROTOCOL.md" data-dashboard-effort="compass">crumb protocol</a>.</p>
         </section>
       </section>
 
@@ -179,6 +179,34 @@
           <div><p class="eyebrow">BEFORE THE FIRST CRUMB DROPS</p><h2>+U changes everything.</h2></div>
           <p>Tap a course. Order only what fits.</p>
         </div>
+
+        <section class="plusu-dashboard" id="plusu-dashboard" aria-labelledby="plusu-dashboard-title" hidden>
+          <p class="eyebrow">YOUR +U DASHBOARD</p>
+          <h3 id="plusu-dashboard-title">A small figure for your next step.</h3>
+          <p>This abstract figure is not a profile or identity. It has no name, face, photo, contact details, biometric data, public page, server record, or unique identifier.</p>
+          <div class="dashboard-grid">
+            <div class="dashboard-figure" role="img" aria-label="Abstract, non-identifying +U stick figure with optional accessories">
+              <span class="dashboard-head"></span>
+              <span class="dashboard-body"></span>
+              <span class="dashboard-arm dashboard-arm-left"></span>
+              <span class="dashboard-arm dashboard-arm-right"></span>
+              <span class="dashboard-leg dashboard-leg-left"></span>
+              <span class="dashboard-leg dashboard-leg-right"></span>
+              <span class="dashboard-accessory accessory-scarf" data-accessory="scarf" hidden>scarf</span>
+              <span class="dashboard-accessory accessory-notebook" data-accessory="notebook" hidden>notebook</span>
+              <span class="dashboard-accessory accessory-pin" data-accessory="pin" hidden>+U</span>
+              <span class="dashboard-accessory accessory-compass" data-accessory="compass" hidden>+</span>
+              <span class="dashboard-accessory accessory-ribbon" data-accessory="ribbon" hidden>ribbon</span>
+            </div>
+            <div class="dashboard-copy">
+              <p id="dashboard-progress" aria-live="polite"></p>
+              <ul id="dashboard-unlocks" aria-label="Unlocked optional accessories"></ul>
+              <p><strong>Try next:</strong> open a course, visit a community subject, read the crumb protocol, or open the share invitation. These are voluntary exploration steps, not purchases or donations.</p>
+              <button id="reset-dashboard" type="button">Reset dashboard and restart welcome</button>
+              <p class="dashboard-note">Only a short anonymous accessory list stays in this browser for continuity. Reset removes it; your +U pass, if any, is a device-local return link and not an identity or profile.</p>
+            </div>
+          </div>
+        </section>
 
         <div class="course-tabs" role="tablist" aria-label="Menu courses">
           <button type="button" id="course-tab-bits" data-menu="bits" role="tab" aria-controls="course-bits" aria-selected="true">BITS</button>
@@ -328,7 +356,7 @@
           </section>
 
           <div class="fine-print">
-            <strong>At the register, plain and clear:</strong> +U passes and recognition are community identifiers, not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support is never automatic and is separate from store purchases. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass and last-visit time in this browser; opening a `?u=` link restores that pass in this browser, and clearing browser storage removes it. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
+            <strong>At the register, plain and clear:</strong> +U passes, Dashboard accessories, and recognition are not money, currency, investments, ownership, prizes, gift cards, or promises of financial value. Optional support is never automatic and is separate from store purchases. The Dashboard is anonymous and local to this browser; its accessories come only from voluntary non-financial exploration, never support, payments, purchases, recipient sharing, referral activity, or external tracking. The responsible merchant or store provider sets purchase availability, fulfillment, refunds, taxes, and product details. This page stores only the +U pass, last-visit time, and minimal Dashboard accessory progress in this browser; opening a `?u=` link restores a pass but does not create an identity or profile. If you request a QR image, the encoded link is sent to a third-party QR service to render it. Do not submit private, health, financial, or children’s information here.
             <details><summary>Community table agreement</summary><p>Participate lawfully and respectfully. Community information is general information, not medical, legal, financial, or professional advice. No harassment, exploitation, impersonation, unsafe activity, or promises of guaranteed results. External links and community contributions remain the responsibility of their providers and authors.</p></details>
           </div>
         </section>

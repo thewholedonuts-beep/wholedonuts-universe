@@ -65,3 +65,14 @@ The non-deployed [consolidation and learning model](config/consolidation-learnin
 defines classification, preserve-before-remove provenance, reviewed learning
 loops, and staged legacy retirement. It prohibits automatic publishing,
 deletion, payment, credential import, and private-data import.
+
+## Anonymous +U Dashboard
+
+After the voluntary three-question welcome flow, the public entry can display
+an abstract, faceless +U figure. It stores only a minimal anonymous local
+accessory record in that browser and unlocks accessories through non-financial
+exploration of the entry experience. It does not create a sign-in, profile,
+unique identifier, server record, payment record, recipient tracking, or
+reward entitlement. Resetting the Dashboard removes that local progress and
+restarts the welcome flow; a +U pass remains a device-local return link, not an
+identity.

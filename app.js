@@ -15,6 +15,19 @@ const templateLibraryCopy=document.querySelector('#template-library-copy');
 const storefrontStatus=document.querySelector('#storefront-status');
 const storefrontActions=document.querySelector('#storefront-actions');
 const storefrontConfig=window.WHNUTZ_STOREFRONT_CONFIG||{};
+const dashboard=document.querySelector('#plusu-dashboard');
+const dashboardProgress=document.querySelector('#dashboard-progress');
+const dashboardUnlocks=document.querySelector('#dashboard-unlocks');
+const dashboardReset=document.querySelector('#reset-dashboard');
+const dashboardAccessories=[...document.querySelectorAll('[data-accessory]')];
+const dashboardKey='plusu-dashboard-progress';
+const dashboardAccessoryNames={
+  scarf:'Welcome scarf',
+  notebook:'Course notebook',
+  pin:'Community pin',
+  compass:'Protocol compass',
+  ribbon:'Invitation ribbon'
+};
 
 function validStorefrontUrl(value){
   if(typeof value!=='string'||!value.trim())return null;
@@ -38,6 +51,63 @@ function renderStorefrontHandoff(){
   storefrontActions.append(storefrontCta);
 }
 renderStorefrontHandoff();
+
+function dashboardState(){
+  const saved=safeGet(dashboardKey);
+  if(!saved)return [];
+  try{
+    const parsed=JSON.parse(saved);
+    if(!parsed||parsed.v!==1||!Array.isArray(parsed.unlocks))return [];
+    return parsed.unlocks.filter(accessory=>Object.prototype.hasOwnProperty.call(dashboardAccessoryNames,accessory));
+  }catch(e){return []}
+}
+
+function saveDashboardState(unlocks){
+  safeSet(dashboardKey,JSON.stringify({v:1,unlocks}));
+}
+
+function renderDashboard(){
+  const unlocks=dashboardState();
+  if(dashboard)dashboard.hidden=false;
+  dashboardAccessories.forEach(accessory=>accessory.hidden=!unlocks.includes(accessory.dataset.accessory));
+  if(dashboardProgress)dashboardProgress.textContent=unlocks.length+' of '+Object.keys(dashboardAccessoryNames).length+' optional accessories opened through voluntary exploration.';
+  if(dashboardUnlocks){
+    dashboardUnlocks.replaceChildren();
+    unlocks.forEach(accessory=>{
+      const item=document.createElement('li');
+      item.textContent=dashboardAccessoryNames[accessory];
+      dashboardUnlocks.append(item);
+    });
+  }
+}
+
+function unlockDashboardAccessory(accessory){
+  if(!dashboard||dashboard.hidden||!Object.prototype.hasOwnProperty.call(dashboardAccessoryNames,accessory))return;
+  const unlocks=dashboardState();
+  if(!unlocks.includes(accessory)){
+    unlocks.push(accessory);
+    saveDashboardState(unlocks);
+  }
+  renderDashboard();
+}
+
+function beginDashboard(){
+  if(!dashboard)return;
+  if(!dashboardState().includes('scarf'))saveDashboardState(['scarf']);
+  renderDashboard();
+}
+
+function resetDashboard(){
+  safeRemove(dashboardKey);
+  safeRemove('plusu-welcome');
+  if(dashboard)dashboard.hidden=true;
+}
+
+if(dashboardReset)dashboardReset.addEventListener('click',()=>{
+  resetDashboard();
+  resetWelcome();
+});
+document.querySelectorAll('[data-dashboard-effort]').forEach(element=>element.addEventListener('click',()=>unlockDashboardAccessory(element.dataset.dashboardEffort)));
 
 const donationPurposeInputs=[...document.querySelectorAll('input[name="donation-purpose"]')];
 const donationDisclosure=document.querySelector('#donation-disclosure');
@@ -109,8 +179,12 @@ async function copyInvitation(){
   }
 }
 
-if(copyInvitationButton)copyInvitationButton.addEventListener('click',copyInvitation);
+if(copyInvitationButton)copyInvitationButton.addEventListener('click',()=>{
+  unlockDashboardAccessory('ribbon');
+  copyInvitation();
+});
 if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=>{
+  unlockDashboardAccessory('ribbon');
   if(!navigator.share){
     setShareInvitationStatus('Native sharing is unavailable in this browser. Use Copy invitation link instead.');
     return;
@@ -146,11 +220,12 @@ function syncBranch(){
     counter.hidden=false;
     openCourse('bombs');
   }
+  if(stores[id])unlockDashboardAccessory('pin');
 }
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];
 const menuPanels=[...document.querySelectorAll('[data-course]')];
-function openCourse(id,{focus=false}={}){
+function openCourse(id,{focus=false,recordEffort=false}={}){
   menuButtons.forEach(button=>{
     const active=button.dataset.menu===id;
     button.classList.toggle('active',active);
@@ -159,8 +234,9 @@ function openCourse(id,{focus=false}={}){
     if(active&&focus)button.focus();
   });
   menuPanels.forEach(panel=>panel.hidden=panel.dataset.course!==id);
+  if(recordEffort)unlockDashboardAccessory('notebook');
 }
-menuButtons.forEach(button=>button.addEventListener('click',()=>openCourse(button.dataset.menu)));
+menuButtons.forEach(button=>button.addEventListener('click',()=>openCourse(button.dataset.menu,{recordEffort:true})));
 menuButtons.forEach((button,index)=>button.addEventListener('keydown',event=>{
   const {key}=event;
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(key))return;
@@ -170,7 +246,7 @@ menuButtons.forEach((button,index)=>button.addEventListener('keydown',event=>{
   else if(key==='End')nextIndex=menuButtons.length-1;
   else if(key==='ArrowLeft')nextIndex=(index-1+menuButtons.length)%menuButtons.length;
   else nextIndex=(index+1)%menuButtons.length;
-  openCourse(menuButtons[nextIndex].dataset.menu,{focus:true});
+  openCourse(menuButtons[nextIndex].dataset.menu,{focus:true,recordEffort:true});
 }));
 
 const dateLabel=document.querySelector('#daily-date');
@@ -196,6 +272,7 @@ function finishWelcome({scroll=true}={}){
   steps.forEach(step=>step.hidden=true);
   welcomeResult.hidden=false;
   counter.hidden=false;
+  beginDashboard();
   const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the whole +U table';
   welcomeResult.querySelector('strong').textContent='Your seat is ready at '+branchWords+'.';
   welcomeResult.querySelector('span').textContent='We opened '+course.toUpperCase()+' first. Change courses anytime.';
@@ -262,16 +339,19 @@ if(savedWelcome){
   if(gate)showQuestion(1);
 }
 
-const restart=document.querySelector('#restart-welcome');
-if(restart)restart.addEventListener('click',()=>{
+function resetWelcome(){
   safeRemove('plusu-welcome');
+  safeRemove(dashboardKey);
   Object.keys(welcomeAnswers).forEach(key=>delete welcomeAnswers[key]);
   welcomeResult.hidden=true;
   counter.hidden=true;
+  if(dashboard)dashboard.hidden=true;
   gate.classList.remove('complete');
   showQuestion(1);
   gate.scrollIntoView({behavior:'smooth'});
-});
+}
+const restart=document.querySelector('#restart-welcome');
+if(restart)restart.addEventListener('click',resetWelcome);
 
 const passButton=document.querySelector('#make-pass');
 const passCard=document.querySelector('#pass-card');

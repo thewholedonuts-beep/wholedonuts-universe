@@ -42,6 +42,17 @@ No automation may publish material, delete source material, import credentials o
 private data, initiate payment, transfer funds, allocate value, auto-pay,
 auto-reward, or grant rewards.
 
+## Anonymous Dashboard
+
+The public +U Dashboard may store only a minimal local accessory list after a
+person voluntarily completes the welcome flow. It must not collect or create a
+name, face, photo, biometric, contact detail, public profile, server record,
+unique identifier, payment record, recipient record, or referral record.
+Accessories can reflect only voluntary non-financial exploration and must never
+depend on support selection, payment, purchase, sharing recipients, referrals,
+or external tracking. A reset removes the local Dashboard record and restarts
+the welcome flow. A +U pass is a device-local return link, not an identity.
+
 ## Staged legacy retirement
 
 Keep legacy repositories available while their verified replacement is tested.
