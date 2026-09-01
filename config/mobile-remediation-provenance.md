@@ -21,8 +21,46 @@ This private record supports PR #14 and is excluded from the Pages artifact.
 - Original Movement trifold image files remain unrecovered.
 - No canonical mobile-first source layout was recovered; the PR changes only
   the confirmed rail reservation and root overflow defect.
-- Branch-hosted after-captures, measured mobile bounds, and a controlled
-  post-deploy version-marker check are required before release approval.
+- The post-deploy custom-domain comparison cannot be exercised without a
+  release, which remains held. The live custom domain still cannot be used as
+  evidence for this PR until it serves the merged commit marker.
+
+## Controlled PR snapshot evidence
+
+On 2026-09-01, GitHub API archive content at PR #14 head
+`0dc84213a15a0f04899feef468bc80166681a47a` was served locally without
+modifying a repository or production. Edge `152.0.4191.53` (DevTools Protocol
+1.3) used mobile device metrics and one-point touch emulation.
+
+| Viewport | Root width | Rail geometry | Four scrolled targets | Four touch paths | DevTools errors |
+|---|---:|---|---|---|---:|
+| 320x568 | 320 / 320 | `display:none`, 0x0 | in bounds and center-hittable | each revealed question 2 and focused Whole Donuts | 0 |
+| 360x800 | 360 / 360 | `display:none`, 0x0 | in bounds and center-hittable | each revealed question 2 and focused Whole Donuts | 0 |
+| 390x844 | 390 / 390 | `display:none`, 0x0 | in bounds and center-hittable | each revealed question 2 and focused Whole Donuts | 0 |
+| 412x915 | 412 / 412 | `display:none`, 0x0 | in bounds and center-hittable | each revealed question 2 and focused Whole Donuts | 0 |
+
+The animated entry backdrop reported `pointer-events:none`. The four figure
+controls are 105px to 132px high after ordinary vertical scrolling. At 320px,
+the first figure begins at y=470 and the remaining three are below the initial
+viewport; this is normal vertical document scrolling, not horizontal clipping,
+and all four were exercised after scroll. Controlled first-paint captures and
+machine-readable measurements are retained in the private session evidence
+set, not the Pages artifact.
+
+This is actual Edge execution against the immutable PR snapshot, with
+automated touch emulation. It is not physical-device, iOS, Android, macOS,
+ChromeOS, Linux, desktop-layout, keyboard-only, direct-route, reduced-motion,
+storage-denied, or live-domain evidence.
+
+## Controlled marker staging
+
+The Pages staging allowlist was reproduced from the PR workflow with the
+expected head SHA. `deploy-version.txt` contained exactly
+`0dc84213a15a0f04899feef468bc80166681a47a`; all staged public files were
+present. CNAME was absent by design because `include_cname` was not enabled in
+this non-deployment control. The workflow's custom-domain polling check
+remains unverified against a real release and therefore remains a release
+blocker.
 
 ## Release boundary
 
