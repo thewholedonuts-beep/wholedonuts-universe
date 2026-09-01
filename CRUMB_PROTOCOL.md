@@ -2,15 +2,29 @@
 
 ## Purpose
 
-Crumbs are useful contributions that can strengthen the Whole Donuts world, +U Library, Ambassador Path, or community-support work. They may be original writing, a practical lesson, a trusted resource, a connection, or a project idea.
+Crumbs are useful contributions that can strengthen the Whole Donuts world, +U
+Library, Donuts New School, Ambassador Path, or community-support work. They may
+be original writing, a practical lesson, a trusted resource, a connection, or a
+project idea.
 
-## Submission
+Donuts New School: Visionaries & Pioneers is a non-exclusive learning subject for
+learning, building, sharing useful work, and carrying community knowledge forward.
+It is not enrollment, a credential, certification, identity requirement,
+financial opportunity, donation reward, or automated path.
 
-1. Sign in with the email link connected to your +U journey.
-2. Choose where the crumb can help.
-3. Add the original contribution or a source link.
-4. Confirm that you wrote it or have permission to share and recommend it.
-5. Send it to the review queue.
+## Current public availability
+
+The public prototype keeps the Crumb Saver invitation, protocol, and preparation
+template available. Its static Pages configuration has no approved submission
+runtime, so it does not accept, store, or discard a crumb. Do not link a
+separate submission endpoint until its owner supplies and verifies it.
+
+## Reviewed path
+
+1. A person voluntarily accepts the invitation and chooses the relevant community subject.
+2. They share only original or permitted useful material through an approved channel.
+3. A reviewer checks rights, safety, source, usefulness, privacy, and fit.
+4. Approved material retains attribution and revision history before human publication.
 
 ## Review
 

@@ -23,10 +23,10 @@ documents only the public-safe inventory and the state definitions:
 | Parked | Intentionally has no active public experience. |
 
 `wenevergonnaclose.com` is the permanent +U/Table entry that unifies the
-ecosystem without replacing the distinct subject domains. It remains a staged
-Universe cutover while its current live attachment is hosted by the legacy
-`wholedonuts-sunshine` GitHub Pages site. Do not create sites for the remaining
-reserved domains or change their DNS as part of this project.
+ecosystem without replacing the distinct subject domains. It is live on the
+Universe GitHub Pages site; the former Sunshine Pages repository was archived
+after the controlled cutover. Do not create sites for the remaining reserved
+domains or change their DNS as part of this project.
 
 The `active` and `inactive` values in the legacy funnel configuration describe
 funnel operations, not these registry states.
@@ -58,13 +58,13 @@ funnel operations, not these registry states.
 - **Last Updated:** 2026-08-28
 
 ### wenevergonnaclose.com
-- **Status:** Live on legacy Pages; Universe cutover pending
+- **Status:** Live on Universe GitHub Pages
 - **Registrar:** Porkbun
 - **Purpose:** Public +U entry at the repository root
 - **Subdomains:** `www` as required by the GitHub Pages configuration
-- **DNS Provider:** Porkbun (to be configured for GitHub Pages)
-- **Repository configuration:** Root `CNAME` declares this domain; it does not
-  confirm that Pages or DNS is enabled.
+- **DNS Provider:** Porkbun
+- **Repository configuration:** Root `CNAME` declares the domain; the active
+  custom-domain association is managed in Universe **Settings -> Pages**.
 
 ### thenurturedchef.com
 - **Status:** Inactive
@@ -99,13 +99,13 @@ funnel operations, not these registry states.
 - **Last Updated:** 2026-08-28
 
 ### thewholedonuts-beep.github.io/wholedonuts-universe
-- **Status:** Pending GitHub Pages configuration
+- **Status:** Universe GitHub Pages deployment endpoint
 - **Registrar:** GitHub Pages
 - **Purpose:** Repository Pages endpoint before the custom domain cutover
 - **Subdomains:** Not assigned
 - **DNS Provider:** GitHub Pages
-- **Repository configuration:** Enable publication from `main` at the
-  repository root in GitHub Settings before treating this endpoint as live.
+- **Repository configuration:** Publication is managed by the manual GitHub
+  Actions Pages workflow; the custom domain is the public canonical entry.
 
 ## Domain Registry
 
@@ -114,12 +114,12 @@ funnel operations, not these registry states.
 | wholedonuts | .org | Active | Porkbun | Primary Brand | Multiple |
 | wholedonuts | .buzz | Active | Porkbun | Marketing Funnel | Multiple |
 | wholedonuts | .app | Inactive | Porkbun | Application Domain | None |
-| wenevergonnaclose | .com | Pending Pages/DNS cutover | Porkbun | Public +U entry | `www` pending configuration |
+| wenevergonnaclose | .com | Live on Universe Pages | Porkbun | Public +U entry | `www` |
 | thenurturedchef | .com | Inactive | Porkbun | Brand Domain | None |
 | thenurturedchef | .foundation | Inactive | Porkbun | Foundation Domain | None |
 | thenutur3dchef | .com | Active | Porkbun | Content Funnel | Multiple |
 | thewholedonuts-beep | .github.io | Inactive | GitHub Pages | Owner Site | None |
-| thewholedonuts-beep.github.io/wholedonuts-universe | N/A | Pending Pages configuration | GitHub Pages | Repository Pages endpoint | None |
+| thewholedonuts-beep.github.io/wholedonuts-universe | N/A | Pages deployment endpoint | GitHub Pages | Repository Pages endpoint | None |
 
 ## Subdomain Structure
 
@@ -151,23 +151,21 @@ funnel operations, not these registry states.
 ## Deployment Status
 - [x] Documented domains catalogued
 - [x] `wenevergonnaclose.com` declared in the repository root `CNAME`
-- [ ] GitHub Pages enabled for the `main` branch repository root
-- [ ] Custom domain verified in GitHub Pages and DNS
+- [x] GitHub Pages enabled through GitHub Actions
+- [x] Custom domain attached to Universe Pages with HTTPS enabled
 - [ ] All subdomains mapped
 - [ ] DNS configurations synced
 - [ ] Funnel system validated
-- [x] Manual GitHub Pages deployment workflow committed (not run)
+- [x] Manual GitHub Pages deployment workflow used for the controlled cutover
 
-## Safe Pages cutover
+## Completed Pages cutover record
 
-1. Set Universe Pages to use GitHub Actions and run the manual Pages workflow
-   with `include_cname: false`.
-2. Validate the generated Universe Pages URL and its public static artifact.
-3. Add or confirm the GitHub-provided TXT verification record for the custom domain.
-4. Detach the domain from `wholedonuts-sunshine` and immediately attach it to Universe.
-5. Optionally run the Pages workflow with `include_cname: true` to place the
-   source declaration in the artifact; this does not attach the custom domain.
-6. Verify HTTPS and the canonical custom-domain redirect, then retire the legacy Pages deployment.
+Universe Pages was enabled and validated first without the custom domain. After
+GitHub ownership verification, `wenevergonnaclose.com` was detached from
+`wholedonuts-sunshine`, attached to Universe Pages, and deployed with the
+source `CNAME` included. HTTPS and the apex/www canonical behavior were then
+verified before Sunshine was re-archived. Future changes to this attachment or
+DNS are separate reviewed production operations.
 
 ## Next Steps
 1. Map subdomain routing for the newly documented domains

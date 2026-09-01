@@ -1,6 +1,13 @@
 const links=[...document.querySelectorAll('[data-branch]')];
 const store=document.querySelector('#branch-store');
 const navigationStatus=document.querySelector('#table-navigation-status');
+const startCommunityWelcome=document.querySelector('#start-community-welcome');
+const openGatewayDashboard=document.querySelector('#open-gateway-dashboard');
+const launchWindowStatus=document.querySelector('#launch-window-status');
+const launchWindowReset=document.querySelector('#reset-launch-window');
+const launchWindowKey='plusu-launch-window';
+const launchWindowLimit=1000;
+const launchWindowDuration=12*60*60*1000;
 const stores={
   awd:['Explore Whole Donuts','#awd'],
   tnc:['Explore The Nurtured Chef','#tnc']
@@ -232,6 +239,74 @@ function safeRemove(key){
   try{localStorage.removeItem(key)}catch(e){memoryStore.delete(key)}
 }
 
+function launchWindowState(){
+  const saved=safeGet(launchWindowKey);
+  if(!saved)return null;
+  try{
+    const state=JSON.parse(saved);
+    const startedAt=Date.parse(state.startedAt);
+    if(!state||state.v!==1||!Number.isFinite(startedAt)||!Number.isInteger(state.count)||state.count<0||state.count>launchWindowLimit)return null;
+    return state;
+  }catch(e){return null}
+}
+
+function localMidnightAfter(startedAt){
+  const midnight=new Date(startedAt);
+  midnight.setHours(24,0,0,0);
+  return midnight.getTime();
+}
+
+function renderLaunchWindow(state=launchWindowState()){
+  if(!launchWindowStatus)return;
+  if(!state){
+    launchWindowStatus.textContent='No local Launch Window is active until you choose an eligible exploration step.';
+    return;
+  }
+  launchWindowStatus.textContent=state.count+' of '+launchWindowLimit+' completed local exploration steps in this browser. This local window resets at the earliest of 12 hours, local midnight, or the next eligible step after '+launchWindowLimit+'.';
+}
+
+function resetLaunchPresentation(message){
+  safeRemove(launchWindowKey);
+  resetWelcome();
+  donationPurposeInputs.forEach(input=>input.checked=false);
+  syncDonationHub();
+  history.replaceState(null,'','#home');
+  focusRouteTarget('home');
+  if(navigationStatus)navigationStatus.textContent=message;
+  renderLaunchWindow();
+}
+
+function prepareLaunchInteraction(){
+  const now=Date.now();
+  let state=launchWindowState();
+  if(state&&(now-Date.parse(state.startedAt)>=launchWindowDuration||now>=localMidnightAfter(Date.parse(state.startedAt))||state.count>=launchWindowLimit)){
+    resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
+    return false;
+  }
+  if(!state){
+    state={v:1,startedAt:new Date(now).toISOString(),count:0};
+    safeSet(launchWindowKey,JSON.stringify(state));
+    renderLaunchWindow(state);
+  }
+  return true;
+}
+
+function completeLaunchInteraction(){
+  const state=launchWindowState();
+  if(!state)return;
+  state.count+=1;
+  safeSet(launchWindowKey,JSON.stringify(state));
+  renderLaunchWindow(state);
+}
+
+function isLaunchEligibleRoute(id){
+  return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library'].includes(id);
+}
+
+if(launchWindowReset)launchWindowReset.addEventListener('click',()=>{
+  resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
+});
+
 function focusRouteTarget(id){
   const target=document.getElementById(id);
   if(!target)return;
@@ -242,20 +317,47 @@ function focusRouteTarget(id){
 
 function syncBranch({focus=false}={}){
   const id=location.hash.slice(1);
+  if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
   if(store){store.textContent='Return to the +U gateway';store.href='#home'}
-  if(id==='donation-access-hub'&&counter){
+  if((id==='donation-access-hub'||id==='donuts-new-school')&&counter){
     counter.hidden=false;
-    openCourse('bombs');
+    if(id==='donation-access-hub')openCourse('bombs');
   }
   if(stores[id])unlockDashboardAccessory('pin');
   if(focus&&id){
     focusRouteTarget(id);
     if(navigationStatus)navigationStatus.textContent=stores[id]
       ?'Opened the '+stores[id][0]+' section.'
+      :id==='donuts-new-school'
+        ?'Opened Donuts New School: Visionaries & Pioneers.'
       :'Opened the requested table section.';
+    if(isLaunchEligibleRoute(id))completeLaunchInteraction();
   }
 }
+
+function openGatewayRoute(id,message){
+  if(isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
+  if(location.hash.slice(1)===id){
+    focusRouteTarget(id);
+    if(navigationStatus)navigationStatus.textContent=message;
+    completeLaunchInteraction();
+    return;
+  }
+  location.hash=id;
+  if(navigationStatus)navigationStatus.textContent=message;
+}
+
+if(startCommunityWelcome)startCommunityWelcome.addEventListener('click',()=>{
+  openGatewayRoute('welcome-gate','The three-question Community / Foundation welcome is ready.');
+});
+if(openGatewayDashboard)openGatewayDashboard.addEventListener('click',()=>{
+  if(dashboard&&!dashboard.hidden){
+    openGatewayRoute('plusu-dashboard','Opened your anonymous local +U Dashboard.');
+    return;
+  }
+  openGatewayRoute('welcome-gate','Complete the three-question welcome to open the anonymous local +U Dashboard.');
+});
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];
 const menuPanels=[...document.querySelectorAll('[data-course]')];
@@ -270,17 +372,23 @@ function openCourse(id,{focus=false,recordEffort=false}={}){
   menuPanels.forEach(panel=>panel.hidden=panel.dataset.course!==id);
   if(recordEffort)unlockDashboardAccessory('notebook');
 }
-menuButtons.forEach(button=>button.addEventListener('click',()=>openCourse(button.dataset.menu,{recordEffort:true})));
+menuButtons.forEach(button=>button.addEventListener('click',()=>{
+  if(!prepareLaunchInteraction())return;
+  openCourse(button.dataset.menu,{recordEffort:true});
+  completeLaunchInteraction();
+}));
 menuButtons.forEach((button,index)=>button.addEventListener('keydown',event=>{
   const {key}=event;
   if(!['ArrowLeft','ArrowRight','Home','End'].includes(key))return;
   event.preventDefault();
+  if(!prepareLaunchInteraction())return;
   let nextIndex=index;
   if(key==='Home')nextIndex=0;
   else if(key==='End')nextIndex=menuButtons.length-1;
   else if(key==='ArrowLeft')nextIndex=(index-1+menuButtons.length)%menuButtons.length;
   else nextIndex=(index+1)%menuButtons.length;
   openCourse(menuButtons[nextIndex].dataset.menu,{focus:true,recordEffort:true});
+  completeLaunchInteraction();
 }));
 
 const dateLabel=document.querySelector('#daily-date');
@@ -354,10 +462,12 @@ function renderVirtualStore(journey,branch,intent){
 }
 document.querySelectorAll('[data-answer]').forEach(button=>{
   button.addEventListener('click',()=>{
+    if(!prepareLaunchInteraction())return;
     const step=button.closest('[data-question]');
     welcomeAnswers[step.dataset.key]=button.dataset.answer;
     const next=Number(step.dataset.question)+1;
     if(next>3)finishWelcome();else showQuestion(next);
+    completeLaunchInteraction();
   });
 });
 
@@ -407,6 +517,9 @@ function syncPassFromQuery(){
   const params=new URLSearchParams(location.search);
   const incoming=params.get('u');
   if(!incoming)return 'none';
+  // A +U pass is only a device-local return link and must never become a target identifier.
+  const robots=document.querySelector('#page-robots');
+  if(robots)robots.content='noindex,nofollow';
   const pass=incoming.trim();
   if(!validPass(pass))return 'invalid';
   const existing=safeGet('plusu-pass');
