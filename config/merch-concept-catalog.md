@@ -54,6 +54,8 @@ connected to any provider, a responsible human must approve the source asset,
 rights and brand use, product/placement fit, a human print proof, and the
 separate provider and customer-support decision. Record that evidence in the
 [print-asset intake manifest](print-asset-intake-manifest.md).
+Any future price or purchase-promotion decision must also meet the separate
+[commerce and promotion readiness policy](commerce-promotion-readiness.md).
 
 Any future provider checkout must collect only the order data it requires under
 that provider's terms. The +U ecosystem site must not collect customer details,
