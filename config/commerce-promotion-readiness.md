@@ -73,4 +73,3 @@ item has a documented human decision:
 No vendor is selected by this policy. The separate
 [print-asset intake manifest](print-asset-intake-manifest.md) remains the
 required evidence path for artwork and proof readiness.
-
