@@ -496,6 +496,14 @@ main{margin-left:var(--rail)}
   background:#dfe9de
 }
 .donation-exit p{margin:0 0 .75rem;line-height:1.5}
+.impact-stewardship{
+  max-width:58rem;
+  margin:1rem 0 0;
+  padding:1rem;
+  border-left:5px solid var(--green);
+  background:#dfe9de;
+  line-height:1.5
+}
 .rewards-center{
   margin-top:1rem;
   padding:1rem;
@@ -504,6 +512,27 @@ main{margin-left:var(--rail)}
 }
 .rewards-center h4{margin:0;font:700 1.5rem Georgia,serif}
 .rewards-center p{max-width:56rem;margin:.5rem 0 0;line-height:1.5}
+.share-invitation{
+  margin-top:1rem;
+  padding:1rem;
+  border:2px solid var(--green);
+  border-radius:.8rem;
+  background:#fffdf8cc
+}
+.share-invitation h4{margin:0;font:700 1.5rem Georgia,serif;color:var(--green)}
+.share-invitation p{max-width:56rem;line-height:1.5}
+.share-invitation-actions{display:flex;flex-wrap:wrap;gap:.7rem}
+.share-invitation-actions button{
+  border:2px solid var(--green);
+  border-radius:.7rem;
+  padding:.8rem 1rem;
+  background:#fff;
+  color:var(--ink);
+  font-weight:900;
+  cursor:pointer
+}
+.share-invitation-actions button:first-child{background:var(--green);color:#fff}
+.share-invitation-status{min-height:1.5rem;font-weight:800}
 .fine-print{margin-top:1.2rem;font-size:.78rem;line-height:1.55;opacity:.78}
 .fine-print details{margin-top:.6rem}
 .choices{

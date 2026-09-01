@@ -20,11 +20,11 @@ Approved crumbs are added deliberately to the relevant part of the public experi
 
 ## Learning loop
 
-Contributions are intentional and reviewed for source, rights, privacy, and
-fit before publication. Approved material is published only to the relevant
-subject or domain with source attribution and revision history retained.
-Feedback and observed impact guide later improvements; they do not trigger
-automatic publishing, deletion, payment, allocation, or rewards.
+Contributions are intentional and reviewed for source, rights, safety,
+usefulness, privacy, and fit before publication. Approved material can be
+connected to the relevant community subject with source attribution and revision
+history retained. Feedback and observed impact guide later improvements; they
+do not trigger automatic publishing, deletion, payment, allocation, or rewards.
 
 ## Boundaries
 

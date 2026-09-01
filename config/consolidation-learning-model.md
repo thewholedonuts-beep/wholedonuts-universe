@@ -33,13 +33,14 @@ migration shortcut.
 ## Learning loop
 
 1. Accept lessons and contributions only through intentional reviewed channels.
-2. Validate source, attribution, rights, safety, and the relevant subject before publication.
-3. Publish approved material to the appropriate domain or subject, retaining source and revision history.
+2. Validate source, attribution, rights, safety, usefulness, and the relevant subject before publication.
+3. Publish approved material to the appropriate community subject or domain, retaining source and revision history.
 4. Measure feedback and impact to inform a human review of the next revision.
 5. Keep rejected, deferred, and archive-only material out of automatic publication paths.
 
 No automation may publish material, delete source material, import credentials or
-private data, initiate payment, transfer funds, allocate value, or grant rewards.
+private data, initiate payment, transfer funds, allocate value, auto-pay,
+auto-reward, or grant rewards.
 
 ## Staged legacy retirement
 

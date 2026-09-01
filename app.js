@@ -48,6 +48,10 @@ const donationExitCopy=document.querySelector('#donation-exit-copy');
 const donationProcessorLink=document.querySelector('#donation-processor-link');
 const donationStatus=document.querySelector('#donation-status');
 const donationProcessorUrl='https://cash.app/$wholedonuts';
+const shareInvitationButton=document.querySelector('#share-invitation');
+const copyInvitationButton=document.querySelector('#copy-invitation');
+const shareInvitationStatus=document.querySelector('#share-invitation-status');
+const invitationUrl='https://wenevergonnaclose.com/';
 
 function selectedDonationPurpose(){
   const selected=donationPurposeInputs.find(input=>input.checked);
@@ -86,6 +90,41 @@ if(revealDonationLink)revealDonationLink.addEventListener('click',()=>{
   if(donationExitCopy)donationExitCopy.textContent='You selected '+purpose+'. Cash App and $wholedonuts are the optional processor and payee shown before you leave this site.';
   if(donationStatus)donationStatus.textContent='The optional payment link is ready. Nothing has been paid, transferred, or scheduled.';
   if(donationProcessorLink)donationProcessorLink.focus();
+});
+
+function setShareInvitationStatus(message){
+  if(shareInvitationStatus)shareInvitationStatus.textContent=message;
+}
+
+async function copyInvitation(){
+  if(!navigator.clipboard||!navigator.clipboard.writeText){
+    setShareInvitationStatus('Copy is unavailable in this browser. You can share https://wenevergonnaclose.com/ directly.');
+    return;
+  }
+  try{
+    await navigator.clipboard.writeText(invitationUrl);
+    setShareInvitationStatus('Invitation link copied. It contains no personal or referral information.');
+  }catch(e){
+    setShareInvitationStatus('The invitation link could not be copied. You can share https://wenevergonnaclose.com/ directly.');
+  }
+}
+
+if(copyInvitationButton)copyInvitationButton.addEventListener('click',copyInvitation);
+if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=>{
+  if(!navigator.share){
+    setShareInvitationStatus('Native sharing is unavailable in this browser. Use Copy invitation link instead.');
+    return;
+  }
+  try{
+    await navigator.share({
+      title:'+U Movement',
+      text:'Every crumb becomes part of the whole. Join the +U table.',
+      url:invitationUrl
+    });
+    setShareInvitationStatus('Invitation shared. No recipient, referral, reward, or payment record was created.');
+  }catch(e){
+    setShareInvitationStatus('Sharing was closed. No invitation, payment, referral, or reward record was created.');
+  }
 });
 
 function safeGet(key){

@@ -47,7 +47,9 @@ processor, wallet, fund-transfer system, automatic billing system, or
 automatic allocation system. A visitor must select a voluntary support purpose,
 review the processor and payee, and affirm a final action before an external
 payment link is revealed. Store purchases remain separate merchant
-transactions, not donations.
+transactions, not donations. The Share & Invitation Protocol creates a
+non-sensitive ecosystem link only when a visitor explicitly shares or copies
+it; it does not track recipients or create referral, payment, or reward records.
 
 Real accounting, charity or tax treatment, refunds, merchant-of-record
 responsibilities, and reward eligibility require decisions by the responsible
