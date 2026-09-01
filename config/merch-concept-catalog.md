@@ -56,6 +56,8 @@ separate provider and customer-support decision. Record that evidence in the
 [print-asset intake manifest](print-asset-intake-manifest.md).
 Any future price or purchase-promotion decision must also meet the separate
 [commerce and promotion readiness policy](commerce-promotion-readiness.md).
+Candidate vendor, affiliate, and sponsorship relationships require the separate
+[vendor, affiliate, and sponsorship evaluation policy](vendor-affiliate-sponsorship-evaluation.md).
 
 Any future provider checkout must collect only the order data it requires under
 that provider's terms. The +U ecosystem site must not collect customer details,
