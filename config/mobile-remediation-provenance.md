@@ -47,10 +47,26 @@ and all four were exercised after scroll. Controlled first-paint captures and
 machine-readable measurements are retained in the private session evidence
 set, not the Pages artifact.
 
-This is actual Edge execution against the immutable PR snapshot, with
-automated touch emulation. It is not physical-device, iOS, Android, macOS,
-ChromeOS, Linux, desktop-layout, keyboard-only, direct-route, reduced-motion,
-storage-denied, or live-domain evidence.
+Additional controlled Edge checks passed:
+
+- keyboard emulation focused `Learn` after Tab navigation; the normal
+  keydown/character/keyup Enter sequence revealed question two and focused
+  `Whole Donuts`;
+- direct `#awd` and `#tnc` routes on a 1280x800 layout entered and focused
+  their requested targets;
+- emulated reduced motion computed `scroll-behavior:auto` and a zero-second
+  skip-link transition;
+- when every `Storage` get/set/remove method was injected to throw a
+  `SecurityError`, selecting `Learn` still revealed question two through the
+  in-memory fallback;
+- a 568x320 landscape layout and a 1280x800 desktop layout had no horizontal
+  overflow. The initial entry hides the rail at desktop by design until entry
+  is complete.
+
+This is actual Windows Edge execution against the immutable PR snapshot, with
+automated keyboard and touch emulation. It is not physical-device, iOS,
+Android, macOS, ChromeOS, Linux, network-constrained asset, Clipboard/QR
+fallback, or live-domain evidence.
 
 ## Controlled marker staging
 
