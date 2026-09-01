@@ -8,6 +8,29 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **Registrars:** Porkbun, GitHub Pages
 - **Account:** wholedonuts
 
+## Operating model
+
+The complete 28-domain registry is private operational data. Keep it in an
+access-controlled system and do not commit registrar credentials, DNS record
+values, private IP addresses, or verification tokens here. This repository
+documents only the public-safe inventory and the state definitions:
+
+| State | Meaning |
+|---|---|
+| Live | A domain is serving its approved public destination. |
+| Reserved | Held for a future approved use; no public destination is created. |
+| Redirect | Deliberately forwards to an approved Live domain or route. |
+| Parked | Intentionally has no active public experience. |
+
+`wenevergonnaclose.com` is the permanent +U/Table entry that unifies the
+ecosystem without replacing the distinct subject domains. It remains a staged
+Universe cutover while its current live attachment is hosted by the legacy
+`wholedonuts-sunshine` GitHub Pages site. Do not create sites for the remaining
+reserved domains or change their DNS as part of this project.
+
+The `active` and `inactive` values in the legacy funnel configuration describe
+funnel operations, not these registry states.
+
 ## Documented Domains
 
 ### wholedonuts.org
@@ -35,7 +58,7 @@ Centralized management system for all WholeDonut domains and subdomains.
 - **Last Updated:** 2026-08-28
 
 ### wenevergonnaclose.com
-- **Status:** Pending GitHub Pages and DNS cutover
+- **Status:** Live on legacy Pages; Universe cutover pending
 - **Registrar:** Porkbun
 - **Purpose:** Public +U entry at the repository root
 - **Subdomains:** `www` as required by the GitHub Pages configuration
@@ -133,7 +156,15 @@ Centralized management system for all WholeDonut domains and subdomains.
 - [ ] All subdomains mapped
 - [ ] DNS configurations synced
 - [ ] Funnel system validated
-- [ ] CI/CD pipeline configured
+- [x] Manual GitHub Pages deployment workflow committed (not run)
+
+## Safe Pages cutover
+
+1. Set Universe Pages to use GitHub Actions and run the manual Pages workflow.
+2. Validate the generated Universe Pages URL and its public static artifact.
+3. Add or confirm the GitHub-provided TXT verification record for the custom domain.
+4. Detach the domain from `wholedonuts-sunshine` and immediately attach it to Universe.
+5. Verify HTTPS and the canonical custom-domain redirect, then retire the legacy Pages deployment.
 
 ## Next Steps
 1. Map subdomain routing for the newly documented domains

@@ -14,11 +14,15 @@ The repository root contains the static GitHub Pages bundle for
   are requested only when the visitor explicitly asks for one.
 
 The custom domain is declared in this repository, but it is not evidence that
-GitHub Pages or DNS is already active. To cut over, configure **Settings ->
-Pages** to publish from the `main` branch repository root, set
-`wenevergonnaclose.com` as the custom domain, and then configure the DNS
-records GitHub Pages displays for that domain. Enable HTTPS enforcement only
-after GitHub verifies the domain.
+GitHub Pages or DNS is already active. The manual
+[`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages only the
+public static files; it excludes Go operations configuration and local
+credentials. To prepare and cut over, set **Settings -> Pages** to **GitHub
+Actions**, run that workflow to validate the Universe Pages URL, set
+`wenevergonnaclose.com` as the custom domain, and configure the DNS records
+GitHub Pages displays. Do not detach the current legacy attachment until the
+Universe URL and GitHub TXT verification are ready. Enable HTTPS enforcement
+only after GitHub verifies the domain.
 
 ## Operations tooling
 

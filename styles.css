@@ -16,16 +16,77 @@ body{
   font-family:Inter,ui-sans-serif,system-ui,sans-serif
 }
 .world-entry{
+  position:relative;
+  overflow:hidden;
   min-height:100vh;
   padding:clamp(1rem,3vw,2rem);
   background:
     radial-gradient(circle at 76% 18%,#f8d87655,transparent 25rem),
     linear-gradient(135deg,#9dd5d8,#f5f0e6 56%,#e8d9b8)
 }
-.world-entry-copy{max-width:70rem;margin:0 auto;padding:0 0 1rem}
+.entry-backdrop{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.overflow-hand{
+  position:absolute;
+  display:flex;
+  align-items:flex-end;
+  gap:.3rem;
+  width:13rem;
+  height:13rem;
+  opacity:.36;
+  filter:drop-shadow(5px 5px 0 #38634844)
+}
+.overflow-hand::before{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:1.2rem;
+  width:10rem;
+  height:7rem;
+  border:3px solid var(--ink);
+  border-radius:4rem 4rem 1.5rem 1.5rem;
+  background:#fffaf0aa
+}
+.overflow-hand span{
+  position:relative;
+  z-index:1;
+  width:1.8rem;
+  height:8rem;
+  border:3px solid var(--ink);
+  border-radius:999px;
+  background:#fffaf0aa
+}
+.overflow-hand span:nth-child(2){height:10rem}
+.overflow-hand span:nth-child(3){height:9.2rem}
+.overflow-hand span:nth-child(4){height:7rem}
+.hand-left{top:-4rem;left:-2rem;transform:rotate(-30deg)}
+.hand-right{right:-3rem;bottom:-5rem;transform:rotate(42deg)}
+.entry-jack{
+  position:absolute;
+  width:4.5rem;
+  height:4.5rem;
+  opacity:.45;
+  transform:rotate(15deg)
+}
+.entry-jack::before,
+.entry-jack::after{
+  content:'';
+  position:absolute;
+  top:1.9rem;
+  left:.1rem;
+  width:4.2rem;
+  border-top:3px solid var(--berry);
+  transform:rotate(45deg)
+}
+.entry-jack::after{transform:rotate(-45deg)}
+.jack-one{top:14%;right:12%}
+.jack-two{top:54%;left:4%;transform:rotate(-20deg) scale(.7)}
+.jack-three{right:4%;bottom:14%;transform:rotate(30deg) scale(.9)}
+.world-entry-copy{position:relative;z-index:1;max-width:70rem;margin:0 auto;padding:0 0 1rem}
 .world-entry-copy h1{font:700 clamp(2.8rem,7vw,6rem)/.95 Georgia,serif;margin:.3rem 0 1rem}
 .world-entry-copy p:last-child{max-width:45rem;font-size:1.1rem;line-height:1.55}
 .world-frame{
+  position:relative;
+  z-index:1;
   display:block;
   width:min(100%,1200px);
   height:min(80vh,820px);
@@ -516,6 +577,10 @@ footer a{color:var(--ink);font-weight:900}
   .rail nav a{padding:.7rem .5rem}
   .panel{padding:6rem 1.2rem 5rem}
   .world-entry{padding:1rem}
+  .overflow-hand{transform:scale(.72)}
+  .hand-left{top:-5rem;left:-4rem;transform:rotate(-30deg) scale(.72)}
+  .hand-right{right:-5rem;bottom:-6rem;transform:rotate(42deg) scale(.72)}
+  .entry-jack{opacity:.3}
   .world-frame{min-height:720px;height:82vh;border-radius:1rem}
   .course-tabs{grid-template-columns:repeat(2,1fr)}
   .course-grid,
