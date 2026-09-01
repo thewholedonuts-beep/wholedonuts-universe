@@ -62,11 +62,17 @@ Additional controlled Edge checks passed:
 - a 568x320 landscape layout and a 1280x800 desktop layout had no horizontal
   overflow. The initial entry hides the rail at desktop by design until entry
   is complete.
+- with `api.qrserver.com` blocked in Edge DevTools before the user requested a
+  QR, the existing pass control showed `QR image unavailable right now. Use
+  your private +U link instead.`; no request reached the QR provider;
+- with the controlled browser's Clipboard write unavailable, `Copy invitation
+  link` visibly reported `The invitation link could not be copied. You can
+  share https://wenevergonnaclose.com/ directly.` without preventing entry.
 
 This is actual Windows Edge execution against the immutable PR snapshot, with
 automated keyboard and touch emulation. It is not physical-device, iOS,
-Android, macOS, ChromeOS, Linux, network-constrained asset, Clipboard/QR
-fallback, or live-domain evidence.
+Android, macOS, ChromeOS, Linux, network-constrained asset, or live-domain
+evidence.
 
 ## Controlled marker staging
 
