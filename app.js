@@ -76,7 +76,7 @@ function renderDashboard(){
   const unlocks=dashboardState();
   if(dashboard)dashboard.hidden=false;
   dashboardAccessories.forEach(accessory=>accessory.hidden=!unlocks.includes(accessory.dataset.accessory));
-  if(dashboardProgress)dashboardProgress.textContent=unlocks.length+' of '+Object.keys(dashboardAccessoryNames).length+' optional accessories opened through voluntary exploration.';
+  if(dashboardProgress)dashboardProgress.textContent=unlocks.length+' of '+Object.keys(dashboardAccessoryNames).length+' optional accessories shown through voluntary exploration.';
   if(dashboardUnlocks){
     dashboardUnlocks.replaceChildren();
     unlocks.forEach(accessory=>{
@@ -300,6 +300,9 @@ function completeLaunchInteraction(){
 function isLaunchEligibleRoute(id){
   return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
 }
+function isYouthRestrictedRoute(id){
+  return ['awd','tnc','ambassador-path','donation-access-hub','plusu-dashboard'].includes(id);
+}
 
 if(launchWindowReset)launchWindowReset.addEventListener('click',()=>{
   resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
@@ -314,8 +317,13 @@ function focusRouteTarget(id){
 }
 
 function syncBranch({focus=false}={}){
-  const id=location.hash.slice(1);
-  if(id&&id!=='home')document.body.classList.add('entered');
+  let id=location.hash.slice(1);
+  if((ageMode==='youth'||ageMode==='under13')&&isYouthRestrictedRoute(id)){
+    id='table';
+    history.replaceState(null,'','#table');
+    if(navigationStatus)navigationStatus.textContent='This youth path stays with the low-data community table.';
+  }
+  if(id&&id!=='home'&&id!=='age-gate')document.body.classList.add('entered');
   if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
   if(store){store.textContent='Return to the +U gateway';store.href='#home'}
@@ -388,7 +396,14 @@ const steps=[...document.querySelectorAll('[data-question]')];
 const welcomeResult=document.querySelector('#welcome-result');
 const outcomePrimary=document.querySelector('#outcome-primary');
 const outcomeNext=document.querySelector('#outcome-next');
+const ageGate=document.querySelector('#age-gate');
+const ageGateStatus=document.querySelector('#age-gate-status');
+const youthAgeForm=document.querySelector('#youth-age-form');
+const youthBirthDate=document.querySelector('#youth-birth-date');
+const under13Notice=document.querySelector('#under-13-notice');
+const youthPathNote=document.querySelector('#youth-path-note');
 const welcomeAnswers={};
+let ageMode=null;
 
 const counterCourses={
   learn:'bites',
@@ -418,11 +433,90 @@ const tableOutcomes={
     detail:'Begin with the existing +U world and return to the table when ready.'
   }
 };
+const youthTableOutcomes={
+  learn:tableOutcomes.learn,
+  share:{
+    href:'#template-library',
+    action:'Open the +U Library',
+    detail:'Begin with the existing share-a-crumb template. This youth path does not collect a submission.'
+  },
+  help:{
+    href:'#community-counter',
+    action:'Open the Community Counter',
+    detail:'Begin with the existing guided community learning menu without a payment or member path.'
+  },
+  explore:tableOutcomes.explore
+};
 const branchNext={
   awd:{href:'#awd',label:'Next: open Whole Donuts'},
   tnc:{href:'#tnc',label:'Next: open The Nurtured Chef'},
   table:{href:'#donuts-new-school',label:'Next: open Donuts New School'}
 };
+
+function showAgeGate(message=''){
+  ageMode=null;
+  document.body.classList.remove('adult-mode','youth-mode','entered');
+  if(ageGate)ageGate.hidden=false;
+  if(gate)gate.hidden=true;
+  if(youthAgeForm)youthAgeForm.hidden=true;
+  if(under13Notice)under13Notice.hidden=true;
+  if(youthBirthDate)youthBirthDate.value='';
+  if(youthPathNote)youthPathNote.hidden=true;
+  if(ageGateStatus)ageGateStatus.textContent=message;
+}
+function beginWelcome(mode){
+  ageMode=mode;
+  document.body.classList.toggle('adult-mode',mode==='adult');
+  document.body.classList.toggle('youth-mode',mode==='youth');
+  if(ageGate)ageGate.hidden=true;
+  if(gate)gate.hidden=false;
+  if(youthPathNote)youthPathNote.hidden=mode!=='youth';
+  showQuestion(1);
+  const firstQuestion=steps[0];
+  if(firstQuestion)firstQuestion.querySelector('button').focus();
+}
+function ageFromDate(value){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
+  const [year,month,day]=value.split('-').map(Number);
+  const date=new Date(year,month-1,day);
+  if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;
+  const today=new Date();
+  let age=today.getFullYear()-year;
+  if(today.getMonth()<month-1||(today.getMonth()===month-1&&today.getDate()<day))age-=1;
+  return age>=0?age:null;
+}
+document.querySelectorAll('[data-age-choice]').forEach(button=>button.addEventListener('click',()=>{
+  if(button.dataset.ageChoice==='adult'){
+    beginWelcome('adult');
+    return;
+  }
+  if(youthAgeForm)youthAgeForm.hidden=false;
+  if(ageGateStatus)ageGateStatus.textContent='Enter a birth date only to calculate this local youth-path eligibility; it will be cleared immediately.';
+  if(youthBirthDate)youthBirthDate.focus();
+}));
+if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
+  event.preventDefault();
+  const age=ageFromDate(youthBirthDate?youthBirthDate.value:'');
+  if(youthBirthDate)youthBirthDate.value='';
+  if(age===null){
+    if(ageGateStatus)ageGateStatus.textContent='Enter a valid birth date to calculate eligibility. It was not kept.';
+    return;
+  }
+  if(age<13){
+    ageMode='under13';
+    youthAgeForm.hidden=true;
+    if(under13Notice)under13Notice.hidden=false;
+    if(ageGateStatus)ageGateStatus.textContent='The birth date was used only for this local calculation and was cleared.';
+    return;
+  }
+  if(age>17){
+    if(ageGateStatus)ageGateStatus.textContent='This youth path is for ages 13-17. Choose Adult (18+) to continue. The birth date was cleared.';
+    return;
+  }
+  beginWelcome('youth');
+});
+const restartAgeGate=document.querySelector('#restart-age-gate');
+if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
 
 function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
@@ -433,6 +527,7 @@ function finishWelcome({scroll=true}={}){
   const branch=welcomeAnswers.branch;
   const intent=welcomeAnswers.intent||'explore';
   const entry=welcomeAnswers.entry||'counter';
+  const youth=ageMode==='youth';
   const course=counterCourses[intent]||'bits';
   const outcome=entry==='counter'
     ?{
@@ -440,14 +535,16 @@ function finishWelcome({scroll=true}={}){
       action:'Open the guided Counter',
       detail:'Begin the existing '+course.toUpperCase()+' menu course for '+intent+'.'
     }
-    :tableOutcomes[intent];
+    :(youth?youthTableOutcomes:tableOutcomes)[intent];
   openCourse(course);
-  saveJourney();
+  if(youth)safeRemove('plusu-welcome');else saveJourney();
   gate.classList.add('complete');
   steps.forEach(step=>step.hidden=true);
   welcomeResult.hidden=false;
   counter.hidden=false;
-  beginDashboard();
+  if(youth){
+    if(dashboard)dashboard.hidden=true;
+  }else beginDashboard();
   document.body.classList.add('entered');
   const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the shared community table';
   welcomeResult.querySelector('strong').textContent=outcome.action+'.';
@@ -457,7 +554,9 @@ function finishWelcome({scroll=true}={}){
     outcomePrimary.textContent=outcome.action;
   }
   if(outcomeNext){
-    const next=branchNext[branch]||branchNext.table;
+    const next=youth
+      ?{href:'#table',label:'Next: stay with the shared community table'}
+      :(branchNext[branch]||branchNext.table);
     outcomeNext.href=next.href;
     outcomeNext.textContent=next.label;
     outcomeNext.hidden=false;
@@ -488,7 +587,7 @@ function renderJourneyOffers(journey){
     explore:'room to look around at your own pace'
   }[journey.intent]||'a next step that fits today';
   journeyOfferTitle.textContent=branch+' picks, made for your '+journey.course+' appetite.';
-  journeyOfferCopy.textContent='Start with '+intent+'. Your free next-step template is ready whenever you are.';
+  journeyOfferCopy.textContent='Try something, keep what helps, and choose what is next. Start with '+intent+' whenever you are; nothing is required.';
   renderVirtualStore(journey,branch,intent);
 }
 function renderVirtualStore(journey,branch,intent){
@@ -518,17 +617,8 @@ document.querySelectorAll('[data-answer]').forEach(button=>{
   });
 });
 
-const savedWelcome=safeGet('plusu-welcome');
-if(savedWelcome){
-  try{Object.assign(welcomeAnswers,JSON.parse(savedWelcome));finishWelcome({scroll:false})}
-  catch(e){
-    if(menuButtons.length)openCourse('bits');
-    showQuestion(1);
-  }
-}else{
-  if(menuButtons.length)openCourse('bits');
-  if(gate)showQuestion(1);
-}
+if(menuButtons.length)openCourse('bits');
+showAgeGate();
 
 function resetWelcome(){
   safeRemove('plusu-welcome');
@@ -537,10 +627,9 @@ function resetWelcome(){
   welcomeResult.hidden=true;
   counter.hidden=true;
   if(dashboard)dashboard.hidden=true;
-  document.body.classList.remove('entered');
   gate.classList.remove('complete');
-  showQuestion(1);
-  gate.scrollIntoView({behavior:'smooth'});
+  showAgeGate();
+  ageGate.scrollIntoView({behavior:'smooth'});
 }
 const restart=document.querySelector('#restart-welcome');
 if(restart)restart.addEventListener('click',resetWelcome);
