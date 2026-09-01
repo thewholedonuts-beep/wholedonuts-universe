@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="styles.css?v=universe-prototype1">
 </head>
 <body>
-  <a class="skip-link" href="#table">Skip the gateway and enter the table</a>
+  <a class="skip-link" href="#age-gate">Skip the figure field and choose an age path</a>
   <section class="universe-gateway" id="home" aria-labelledby="universe-gateway-title">
     <div class="entry-backdrop" aria-hidden="true">
       <div class="overflow-hand hand-left"><span></span><span></span><span></span><span></span></div>
@@ -32,13 +32,63 @@
         <span class="field-figure one"></span><span class="field-figure two"></span><span class="field-figure three"></span><span class="field-figure four"></span><span class="field-figure five"></span><span class="field-figure six"></span><span class="field-figure seven"></span><span class="universe-plus">+U</span>
       </div>
       <div class="universe-copy">
-        <p class="eyebrow">+U UNIVERSE · ANONYMOUS ENTRY</p>
-        <h1 id="universe-gateway-title">One table.<br>Many subjects.</h1>
-        <p class="universe-lede">A quiet start. No name, account, or profile.</p>
-        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title">
+        <p class="eyebrow visually-hidden">+U UNIVERSE · ANONYMOUS ENTRY</p>
+        <h1 id="universe-gateway-title" class="visually-hidden">+U Universe anonymous entry</h1>
+        <p class="universe-lede visually-hidden">A quiet start. No name, account, or profile.</p>
+        <section class="age-gate" id="age-gate" aria-labelledby="age-gate-title">
+          <h2 id="age-gate-title">Choose a figure to begin.</h2>
+          <div class="figure-choice-grid" role="group" aria-label="Choose an anonymous entry path">
+            <button class="figure-choice" type="button" data-entry-choice="learn" aria-label="Learn">
+              <span class="figure-choice-art figure-choice-standing" aria-hidden="true"><span></span></span>
+              <span>Learn</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="share" aria-label="Share from experience">
+              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
+              <span>Share from experience</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="help" aria-label="Help">
+              <span class="figure-choice-art figure-choice-seated" aria-hidden="true"><span></span></span>
+              <span>Help</span>
+            </button>
+            <button class="figure-choice" type="button" data-entry-choice="explore" aria-label="Explore">
+              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
+              <span>Explore</span>
+            </button>
+          </div>
+          <p class="figure-choice-text">Choose a direction. The next two touches choose a subject and a starting place. No choice identifies you.</p>
+        </section>
+        <div class="welcome-step" data-question="4" data-key="pace" hidden>
+          <p>Choose your pace.</p>
+          <div class="answer-grid">
+            <button type="button" data-answer="guided">Guide me</button>
+            <button type="button" data-answer="steady">I will take my time</button>
+          </div>
+        </div>
+        <section id="positive-path" hidden aria-live="polite">
+          <p>Create your positive path now. Press =U and let us guide you.</p>
+          <button type="button" id="begin-positive-path" aria-label="Begin my positive path">=U</button>
+        </section>
+        <section class="age-gate" id="age-eligibility" aria-labelledby="age-eligibility-title" hidden>
+          <h2 id="age-eligibility-title">Age eligibility</h2>
+          <p>This local age screen is not identity verification. A birth date is used only in this browser to choose an age-appropriate path, then cleared immediately.</p>
+          <form id="age-eligibility-form">
+            <label for="youth-birth-date">Birth date</label>
+            <input id="youth-birth-date" type="date" inputmode="numeric" aria-describedby="youth-age-note" required>
+            <p id="youth-age-note">It is not stored, sent, or attached to a profile, pass, or account.</p>
+            <button type="submit">Enter</button>
+          </form>
+          <div id="under-13-notice" hidden aria-live="polite">
+            <h3>This table is not set up for under 13.</h3>
+            <p>No birth date or other information was kept. Please ask a parent or guardian before using online community features.</p>
+            <button type="button" id="restart-age-gate">Start over</button>
+          </div>
+          <p id="age-gate-status" class="gateway-status" aria-live="polite"></p>
+        </section>
+        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title" hidden>
           <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
           <h2 id="welcome-title">Three questions. One useful start.</h2>
-          <div class="welcome-step" data-question="1" data-key="intent">
+          <p id="youth-path-note" class="youth-path-note" hidden>Your youth path stays anonymous and low-data. Payment, store, member, and ambassador paths are not shown here.</p>
+          <div class="welcome-step" data-question="1" data-key="intent" hidden>
             <p>What do you need right now?</p>
             <div class="answer-grid">
               <button type="button" data-answer="learn">Learn</button>
@@ -69,6 +119,11 @@
               <a class="button primary" id="outcome-primary" href="#community-counter"></a>
               <a class="button" id="outcome-next" href="#home"></a>
             </div>
+            <div id="age-result-confirmation" class="age-result-confirmation" hidden aria-live="polite">
+              <p id="age-result-status" tabindex="-1"></p>
+              <button type="button" id="continue-to-outcome">Continue to your selected path</button>
+            </div>
+            <p class="progressive-next-note">Try something. Keep what helps. Choose what is next, change direction, reset, or leave. Nothing is required.</p>
             <button type="button" id="restart-welcome">Ask me again</button>
           </div>
         </section>
@@ -239,8 +294,8 @@
             </div>
             <div class="dashboard-copy">
               <p id="dashboard-progress" aria-live="polite"></p>
-              <ul id="dashboard-unlocks" aria-label="Unlocked optional accessories"></ul>
-              <p><strong>Try next:</strong> open a course, visit a community subject, read the crumb protocol, or open the share invitation. These are voluntary exploration steps, not purchases or donations.</p>
+              <ul id="dashboard-unlocks" aria-label="Optional accessories shown during this visit"></ul>
+              <p><strong>Try, learn, choose a next path:</strong> open a course, visit a community subject, read the crumb protocol, or open the share invitation. Keep what helps; nothing is required. These are voluntary exploration steps, not purchases or donations.</p>
               <button id="reset-dashboard" type="button">Reset dashboard and restart welcome</button>
               <p class="dashboard-note">Only a short anonymous accessory list stays in this browser for continuity. Reset removes it; your +U pass, if any, is a device-local return link and not an identity or profile.</p>
             </div>
@@ -344,7 +399,7 @@
           <section class="journey-offers" id="journey-offers" aria-labelledby="journey-offers-title">
             <p class="eyebrow">YOUR NEXT BITE</p>
             <h3 id="journey-offers-title">Start with what fits today.</h3>
-            <p id="journey-offers-copy">Answer the three welcome questions and this space will shape itself around what you came for.</p>
+            <p id="journey-offers-copy">Try something, keep what helps, and choose what is next. Nothing is required.</p>
             <div class="journey-offer-actions">
               <a class="button primary" href="templates/plus-u-next-step-template.md">Get the free +U next-step template</a>
               <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>

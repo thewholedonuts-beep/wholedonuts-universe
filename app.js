@@ -76,7 +76,7 @@ function renderDashboard(){
   const unlocks=dashboardState();
   if(dashboard)dashboard.hidden=false;
   dashboardAccessories.forEach(accessory=>accessory.hidden=!unlocks.includes(accessory.dataset.accessory));
-  if(dashboardProgress)dashboardProgress.textContent=unlocks.length+' of '+Object.keys(dashboardAccessoryNames).length+' optional accessories opened through voluntary exploration.';
+  if(dashboardProgress)dashboardProgress.textContent=unlocks.length+' of '+Object.keys(dashboardAccessoryNames).length+' optional accessories shown through voluntary exploration.';
   if(dashboardUnlocks){
     dashboardUnlocks.replaceChildren();
     unlocks.forEach(accessory=>{
@@ -300,6 +300,9 @@ function completeLaunchInteraction(){
 function isLaunchEligibleRoute(id){
   return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
 }
+function isYouthRestrictedRoute(id){
+  return ['awd','tnc','ambassador-path','donation-access-hub','plusu-dashboard'].includes(id);
+}
 
 if(launchWindowReset)launchWindowReset.addEventListener('click',()=>{
   resetLaunchPresentation('Fresh Launch reset locally. Start the anonymous welcome again; your device-local +U pass was kept.');
@@ -314,8 +317,13 @@ function focusRouteTarget(id){
 }
 
 function syncBranch({focus=false}={}){
-  const id=location.hash.slice(1);
-  if(id&&id!=='home')document.body.classList.add('entered');
+  let id=location.hash.slice(1);
+  if((ageMode==='youth'||ageMode==='under13')&&isYouthRestrictedRoute(id)){
+    id='table';
+    history.replaceState(null,'','#table');
+    if(navigationStatus)navigationStatus.textContent='This youth path stays with the low-data community table.';
+  }
+  if(id&&id!=='home'&&id!=='age-gate')document.body.classList.add('entered');
   if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
   if(store){store.textContent='Return to the +U gateway';store.href='#home'}
@@ -388,7 +396,20 @@ const steps=[...document.querySelectorAll('[data-question]')];
 const welcomeResult=document.querySelector('#welcome-result');
 const outcomePrimary=document.querySelector('#outcome-primary');
 const outcomeNext=document.querySelector('#outcome-next');
+const ageResultConfirmation=document.querySelector('#age-result-confirmation');
+const ageResultStatus=document.querySelector('#age-result-status');
+const continueToOutcome=document.querySelector('#continue-to-outcome');
+const ageGate=document.querySelector('#age-gate');
+const ageGateStatus=document.querySelector('#age-gate-status');
+const ageEligibility=document.querySelector('#age-eligibility');
+const youthAgeForm=document.querySelector('#age-eligibility-form');
+const youthBirthDate=document.querySelector('#youth-birth-date');
+const under13Notice=document.querySelector('#under-13-notice');
+const youthPathNote=document.querySelector('#youth-path-note');
+const positivePath=document.querySelector('#positive-path');
+const beginPositivePath=document.querySelector('#begin-positive-path');
 const welcomeAnswers={};
+let ageMode=null;
 
 const counterCourses={
   learn:'bites',
@@ -418,21 +439,114 @@ const tableOutcomes={
     detail:'Begin with the existing +U world and return to the table when ready.'
   }
 };
+const youthTableOutcomes={
+  learn:tableOutcomes.learn,
+  share:{
+    href:'#template-library',
+    action:'Open the +U Library',
+    detail:'Begin with the existing share-a-crumb template. This youth path does not collect a submission.'
+  },
+  help:{
+    href:'#community-counter',
+    action:'Open the Community Counter',
+    detail:'Begin with the existing guided community learning menu without a payment or member path.'
+  },
+  explore:tableOutcomes.explore
+};
 const branchNext={
   awd:{href:'#awd',label:'Next: open Whole Donuts'},
   tnc:{href:'#tnc',label:'Next: open The Nurtured Chef'},
   table:{href:'#donuts-new-school',label:'Next: open Donuts New School'}
 };
 
+function showAgeGate(message=''){
+  ageMode=null;
+  document.body.classList.remove('adult-mode','youth-mode','entered');
+  if(ageGate)ageGate.hidden=false;
+  if(gate)gate.hidden=true;
+  steps.forEach(step=>step.hidden=true);
+  if(positivePath)positivePath.hidden=true;
+  if(ageEligibility)ageEligibility.hidden=true;
+  if(under13Notice)under13Notice.hidden=true;
+  if(youthBirthDate)youthBirthDate.value='';
+  if(youthPathNote)youthPathNote.hidden=true;
+  if(ageGateStatus)ageGateStatus.textContent=message;
+}
+function beginWelcome(){
+  if(ageGate)ageGate.hidden=true;
+  if(gate)gate.hidden=false;
+  if(youthPathNote)youthPathNote.hidden=true;
+  showQuestion(1);
+  focusQuestion(1);
+}
+function showAgeEligibility(){
+  if(gate)gate.hidden=true;
+  if(ageEligibility)ageEligibility.hidden=false;
+  if(under13Notice)under13Notice.hidden=true;
+  if(youthBirthDate)youthBirthDate.value='';
+  if(ageGateStatus)ageGateStatus.textContent='';
+  if(youthBirthDate)youthBirthDate.focus();
+}
+function ageFromDate(value){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
+  const [year,month,day]=value.split('-').map(Number);
+  const date=new Date(year,month-1,day);
+  if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;
+  const today=new Date();
+  let age=today.getFullYear()-year;
+  if(today.getMonth()<month-1||(today.getMonth()===month-1&&today.getDate()<day))age-=1;
+  return age>=0?age:null;
+}
+document.querySelectorAll('[data-entry-choice]').forEach(button=>button.addEventListener('click',()=>{
+  welcomeAnswers.intent=button.dataset.entryChoice;
+  if(ageGate)ageGate.hidden=true;
+  if(gate)gate.hidden=false;
+  showQuestion(2);
+  focusQuestion(2);
+}));
+if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
+  event.preventDefault();
+  const age=ageFromDate(youthBirthDate?youthBirthDate.value:'');
+  if(youthBirthDate){
+    youthBirthDate.value='';
+    youthBirthDate.blur();
+  }
+  if(age===null){
+    if(ageGateStatus)ageGateStatus.textContent='Enter a valid birth date to calculate eligibility. It was not kept.';
+    return;
+  }
+  if(age<13){
+    ageMode='under13';
+    youthAgeForm.hidden=true;
+    if(under13Notice)under13Notice.hidden=false;
+    if(ageGateStatus)ageGateStatus.textContent='The birth date was used only for this local calculation and was cleared.';
+    return;
+  }
+  ageMode=age>17?'adult':'youth';
+  document.body.classList.toggle('adult-mode',ageMode==='adult');
+  document.body.classList.toggle('youth-mode',ageMode==='youth');
+  if(ageEligibility)ageEligibility.hidden=true;
+  if(youthPathNote)youthPathNote.hidden=ageMode!=='youth';
+  finishWelcome({ageConfirmed:true});
+});
+const restartAgeGate=document.querySelector('#restart-age-gate');
+if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
+
 function showQuestion(number){
   steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
   const progress=document.querySelector('#welcome-progress');
-  if(progress)progress.textContent=number<=3?'Question '+number+' of 3':'Welcome to your table';
+  if(progress)progress.textContent=number<=4?'Touch '+number+' of 4':'Your positive path is ready';
 }
-function finishWelcome({scroll=true}={}){
+function focusQuestion(number){
+  const step=steps.find(item=>Number(item.dataset.question)===number);
+  const button=step&&step.querySelector('button');
+  if(button)button.focus();
+}
+function finishWelcome({scroll=true,ageConfirmed=false}={}){
   const branch=welcomeAnswers.branch;
   const intent=welcomeAnswers.intent||'explore';
   const entry=welcomeAnswers.entry||'counter';
+  const youth=ageMode==='youth';
   const course=counterCourses[intent]||'bits';
   const outcome=entry==='counter'
     ?{
@@ -440,14 +554,16 @@ function finishWelcome({scroll=true}={}){
       action:'Open the guided Counter',
       detail:'Begin the existing '+course.toUpperCase()+' menu course for '+intent+'.'
     }
-    :tableOutcomes[intent];
+    :(youth?youthTableOutcomes:tableOutcomes)[intent];
   openCourse(course);
-  saveJourney();
+  if(youth)safeRemove('plusu-welcome');else saveJourney();
   gate.classList.add('complete');
   steps.forEach(step=>step.hidden=true);
   welcomeResult.hidden=false;
   counter.hidden=false;
-  beginDashboard();
+  if(youth){
+    if(dashboard)dashboard.hidden=true;
+  }else beginDashboard();
   document.body.classList.add('entered');
   const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the shared community table';
   welcomeResult.querySelector('strong').textContent=outcome.action+'.';
@@ -457,17 +573,39 @@ function finishWelcome({scroll=true}={}){
     outcomePrimary.textContent=outcome.action;
   }
   if(outcomeNext){
-    const next=branchNext[branch]||branchNext.table;
+    const next=youth
+      ?{href:'#table',label:'Next: stay with the shared community table'}
+      :(branchNext[branch]||branchNext.table);
     outcomeNext.href=next.href;
     outcomeNext.textContent=next.label;
     outcomeNext.hidden=false;
   }
-  showQuestion(4);
+  if(ageResultConfirmation)ageResultConfirmation.hidden=!ageConfirmed;
+  if(ageResultStatus&&ageConfirmed)ageResultStatus.textContent='Age path selected locally. Your birth date was cleared and your selected path is ready.';
+  showQuestion(5);
   if(scroll){
     welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
-    if(outcomePrimary)outcomePrimary.focus({preventScroll:true});
+    focusRenderedOutcome();
   }
 }
+function focusRenderedOutcome(){
+  const target=outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')?outcomePrimary:null;
+  const fallback=continueToOutcome&&continueToOutcome.isConnected&&!continueToOutcome.hidden&&!continueToOutcome.disabled?continueToOutcome:null;
+  const focus=()=>{
+    if(target)target.focus({preventScroll:true});
+    if(target&&document.activeElement===target)return;
+    if(fallback)fallback.focus({preventScroll:true});
+  };
+  requestAnimationFrame(()=>requestAnimationFrame(focus));
+  setTimeout(focus,0);
+  setTimeout(focus,50);
+}
+if(continueToOutcome)continueToOutcome.addEventListener('click',()=>{
+  if(outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')){
+    outcomePrimary.focus({preventScroll:true});
+    outcomePrimary.click();
+  }
+});
 function saveJourney(){
   const journey={
     branch:welcomeAnswers.branch||'table',
@@ -488,7 +626,7 @@ function renderJourneyOffers(journey){
     explore:'room to look around at your own pace'
   }[journey.intent]||'a next step that fits today';
   journeyOfferTitle.textContent=branch+' picks, made for your '+journey.course+' appetite.';
-  journeyOfferCopy.textContent='Start with '+intent+'. Your free next-step template is ready whenever you are.';
+  journeyOfferCopy.textContent='Try something, keep what helps, and choose what is next. Start with '+intent+' whenever you are; nothing is required.';
   renderVirtualStore(journey,branch,intent);
 }
 function renderVirtualStore(journey,branch,intent){
@@ -513,22 +651,21 @@ document.querySelectorAll('[data-answer]').forEach(button=>{
     const step=button.closest('[data-question]');
     welcomeAnswers[step.dataset.key]=button.dataset.answer;
     const next=Number(step.dataset.question)+1;
-    if(next>3)finishWelcome();else showQuestion(next);
+    if(next>4){
+      steps.forEach(step=>step.hidden=true);
+      if(positivePath)positivePath.hidden=false;
+      if(beginPositivePath)beginPositivePath.focus();
+    }
+    else{
+      showQuestion(next);
+      focusQuestion(next);
+    }
     completeLaunchInteraction();
   });
 });
 
-const savedWelcome=safeGet('plusu-welcome');
-if(savedWelcome){
-  try{Object.assign(welcomeAnswers,JSON.parse(savedWelcome));finishWelcome({scroll:false})}
-  catch(e){
-    if(menuButtons.length)openCourse('bits');
-    showQuestion(1);
-  }
-}else{
-  if(menuButtons.length)openCourse('bits');
-  if(gate)showQuestion(1);
-}
+if(menuButtons.length)openCourse('bits');
+showAgeGate();
 
 function resetWelcome(){
   safeRemove('plusu-welcome');
@@ -537,10 +674,9 @@ function resetWelcome(){
   welcomeResult.hidden=true;
   counter.hidden=true;
   if(dashboard)dashboard.hidden=true;
-  document.body.classList.remove('entered');
   gate.classList.remove('complete');
-  showQuestion(1);
-  gate.scrollIntoView({behavior:'smooth'});
+  showAgeGate();
+  ageGate.scrollIntoView({behavior:'smooth'});
 }
 const restart=document.querySelector('#restart-welcome');
 if(restart)restart.addEventListener('click',resetWelcome);
@@ -660,4 +796,5 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
 });
 
 addEventListener('hashchange',()=>syncBranch({focus:true}));
+if(beginPositivePath)beginPositivePath.addEventListener('click',showAgeEligibility);
 syncBranch({focus:location.hash.length>1});
