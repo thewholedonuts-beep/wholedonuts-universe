@@ -23,6 +23,16 @@ Optional support contributions are not store purchases. Store product,
 fulfillment, refund, tax, and merchant-of-record terms must remain with the
 separate store provider.
 
+## Provider availability
+
+The provider set is Cash App and Chime only. Cash App to `$wholedonuts` is the
+only currently configured optional support exit and must remain behind the
+purpose, disclosure, and final-action gate. Chime is a future manual provider;
+do not create a Chime link, sign, placeholder, or payable destination until a
+verified public destination is supplied. Do not add providers or account
+language outside this set. Provider selection must not identify a person or
+initiate a payment or transfer.
+
 ## Impact stewardship
 
 Show the selected support purpose before a person leaves for a provider. Do not

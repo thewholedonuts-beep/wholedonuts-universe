@@ -50,6 +50,9 @@ payment link is revealed. Store purchases remain separate merchant
 transactions, not donations. The Share & Invitation Protocol creates a
 non-sensitive ecosystem link only when a visitor explicitly shares or copies
 it; it does not track recipients or create referral, payment, or reward records.
+Cash App to `$wholedonuts` is the only configured optional exit. Chime is a
+future manual provider with no verified public destination yet, so it has no
+payment link. No other provider is part of this model.
 
 Real accounting, charity or tax treatment, refunds, merchant-of-record
 responsibilities, and reward eligibility require decisions by the responsible
