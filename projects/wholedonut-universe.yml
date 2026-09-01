@@ -23,8 +23,8 @@ domain_registry:
     purpose: Application domain
   - domain: wenevergonnaclose.com
     registrar: porkbun
-    status: inactive
-    purpose: Campaign domain
+    status: pages-cutover-pending
+    purpose: Public +U entry; GitHub Pages and DNS still require manual configuration
   - domain: thenurturedchef.com
     registrar: porkbun
     status: inactive
@@ -41,10 +41,10 @@ domain_registry:
     registrar: github-pages
     status: inactive
     purpose: Owner GitHub Pages site
-  - domain: thewholedonts-universe.github.io
+  - domain: thewholedonuts-beep.github.io/wholedonuts-universe
     registrar: github-pages
-    status: inactive
-    purpose: Repository GitHub Pages site
+    status: pages-configuration-pending
+    purpose: Repository Pages endpoint before custom-domain cutover
 
 networks:
   lead-generation-network:

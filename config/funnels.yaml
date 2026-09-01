@@ -26,9 +26,11 @@ domains:
 
   - name: wenevergonnaclose
     tld: com
+    # This is the operational funnel state, not the static site's Pages state.
     status: inactive
     registrar: porkbun
     funnels: []
+    pages_status: pending_github_pages_configuration
 
   - name: thenurturedchef
     tld: com

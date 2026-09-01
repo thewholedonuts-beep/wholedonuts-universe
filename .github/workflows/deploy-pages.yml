@@ -1,0 +1,52 @@
+name: Deploy public Pages site
+
+on:
+  workflow_dispatch:
+    inputs:
+      include_cname:
+        description: Include CNAME only after the custom domain is attached to Universe Pages
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Stage public site
+        run: |
+          mkdir -p _site/world _site/templates
+          cp index.html styles.css app.js auth-config.js auth.js storefront-config.js _site/
+          cp CRUMB_PROTOCOL.md WHOLE_DONUTS_GUIDE.md _site/
+          cp world/index.html world/script.js world/styles.css _site/world/
+          cp templates/*.md _site/templates/
+          if [[ "${{ inputs.include_cname }}" == "true" ]]; then
+            cp CNAME _site/CNAME
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
