@@ -160,11 +160,14 @@ funnel operations, not these registry states.
 
 ## Safe Pages cutover
 
-1. Set Universe Pages to use GitHub Actions and run the manual Pages workflow.
+1. Set Universe Pages to use GitHub Actions and run the manual Pages workflow
+   with `include_cname: false`.
 2. Validate the generated Universe Pages URL and its public static artifact.
 3. Add or confirm the GitHub-provided TXT verification record for the custom domain.
 4. Detach the domain from `wholedonuts-sunshine` and immediately attach it to Universe.
-5. Verify HTTPS and the canonical custom-domain redirect, then retire the legacy Pages deployment.
+5. Optionally run the Pages workflow with `include_cname: true` to place the
+   source declaration in the artifact; this does not attach the custom domain.
+6. Verify HTTPS and the canonical custom-domain redirect, then retire the legacy Pages deployment.
 
 ## Next Steps
 1. Map subdomain routing for the newly documented domains

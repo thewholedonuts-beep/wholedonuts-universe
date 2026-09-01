@@ -17,12 +17,20 @@ The custom domain is declared in this repository, but it is not evidence that
 GitHub Pages or DNS is already active. The manual
 [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages only the
 public static files; it excludes Go operations configuration and local
-credentials. To prepare and cut over, set **Settings -> Pages** to **GitHub
-Actions**, run that workflow to validate the Universe Pages URL, set
-`wenevergonnaclose.com` as the custom domain, and configure the DNS records
+credentials. Its `include_cname` input defaults to `false`, so the first
+Universe Pages deployment is URL-only. `CNAME` remains in source for the final
+cutover and is included only when that input is explicitly enabled after the
+domain has moved to Universe. GitHub Actions deployments manage custom domains
+in **Settings -> Pages**, not from the artifact's `CNAME` file.
+
+To prepare and cut over, set **Settings -> Pages** to **GitHub Actions**, run
+the workflow with `include_cname: false` to validate the Universe Pages URL,
+set and verify `wenevergonnaclose.com` in Pages, and configure the DNS records
 GitHub Pages displays. Do not detach the current legacy attachment until the
-Universe URL and GitHub TXT verification are ready. Enable HTTPS enforcement
-only after GitHub verifies the domain.
+Universe URL and GitHub TXT verification are ready. After the transfer, run the
+workflow with `include_cname: true` if the deployed artifact should retain the
+source declaration. Enable HTTPS enforcement only after GitHub verifies the
+domain.
 
 ## Operations tooling
 
