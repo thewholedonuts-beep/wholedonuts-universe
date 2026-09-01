@@ -1,5 +1,6 @@
 const links=[...document.querySelectorAll('[data-branch]')];
 const store=document.querySelector('#branch-store');
+const navigationStatus=document.querySelector('#table-navigation-status');
 const stores={
   awd:['Explore Whole Donuts','#awd'],
   tnc:['Explore The Nurtured Chef','#tnc']
@@ -231,16 +232,29 @@ function safeRemove(key){
   try{localStorage.removeItem(key)}catch(e){memoryStore.delete(key)}
 }
 
-function syncBranch(){
+function focusRouteTarget(id){
+  const target=document.getElementById(id);
+  if(!target)return;
+  target.tabIndex=-1;
+  target.scrollIntoView({behavior:'smooth',block:'start'});
+  target.focus({preventScroll:true});
+}
+
+function syncBranch({focus=false}={}){
   const id=location.hash.slice(1);
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
-  if(stores[id]){store.textContent=stores[id][0]+' ↗';store.href=stores[id][1]}
-  else{store.textContent='Open the menu';store.href='#home'}
+  if(store){store.textContent='Return to the +U gateway';store.href='#home'}
   if(id==='donation-access-hub'&&counter){
     counter.hidden=false;
     openCourse('bombs');
   }
   if(stores[id])unlockDashboardAccessory('pin');
+  if(focus&&id){
+    focusRouteTarget(id);
+    if(navigationStatus)navigationStatus.textContent=stores[id]
+      ?'Opened the '+stores[id][0]+' section.'
+      :'Opened the requested table section.';
+  }
 }
 
 const menuButtons=[...document.querySelectorAll('[data-menu]')];
@@ -484,5 +498,5 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
   }
 });
 
-addEventListener('hashchange',syncBranch);
+addEventListener('hashchange',()=>syncBranch({focus:true}));
 syncBranch();
