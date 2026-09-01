@@ -305,7 +305,6 @@ body:not(.entered) footer{display:none}
 #positive-path{display:grid;justify-items:center;gap:1rem;margin-top:1.5rem;text-align:center}
 #positive-path p{margin:0;max-width:30rem;font:700 1.2rem/1.4 Georgia,serif}
 #begin-positive-path{border:0;background:transparent;color:var(--ink);font:900 clamp(4rem,12vw,8rem)/1 Georgia,serif;cursor:pointer}
-#positive-path span{font:italic .75rem/1 Georgia,serif;opacity:.45}
 .youth-path-note{
   margin:0 0 1rem;
   padding:.75rem;
