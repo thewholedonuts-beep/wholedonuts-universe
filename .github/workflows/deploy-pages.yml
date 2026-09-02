@@ -1,13 +1,27 @@
 name: Deploy public Pages site
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/deploy-pages.yml"
+      - "CNAME"
+      - "CRUMB_PROTOCOL.md"
+      - "WHOLE_DONUTS_GUIDE.md"
+      - "RELEASE_NOTES.md"
+      - "app.js"
+      - "auth-config.js"
+      - "auth.js"
+      - "guide.html"
+      - "index.html"
+      - "robots.txt"
+      - "sitemap.xml"
+      - "storefront-config.js"
+      - "styles.css"
+      - "templates/**"
+      - "world/**"
   workflow_dispatch:
-    inputs:
-      include_cname:
-        description: Include CNAME only after the custom domain is attached to Universe Pages
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -16,7 +30,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -34,13 +48,11 @@ jobs:
       - name: Stage public site
         run: |
           mkdir -p _site/world _site/templates
-          cp index.html styles.css app.js auth-config.js auth.js storefront-config.js robots.txt sitemap.xml _site/
-          cp CRUMB_PROTOCOL.md WHOLE_DONUTS_GUIDE.md _site/
+          cp index.html guide.html styles.css app.js auth-config.js auth.js storefront-config.js robots.txt sitemap.xml CNAME _site/
+          cp CRUMB_PROTOCOL.md WHOLE_DONUTS_GUIDE.md RELEASE_NOTES.md _site/
           cp world/index.html world/script.js world/styles.css _site/world/
           cp templates/*.md _site/templates/
-          if [[ "${{ inputs.include_cname }}" == "true" ]]; then
-            cp CNAME _site/CNAME
-          fi
+          printf '%s\n' "$GITHUB_SHA" > _site/deploy-version.txt
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -50,3 +62,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify deployed revision
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for attempt in {1..40}; do
+            live_sha="$(curl --fail --silent --show-error --location "$PAGE_URL/deploy-version.txt" | tr -d '\r\n' || true)"
+            if [[ "$live_sha" == "$EXPECTED_SHA" ]]; then
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "GitHub Pages did not serve the deployed revision: $EXPECTED_SHA" >&2
+          exit 1

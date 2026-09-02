@@ -36,7 +36,7 @@ func main() {
 		}
 		parts := parseFullDomain(*domain)
 		if len(parts) != 2 {
-			log.Fatal("❌ Invalid domain format. Use: name.tld")
+			log.Fatal("❌ Invalid domain format. Use a domain with a TLD, such as example.com or sub.example.com")
 		}
 		d, err := manager.AddDomain(ctx, parts[0], parts[1])
 		if err != nil {
@@ -50,7 +50,11 @@ func main() {
 		if *funnelID == "" || *domain == "" || *funnelName == "" || *ipAddress == "" {
 			log.Fatal("❌ --funnel-id, --domain, --funnel-name, and --ip required")
 		}
-		_, err := manager.AddDomain(ctx, parseFullDomain(*domain)[0], parseFullDomain(*domain)[1])
+		parts := parseFullDomain(*domain)
+		if len(parts) != 2 {
+			log.Fatal("❌ Invalid domain format. Use a domain with a TLD, such as example.com or sub.example.com")
+		}
+		_, err := manager.AddDomain(ctx, parts[0], parts[1])
 		if err != nil && !contains(err.Error(), "not registered") {
 			log.Fatalf("❌ Failed to add domain: %v", err)
 		}

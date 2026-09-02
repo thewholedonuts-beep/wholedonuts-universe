@@ -467,6 +467,7 @@ function showAgeGate(message=''){
   steps.forEach(step=>step.hidden=true);
   if(positivePath)positivePath.hidden=true;
   if(ageEligibility)ageEligibility.hidden=true;
+  if(youthAgeForm)youthAgeForm.hidden=false;
   if(under13Notice)under13Notice.hidden=true;
   if(youthBirthDate)youthBirthDate.value='';
   if(youthPathNote)youthPathNote.hidden=true;
