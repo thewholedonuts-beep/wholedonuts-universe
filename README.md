@@ -7,9 +7,10 @@ This repository is the consolidated home for the Whole Donuts Universe.
 The repository root contains the static GitHub Pages bundle for
 `wenevergonnaclose.com`:
 
-- `index.html`, `guide.html`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
+- `index.html`, `guide.html`, `ecosystem.html`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
   provide the one public Whole Donuts entry, system map, curation policy, and
-  +U experience.
+  +U experience. The ecosystem map distinguishes the available canonical
+  on-site routes from planned domains that require owner verification.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
 - The +U gateway is a four-tap, progressive route: broad Youth or
   Adult side, a face-only feeling, one of three bounded non-sensitive needs,

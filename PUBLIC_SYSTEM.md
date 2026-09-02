@@ -13,6 +13,7 @@ material.
 | Four-tap +U gateway | Yes. It is the first screen: a broad Youth or Adult side, face-only feeling, bounded need, and first destination progressively route to available on-site content. A visible Skip to the full site control immediately reaches The Table and reveals its progressive content. | All choices are temporary page state only: never stored, submitted, tracked, or used as a profile. |
 | +U Library | Yes. The tracked templates may be copied and adapted for personal use. | Do not add private, sensitive, or third-party material without permission. |
 | +U World | Yes. The visual studio is an optional public exploration path. | It does not create an account or collect a contribution. |
+| Ecosystem map | Yes. It explains the canonical entry, available on-site paths, and intended future domain roles. | Planned domains remain non-clickable until a human verifies destination, ownership, rights, privacy, safety, accessibility, and a return path. |
 | Donuts New School and Ambassador direction | Yes. They are open learning and leadership directions. | They are not enrollment, certification, employment, an application, or a guaranteed opportunity. |
 | Reviewed crumb process | Preparation only. The protocol and template are public. | The static site has no submission runtime; publication is always human-reviewed. |
 | Browser-only review queue | Yes. It renders curated metadata already shipped with the site. | It cannot scan, ingest, publish, merge, or access repositories or networks. |

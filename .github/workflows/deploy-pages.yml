@@ -28,7 +28,7 @@ jobs:
       - name: Stage public site
         run: |
           mkdir -p _site/world _site/templates
-          cp index.html guide.html styles.css app.js review-queue-manifest.js storefront-config.js robots.txt sitemap.xml CNAME _site/
+          cp index.html guide.html ecosystem.html styles.css app.js review-queue-manifest.js storefront-config.js robots.txt sitemap.xml CNAME _site/
           cp CRUMB_PROTOCOL.md WHOLE_DONUTS_GUIDE.md PUBLIC_SYSTEM.md RELEASE_NOTES.md _site/
           cp world/index.html world/script.js world/styles.css _site/world/
           cp templates/*.md _site/templates/

@@ -1442,6 +1442,15 @@ footer a{color:var(--ink);font-weight:900}
 .guide-card h3{margin:0 0 .5rem;font:700 1.45rem Georgia,serif}
 .guide-card p{margin:0;line-height:1.55}
 .guide-card a{color:var(--ink);font-weight:900}
+.ecosystem-summary{max-width:66rem;margin:1.5rem 0;padding:1.25rem;border-left:5px solid var(--berry);background:#f5e5eb}
+.ecosystem-summary h2{margin:.2rem 0 .7rem}
+.ecosystem-summary p{margin:0;line-height:1.55}
+.ecosystem-role-map{overflow-x:auto;border:2px solid var(--ink);border-radius:1rem;background:var(--cream)}
+.ecosystem-role-map table{width:100%;min-width:48rem;border-collapse:collapse}
+.ecosystem-role-map th,.ecosystem-role-map td{padding:1rem;text-align:left;vertical-align:top;border-bottom:1px solid #15130f33;line-height:1.5}
+.ecosystem-role-map thead{background:var(--ink);color:#fff}
+.ecosystem-role-map tbody th{font-family:Georgia,serif}
+.ecosystem-role-map tbody tr:last-child th,.ecosystem-role-map tbody tr:last-child td{border-bottom:0}
 .guide-note{max-width:58rem;padding:1rem 1.2rem;border-left:5px solid var(--green);background:#dce9d9;line-height:1.55}
 .noscript-note{margin:0;padding:1rem 1.2rem;background:var(--berry);color:#fff;font-weight:700}
 @media(max-width:760px){
