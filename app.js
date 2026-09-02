@@ -325,10 +325,20 @@ function restartJourney({focus=false}={}){
   journeyState.variant=null;
   journeyState.need=null;
   document.querySelectorAll('[data-entry-character]').forEach(choice=>choice.setAttribute('aria-pressed','false'));
+  if(entryRouteTitle)entryRouteTitle.textContent='';
+  if(entryRouteCopy)entryRouteCopy.textContent='';
+  if(entryRouteLink){
+    entryRouteLink.removeAttribute('href');
+    entryRouteLink.textContent='Choose an answer first';
+  }
   showJourneyStep(1,{focus});
 }
 
 document.querySelectorAll('[data-entry-need]').forEach(button=>button.addEventListener('click',()=>{
+  if(!journeyState.character){
+    restartJourney({focus:true});
+    return;
+  }
   journeyState.need=button.dataset.entryNeed;
   showJourneyRoute();
   showJourneyStep(3,{focus:true});
