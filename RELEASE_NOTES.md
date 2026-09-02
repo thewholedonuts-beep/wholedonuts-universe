@@ -8,15 +8,14 @@ suggestion optional.
 
 ### Whole Donuts entry
 
-**What changed:** The public entry is now a progressive four-tap +U gateway:
-choose a broad Youth or Adult side, a face-only feeling, a bounded need, and
-an available on-site destination. It presents 14 original visual-only
-stick-figure companions per side and routes directly to The Table, The Counter,
-or the +U Library.
+**What changed:** The public entry now starts with 28 original visual-only
+stick figures: 14 broad Youth figures and 14 broad Adult figures. A visitor
+chooses one visual starting point and one bounded need, then receives a direct
+route to the live course, World, or +U Library.
 
 **Why it matters:** Visitors get a personal-feeling, legible starting point
-without an account, demographic profile, rewards system, persistent choices,
-or an unverified external destination.
+without an account, exact age, demographic profile, persistent choices, or an
+unverified external destination.
 
 **Optional next choices:** Open a guide, explore the World, visit a community
 path, or return later. No action is required.

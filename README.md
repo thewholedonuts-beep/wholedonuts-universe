@@ -14,14 +14,13 @@ The repository root contains the static GitHub Pages bundle for
   responses. The ecosystem map distinguishes the available canonical on-site
   routes from planned domains that require owner verification.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
-- The +U gateway is a four-tap, progressive route: broad Youth or
-  Adult side, a face-only feeling, one of three bounded non-sensitive needs,
-  and an available on-site destination. Its 14 original Youth and 14 original
-  Adult stick-figure companions are visual-only. All four temporary choices
-  exist only in page memory, clear on restart, skip, back, or onward navigation,
-  and are never sent, tracked, or stored. The gateway never asks for an exact
-  age or birth date, name, email, face image, photo, location, account, or
-  sensitive information.
+- The +U gateway starts with 28 original visual stick figures: 14 broad Youth
+  figures and 14 broad Adult figures. One visual choice and one of three bounded
+  non-sensitive needs lead to a present on-site course, World, or Library route.
+  Both temporary choices clear on restart, skip, back, or onward navigation and
+  are never sent, tracked, or stored. The gateway never asks for an exact age
+  or birth date, name, email, face image, photo, location, account, or sensitive
+  information.
 - The optional +U World keeps visual pose and color choices only in page
   memory. They clear on reset or reload and are never sent, tracked, or stored.
 - The browser-only +U review queue renders the small, curated
