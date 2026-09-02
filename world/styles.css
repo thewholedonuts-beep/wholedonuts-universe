@@ -311,6 +311,10 @@ h1 {
   gap: 1rem;
 }
 
+.customizer .primary-button {
+  justify-self: start;
+}
+
 .customizer label {
   display: grid;
   gap: 0.45rem;
@@ -330,6 +334,10 @@ h1 {
 
 .customizer input[type="color"] {
   padding: 0.25rem;
+}
+
+.customizer :disabled {
+  cursor: not-allowed;
 }
 
 .home-figure-card {
