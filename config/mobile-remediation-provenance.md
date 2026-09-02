@@ -83,9 +83,17 @@ The Pages staging allowlist was reproduced from the PR workflow with the
 expected head SHA. `deploy-version.txt` contained exactly
 `0dc84213a15a0f04899feef468bc80166681a47a`; all staged public files were
 present. CNAME was absent by design because `include_cname` was not enabled in
-this non-deployment control. The workflow's custom-domain polling check
-remains unverified against a real release and therefore remains a release
-blocker.
+this non-deployment control.
+
+PR commit `ddf5f763379a5e434753db905f54bc867fa84f3d` adds a post-deploy
+guard. It polls `https://wenevergonnaclose.com/deploy-version.txt` up to 40
+times at 15-second intervals, follows redirects, strips CR/LF, and requires an
+exact match with `${{ github.sha }}`; otherwise the Pages workflow fails. A
+controlled endpoint returned `controlled-sha` and the installed `curl.exe`
+comparison normalized and matched it exactly. Git Bash is unavailable in this
+environment, so this is an HTTP/equality control rather than an execution of
+the GitHub-hosted Bash runner. The custom-domain polling guard remains
+unverified against a real release and therefore remains a release blocker.
 
 ## Release boundary
 
