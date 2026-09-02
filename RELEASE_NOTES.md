@@ -58,6 +58,28 @@ service is live.
 become links only after owner verification and human privacy, safety, rights,
 accessibility, and destination review.
 
+### Free +U course
+
+**What changed:** The +U Library now opens a free, self-directed course with
+print-ready next-step, share-a-crumb, and build-your-table worksheets.
+
+**Why it matters:** Visitors can take an actionable next step with the existing
+public template language without opening an account, entering a store, sharing
+a response, or providing data to the site.
+
+**Optional next choices:** Print one worksheet or the complete course, use an
+editable source template, explore the World, or return to The Table.
+
+### Manual social launch readiness
+
+**What changed:** The canonical course URL includes factual social-preview
+metadata, and the Social Media Protocol now supplies a human-only launch gate
+and approved text-only course announcement.
+
+**Why it matters:** A responsible account owner can publish the live course
+link without connecting an account to the site, adding a tracker, or implying
+that a store, submission channel, reward, or companion capability is active.
+
 ### Pages delivery
 
 **What changed:** The Pages workflow deploys the reviewed static bundle only

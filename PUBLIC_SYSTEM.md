@@ -11,9 +11,10 @@ material.
 |---|---|---|
 | Community start-here | Yes. The Table, The Counter, Whole Donuts path, and The Nurtured Chef path are public and optional. | No account, profile, enrollment, or personal-data requirement. |
 | Four-tap +U gateway | Yes. It is the first screen: a broad Youth or Adult side, face-only feeling, bounded need, and first destination progressively route to available on-site content. A visible Skip to the full site control immediately reaches The Table and reveals its progressive content. | All choices are temporary page state only: never stored, submitted, tracked, or used as a profile. |
-| +U Library | Yes. The tracked templates may be copied and adapted for personal use. | Do not add private, sensitive, or third-party material without permission. |
+| +U Library and free course | Yes. The tracked templates may be copied and adapted for personal use, and the self-directed +U course provides print-ready worksheets. | It creates no account, response record, submission, certification, or public contribution. Do not add private, sensitive, or third-party material without permission. |
 | +U World | Yes. The visual studio is an optional public exploration path. | It does not create an account or collect a contribution. |
 | Ecosystem map | Yes. It explains the canonical entry, available on-site paths, and intended future domain roles. | Planned domains remain non-clickable until a human verifies destination, ownership, rights, privacy, safety, accessibility, and a return path. |
+| Social-media launch | Prepared for a responsible human to publish direct canonical links after production review. | No social account, platform URL, embed, credential, tracker, automatic post, cross-post, direct-message intake, or recipient record is part of this public bundle. |
 | Donuts New School and Ambassador direction | Yes. They are open learning and leadership directions. | They are not enrollment, certification, employment, an application, or a guaranteed opportunity. |
 | Reviewed crumb process | Preparation only. The protocol and template are public. | The static site has no submission runtime; publication is always human-reviewed. |
 | Browser-only review queue | Yes. It renders curated metadata already shipped with the site. | It cannot scan, ingest, publish, merge, or access repositories or networks. |
@@ -40,6 +41,12 @@ Future ecosystem and store domains are not public destinations unless an owner
 verifies their availability, ownership, content, privacy, and safety. Until
 then, any reference is a non-clickable future owner-verified route, never a
 redirect or commerce claim.
+
+The non-deployed [Social Media Protocol](config/social-media-protocol.md)
+defines the human-only launch gate and approved, factual course announcement
+copy. It permits direct canonical links only after a production review; it does
+not authorize account creation, publishing, analytics, tracking, or importing
+platform data into this repository.
 
 ## Companion repository reconciliation
 

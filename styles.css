@@ -1451,6 +1451,29 @@ footer a{color:var(--ink);font-weight:900}
 .ecosystem-role-map thead{background:var(--ink);color:#fff}
 .ecosystem-role-map tbody th{font-family:Georgia,serif}
 .ecosystem-role-map tbody tr:last-child th,.ecosystem-role-map tbody tr:last-child td{border-bottom:0}
+.course-intro{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1rem;align-items:start;margin:1.5rem 0;padding:1.25rem;border-left:5px solid var(--berry);background:#f5e5eb}
+.course-intro h2{margin:.2rem 0 .7rem}
+.course-intro ol{margin:0;padding-left:1.25rem;line-height:1.6}
+.course-mark{display:grid;place-items:center;min-width:4.5rem;min-height:4.5rem;padding:.5rem;border:3px solid var(--ink);border-radius:50%;background:var(--gold);font:900 1.4rem/1 Georgia,serif}
+.course-print-actions,.course-next-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.25rem 0}
+.course-print-actions button,.course-next-actions a{min-height:2.8rem;padding:.7rem 1rem;border:2px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);font-weight:900;text-decoration:none;cursor:pointer}
+.course-print-actions button:first-child{background:var(--ink);color:#fff}
+.course-print-note,.course-sheet-note{font-size:.9rem;line-height:1.5}
+.course-sheet{margin:2rem 0;padding:clamp(1.25rem,4vw,2rem);border:3px solid var(--ink);border-radius:1rem;background:#fffdf8;box-shadow:7px 7px 0 var(--green)}
+.course-sheet-head{display:flex;gap:1rem;align-items:center}
+.course-sheet-head .course-mark{min-width:3.5rem;min-height:3.5rem;font-size:1rem}
+.course-sheet-head p{margin:0;font-weight:900;letter-spacing:.08em}
+.course-sheet h2{margin:1rem 0 .75rem}
+.course-sheet>p{max-width:58rem;line-height:1.55}
+.course-prompts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.25rem 0}
+.course-prompts div{padding:1rem;border:2px solid var(--ink);border-radius:.75rem;background:var(--cream)}
+.course-prompts dt{font:700 1.2rem Georgia,serif}
+.course-prompts dd{margin:.5rem 0 0;line-height:1.5}
+.course-writing-space{display:grid;gap:1.2rem;min-height:9rem;padding:1rem 0}
+.course-writing-space span{display:block;border-bottom:1px solid var(--ink)}
+.course-next{margin:2rem 0;padding:1.5rem;border:2px solid var(--green);border-radius:1rem;background:#dce9d9}
+.course-next h2{margin:.2rem 0 .75rem}
+.course-next p{max-width:58rem;line-height:1.55}
 .guide-note{max-width:58rem;padding:1rem 1.2rem;border-left:5px solid var(--green);background:#dce9d9;line-height:1.55}
 .noscript-note{margin:0;padding:1rem 1.2rem;background:var(--berry);color:#fff;font-weight:700}
 @media(max-width:760px){
@@ -1493,8 +1516,31 @@ footer a{color:var(--ink);font-weight:900}
   footer{left:var(--rail)}
   .guide-page main{padding:2rem 1.2rem}
   .guide-page footer{left:auto}
+  .course-intro{grid-template-columns:1fr}
+  .course-prompts{grid-template-columns:1fr}
   .answer-grid{grid-template-columns:1fr}
   .answer-grid button,.figure-choice{min-height:44px}
+}
+@media print{
+  @page{margin:.5in}
+  .course-page{background:#fff;color:#000}
+  .course-page .skip-link,
+  .course-page .course-print-actions,
+  .course-page .course-print-note,
+  .course-page .course-next,
+  .course-page footer{display:none!important}
+  .course-page main{max-width:none;padding:0}
+  .course-page .guide-shell{max-width:none}
+  .course-page .guide-intro{font-size:1rem}
+  .course-page .course-intro{margin:0 0 1rem;padding:0 0 1rem;border:0;border-bottom:2px solid #000;background:#fff}
+  .course-page .course-sheet{box-shadow:none;break-after:page;page-break-after:always}
+  .course-page .course-sheet:last-of-type{break-after:auto;page-break-after:auto}
+  .course-page[data-print-section="next-step"] .course-intro,
+  .course-page[data-print-section="share-crumb"] .course-intro,
+  .course-page[data-print-section="build-table"] .course-intro{display:none}
+  .course-page[data-print-section="next-step"] .course-sheet:not([data-printable="next-step"]),
+  .course-page[data-print-section="share-crumb"] .course-sheet:not([data-printable="share-crumb"]),
+  .course-page[data-print-section="build-table"] .course-sheet:not([data-printable="build-table"]){display:none}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
