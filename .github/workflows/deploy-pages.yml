@@ -51,3 +51,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify deployed revision
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          for attempt in {1..40}; do
+            live_sha="$(curl --fail --silent --show-error --location https://wenevergonnaclose.com/deploy-version.txt | tr -d '\r\n' || true)"
+            if [[ "$live_sha" == "$EXPECTED_SHA" ]]; then
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "wenevergonnaclose.com did not serve the deployed revision: $EXPECTED_SHA" >&2
+          exit 1
