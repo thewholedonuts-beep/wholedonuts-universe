@@ -598,12 +598,10 @@ if(savedChoices){
 
 const passButton=document.querySelector('#make-pass');
 const passCard=document.querySelector('#pass-card');
-const passImage=document.querySelector('#pass-qr');
 const passName=document.querySelector('#pass-name');
 const passLink=document.querySelector('#open-pass-link');
 const copyPassLink=document.querySelector('#copy-pass-link');
 const passHelp=document.querySelector('#pass-help');
-const passFallback=document.querySelector('#pass-fallback');
 let displayedPass=null;
 // +U passes use the generated format +U-<STAMP>-<4 CHAR SUFFIX>, where STAMP is a timestamp-derived base36 token.
 function validPass(value){
@@ -650,48 +648,32 @@ function getPass(){
   }
   return pass;
 }
-function renderPass(renderQr){
-  if(!passCard||!passImage||!passName)return;
+function renderPass(){
+  if(!passCard||!passName)return;
   const pass=getPass();
   const url=passUrl(pass);
   displayedPass=pass;
   passName.textContent=pass;
   if(passLink)passLink.href=url;
   passCard.hidden=false;
-  if(renderQr){
-    passImage.hidden=false;
-    passImage.src='https://api.qrserver.com/v1/create-qr-code/?size=720x720&data='+encodeURIComponent(url);
-    passImage.alt='Your private +U QR for '+pass;
-  }else{
-    passImage.hidden=true;
-    passImage.removeAttribute('src');
-    passImage.alt='Your private +U QR is ready when requested';
-  }
-  if(passButton)passButton.textContent=renderQr?'Refresh your +U QR':'Show your +U QR';
+  if(passButton)passButton.textContent='Refresh local +U return link';
   if(copyPassLink)copyPassLink.textContent='Copy my private +U link';
   if(passHelp){
     passHelp.textContent=passRestoreState==='restored'
-      ?'This browser restored your +U pass from a private link. Request a QR only if you want one on screen.'
+      ?'This browser restored your +U pass from a private link. It stays local to this browser.'
       :passRestoreState==='kept-existing'
-        ?'This browser kept its existing +U pass. Request a QR only if you want one on screen.'
-        :'The QR image is requested from a third-party QR service only after you ask for it.';
+        ?'This browser kept its existing +U pass. It stays local to this browser.'
+        :'This private return link stays local to this browser. It is not an account, identity, or profile.';
   }
-  if(passFallback)passFallback.hidden=true;
   safeSet('plusu-last-visit',new Date().toISOString());
   if(passRestoreState==='restored'&&counter&&!counter.hidden){
     passCard.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 }
-if(passButton)passButton.addEventListener('click',()=>renderPass(true));
-if(validPass(safeGet('plusu-pass')))renderPass(false);
-if(passImage&&passFallback){
-  passImage.addEventListener('error',()=>{
-    if(!passImage.hidden&&passImage.getAttribute('src'))passFallback.hidden=false;
-  });
-  passImage.addEventListener('load',()=>{passFallback.hidden=true});
-}
+if(passButton)passButton.addEventListener('click',renderPass);
+if(validPass(safeGet('plusu-pass')))renderPass();
 if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
-  if(!displayedPass)renderPass(false);
+  if(!displayedPass)renderPass();
   if(!displayedPass){
     copyPassLink.textContent='Copy unavailable';
     return;
