@@ -19,9 +19,8 @@ The repository root contains the static GitHub Pages bundle for
   and are never sent, tracked, or stored. The gateway never asks for an exact
   age or birth date, name, email, face image, photo, location, account, or
   sensitive information.
-- The public site separately keeps its existing +U pass and last-visit data in
-  the visitor's browser. A valid `?u=` link can restore a pass; visitors can
-  open or copy that local return link without sending it to a QR service.
+- The optional +U World keeps visual pose and color choices only in page
+  memory. They clear on reset or reload and are never sent, tracked, or stored.
 - The browser-only +U review queue renders the small, curated
   `review-queue-manifest.js` list already shipped with the site. It has no
   filesystem access, GitHub API access, network scanning, automatic
@@ -44,18 +43,16 @@ Maintainers refresh the queue through the normal local/repository workflow:
    stated next step; the site never discovers candidates, changes sources,
    publishes material, or merges work automatically.
 
-  The `?u=` value is a private device-local +U return link only. It does not
-  authenticate an operator, grant access, identify a person, activate a target,
-  count a contribution, or carry SEO data. Daily SEO and learning targets remain
-  outside the public site in access-controlled operations and require explicit
-  human activation and release review.
+  The public site creates no visitor identifier, return pass, profile, or
+  visit record. Daily SEO and learning targets remain outside the public site
+  in access-controlled operations and require explicit human activation and
+  release review.
 
   The public SEO Crumb Saver treats deliberate public pages, guides, templates,
   and canonical invitations as discovery entry points for reviewed knowledge. It
   does not collect a visitor profile or submit material from this static site.
   The root uses canonical, robots, sitemap, social-preview, and factual WebSite
-  metadata; `?u=` pass URLs change to `noindex,nofollow` in the browser and retain
-  the canonical root. The non-deployed [SEO Crumb Saver operating model](config/seo-crumb-saver-operating-model.md)
+  metadata. The non-deployed [SEO Crumb Saver operating model](config/seo-crumb-saver-operating-model.md)
   requires human review of aggregate visibility and prohibits tracking, scraping,
   credentials, rank manipulation, and automatic publishing.
 
@@ -77,6 +74,18 @@ curation policy. It identifies available local public paths, unavailable areas,
 external exits, the privacy boundary, and the human-only process for considering
 eligible original or permitted public material. It does not authorize
 collection, automated intake, publication, GitHub actions, or merges.
+
+### Companion repository reconciliation
+
+Universe is the single canonical public bundle. The Sunshine repository is
+recorded only as a public source/provenance reference pending an owner-confirmed
+reuse grant; its code, text, imagery, configuration, and legacy Pages fallback
+are not imported or linked as a canonical destination. WHNutz and the merch
+platform remain separate: their differing source material, operational
+configuration, authentication, and commerce surfaces require explicit rights,
+privacy, safety, and owner review before any future sanitized derivative can be
+considered. No companion repository implies that an internal asset, storefront,
+submission channel, or service is live.
 
 ## Operations tooling
 

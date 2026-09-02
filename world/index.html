@@ -6,8 +6,10 @@
     <title>Whole DoNuts | +U</title>
     <meta
       name="description"
-      content="Enter the Whole DoNuts field and begin the +U adventure."
+      content="An optional visual Whole Donuts exploration with temporary page-only figure settings."
     />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://wenevergonnaclose.com/world/" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -20,22 +22,23 @@
 
       <header class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">github.com/thewholedonuts-beep/Whole-Donuts</p>
+          <p class="eyebrow">Whole Donuts Universe · optional visual studio</p>
           <h1>Walk into the field. Find your place in the +U.</h1>
           <p class="lede">
             A crowd of obvious stick figures gathers at the edge of something
             warm, strange, and alive. The track goes underground. The invitation
             does not explain itself.
           </p>
+          <p class="panel-copy">Visual choices stay only on this page until you reset or reload. Nothing is submitted, saved, or sent.</p>
           <div class="cta-row">
             <button id="enterButton" class="primary-button" type="button">
               Step underground +
             </button>
-            <a id="continueButton" class="continue-button" href="../#home" target="_parent" hidden>
-              Enter the community table
+            <a id="continueButton" class="continue-button" href="../#the-table" target="_parent">
+              Return to The Table
             </a>
             <p id="progressText" class="progress-text">
-              The first figure is waiting for you.
+              The field is ready to explore.
             </p>
           </div>
         </div>
@@ -174,18 +177,19 @@
 
         <section class="unlock-panel" aria-labelledby="unlock-title">
           <div class="panel-heading">
-            <p class="eyebrow">after completion</p>
-            <h2 id="unlock-title">Unlock a special homepage figure.</h2>
+            <p class="eyebrow">temporary visual play</p>
+            <h2 id="unlock-title">Make a temporary figure.</h2>
           </div>
           <p class="panel-copy">
-            Completion reveals a small customization ritual. The figure stays
-            universal, but its stance can become yours.
+            Explore a small customization ritual after stepping underground. The
+            figure stays universal, and its visual settings clear when you reset
+            or reload this page.
           </p>
 
           <div id="unlockState" class="unlock-state locked">
             <div class="unlock-copy">
               <strong>Locked</strong>
-              <span>Take the first step underground to wake it up.</span>
+              <span>Step underground to explore the temporary visual settings.</span>
             </div>
 
             <form id="customizer" class="customizer" autocomplete="off">
@@ -201,14 +205,11 @@
                 Accent glow
                 <input id="accentInput" name="accent" type="color" value="#ffb95e" />
               </label>
-              <label>
-                What are you creating?
-                <input id="creationInput" name="creation" type="text" maxlength="100" placeholder="Name your next positive project" />
-              </label>
+              <button id="resetButton" class="primary-button" type="button">Reset page choices</button>
             </form>
 
             <div class="home-figure-card">
-              <p>Your homepage figure</p>
+              <p>Your temporary figure</p>
               <div id="customFigure" class="custom-figure" aria-hidden="true"></div>
             </div>
           </div>

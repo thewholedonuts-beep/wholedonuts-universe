@@ -21,6 +21,20 @@ or an unverified external destination.
 **Optional next choices:** Open a guide, explore the World, visit a community
 path, or return later. No action is required.
 
+### Privacy and route corrections
+
+**What changed:** The site no longer creates a persistent +U return pass or
+visit record. The optional World uses only temporary page-memory visual
+settings, includes a reset control, and returns to The Table through the
+canonical same-site route. Gateway destination messages now remain visible
+after routing.
+
+**Why it matters:** No public interaction creates a visitor identifier,
+profile, stored free-text response, or hidden routing dead end.
+
+**Optional next choices:** Use the gateway, explore the World, reset its
+temporary settings, or follow any present on-site path.
+
 ### Pages delivery
 
 **What changed:** The Pages workflow deploys the reviewed static bundle only

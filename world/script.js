@@ -6,11 +6,11 @@ const unlockState = document.getElementById("unlockState");
 const customizer = document.getElementById("customizer");
 const poseSelect = document.getElementById("poseSelect");
 const accentInput = document.getElementById("accentInput");
-const creationInput = document.getElementById("creationInput");
-const continueButton = document.getElementById("continueButton");
+const resetButton = document.getElementById("resetButton");
 const pageShell = document.querySelector(".page-shell");
 
-const storageKey = "whole-donuts-landing-state";
+const defaultState = { completed: false, pose: "open", accent: "#ffb95e" };
+let state = { ...defaultState };
 const fieldFigures = [
   { x: 6, y: 50, scale: 1, tilt: "-4deg", pose: "open" },
   { x: 14, y: 26, scale: 0.88, tilt: "2deg", pose: "signal" },
@@ -96,70 +96,34 @@ function renderCustomFigure(state) {
   customFigure.appendChild(figure.firstElementChild);
 }
 
-function saveState(state) {
-  localStorage.setItem(storageKey, JSON.stringify(state));
-}
-
-function applyUrlState(state) {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("completed") === "1") {
-    state.completed = true;
-  }
-
-  const pose = params.get("pose");
-  if (pose && poseMap[pose]) {
-    state.pose = pose;
-  }
-
-  const accent = params.get("accent");
-  if (accent && /^#[0-9a-f]{6}$/i.test(accent)) {
-    state.accent = accent;
-  }
-
-  return state;
-}
-
-function readState() {
-  const fallback = { completed: false, pose: "open", accent: "#ffb95e", creation: "" };
-  try {
-    const saved = JSON.parse(localStorage.getItem(storageKey));
-    return applyUrlState({ ...fallback, ...saved });
-  } catch {
-    return applyUrlState(fallback);
-  }
-}
-
-function applyState(state) {
+function applyState() {
   poseSelect.value = state.pose;
   accentInput.value = state.accent;
-  creationInput.value = state.creation || "";
+  poseSelect.disabled = !state.completed;
+  accentInput.disabled = !state.completed;
   progressText.textContent = state.completed
-    ? state.creation
-      ? `The tunnel remembers you. "${state.creation}" is now part of the field.`
-      : "The tunnel remembers you. Your figure is now part of the field."
-    : "The first figure is waiting for you.";
+    ? "The field is open. Your visual choices stay on this page until you reset or reload."
+    : "The field is ready to explore.";
   unlockState.classList.toggle("locked", !state.completed);
   pageShell.classList.toggle("completed", state.completed);
-  continueButton.hidden = !state.completed;
   renderCustomFigure(state);
 }
 
 function completeJourney() {
-  const state = readState();
   state.completed = true;
-  saveState(state);
-  applyState(state);
+  applyState();
 }
 
 enterButton.addEventListener("click", completeJourney);
 customizer.addEventListener("input", () => {
-  const state = readState();
   state.pose = poseSelect.value;
   state.accent = accentInput.value;
-  state.creation = creationInput.value.trim();
-  saveState(state);
-  applyState(state);
+  applyState();
+});
+resetButton.addEventListener("click", () => {
+  state = { ...defaultState };
+  applyState();
 });
 
 renderField();
-applyState(readState());
+applyState();

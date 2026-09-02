@@ -4,7 +4,6 @@ const stores={
   awd:['Explore Whole Donuts','#awd'],
   tnc:['Explore The Nurtured Chef','#tnc']
 };
-const memoryStore=new Map();
 const reviewQueueList=document.querySelector('#review-queue-list');
 const reviewQueueExclusions=document.querySelector('#review-queue-exclusions');
 const reviewQueueFilter=document.querySelector('#review-queue-filter');
@@ -188,16 +187,6 @@ if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=
   }
 });
 
-function safeGet(key){
-  try{return localStorage.getItem(key)}catch(e){return memoryStore.has(key)?memoryStore.get(key):null}
-}
-function safeSet(key,value){
-  try{localStorage.setItem(key,value)}catch(e){memoryStore.set(key,String(value))}
-}
-function safeRemove(key){
-  try{localStorage.removeItem(key)}catch(e){memoryStore.delete(key)}
-}
-
 const journeySteps=[...document.querySelectorAll('[data-journey-step]')];
 const journeyTitle=document.querySelector('#entry-journey-title');
 const journeyProgress=document.querySelector('#entry-progress');
@@ -205,8 +194,9 @@ const journeyBack=document.querySelector('#journey-back');
 const journeyRestart=document.querySelector('#journey-restart');
 const journeyCompanions=[...document.querySelectorAll('.journey-companion')];
 const journeyDestinationStatus=document.querySelector('#journey-destination-status');
+const counter=document.querySelector('#community-counter');
 const journeyTitles={
-  1:'Choose a broad side.',
+  1:'Choose a broad age range.',
   2:'Choose a face for this moment.',
   3:'Choose what would help most.',
   4:'Choose where to try first.'
@@ -262,10 +252,14 @@ document.querySelectorAll('[data-entry-destination]').forEach(button=>button.add
   if(journeyDestinationStatus){
     journeyDestinationStatus.textContent=button.dataset.entryMessage;
     journeyDestinationStatus.hidden=false;
-    target.before(journeyDestinationStatus);
+    if(target.classList.contains('anchor-target'))target.after(journeyDestinationStatus);
+    else target.prepend(journeyDestinationStatus);
   }
   restartJourney();
   location.hash=button.dataset.entryDestination;
+  if(journeyDestinationStatus){
+    requestAnimationFrame(()=>journeyDestinationStatus.scrollIntoView({behavior:'smooth',block:'start'}));
+  }
 }));
 if(journeyBack)journeyBack.addEventListener('click',()=>{
   if(journeyState.step===2)journeyState.side=null;
@@ -330,102 +324,6 @@ const dateLabel=document.querySelector('#daily-date');
 if(dateLabel)dateLabel.textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(new Date());
 
 if(menuButtons.length)openCourse('bits');
-
-const passButton=document.querySelector('#make-pass');
-const passCard=document.querySelector('#pass-card');
-const passName=document.querySelector('#pass-name');
-const passLink=document.querySelector('#open-pass-link');
-const copyPassLink=document.querySelector('#copy-pass-link');
-const passHelp=document.querySelector('#pass-help');
-let displayedPass=null;
-// +U passes use the generated format +U-<STAMP>-<4 CHAR SUFFIX>, where STAMP is a timestamp-derived base36 token.
-function validPass(value){
-  return typeof value==='string'&&/^\+U-[A-Z0-9]{1,32}-[A-Z0-9]{4}$/.test(value);
-}
-function passUrl(pass){
-  return 'https://wenevergonnaclose.com/?u='+encodeURIComponent(pass);
-}
-function syncPassFromQuery(){
-  const params=new URLSearchParams(location.search);
-  const incoming=params.get('u');
-  if(!incoming)return 'none';
-  // A +U pass is only a device-local return link and must never become a target identifier.
-  const robots=document.querySelector('#page-robots');
-  if(robots)robots.content='noindex,nofollow';
-  const pass=incoming.trim();
-  if(!validPass(pass))return 'invalid';
-  const existing=safeGet('plusu-pass');
-  let current=existing;
-  if(current&&!validPass(current)){
-    safeRemove('plusu-pass');
-    current=null;
-  }
-  if(current&&current!==pass){
-    console.info('Ignoring incoming +U pass because this browser already has a different saved pass.');
-    return 'kept-existing';
-  }
-  safeSet('plusu-pass',pass);
-  safeSet('plusu-last-visit',new Date().toISOString());
-  return 'restored';
-}
-const passRestoreState=syncPassFromQuery();
-function getPass(){
-  let pass=safeGet('plusu-pass');
-  if(pass&&!validPass(pass)){
-    safeRemove('plusu-pass');
-    pass=null;
-  }
-  if(!pass){
-    const stamp=Date.now().toString(36).toUpperCase();
-    const spice=Math.random().toString(36).slice(2,6).toUpperCase();
-    pass='+U-'+stamp+'-'+spice;
-    safeSet('plusu-pass',pass);
-  }
-  return pass;
-}
-function renderPass(){
-  if(!passCard||!passName)return;
-  const pass=getPass();
-  const url=passUrl(pass);
-  displayedPass=pass;
-  passName.textContent=pass;
-  if(passLink)passLink.href=url;
-  passCard.hidden=false;
-  if(passButton)passButton.textContent='Refresh local +U return link';
-  if(copyPassLink)copyPassLink.textContent='Copy my private +U link';
-  if(passHelp){
-    passHelp.textContent=passRestoreState==='restored'
-      ?'This browser restored your +U pass from a private link. It stays local to this browser.'
-      :passRestoreState==='kept-existing'
-        ?'This browser kept its existing +U pass. It stays local to this browser.'
-        :'This private return link stays local to this browser. It is not an account, identity, or profile.';
-  }
-  safeSet('plusu-last-visit',new Date().toISOString());
-  if(passRestoreState==='restored'&&counter&&!counter.hidden){
-    passCard.scrollIntoView({behavior:'smooth',block:'nearest'});
-  }
-}
-if(passButton)passButton.addEventListener('click',renderPass);
-if(validPass(safeGet('plusu-pass')))renderPass();
-if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
-  if(!displayedPass)renderPass();
-  if(!displayedPass){
-    copyPassLink.textContent='Copy unavailable';
-    return;
-  }
-  const pass=displayedPass;
-  const url=passUrl(pass);
-  try{
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      await navigator.clipboard.writeText(url);
-      copyPassLink.textContent='Link copied';
-    }else{
-      copyPassLink.textContent='Copy unavailable';
-    }
-  }catch(e){
-    copyPassLink.textContent='Copy unavailable';
-  }
-});
 
 addEventListener('hashchange',()=>syncBranch({focus:true}));
 syncBranch({focus:location.hash.length>1});

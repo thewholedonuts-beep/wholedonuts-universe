@@ -22,11 +22,12 @@ material.
 
 ## Privacy and safety boundary
 
-Visitor interactions are browser-local by default. The public bundle must not
-collect or request names, email addresses, face images, photos, exact age or
-birth date, location, sensitive data, repository source contents, secrets, or
-operational configuration. The gateway's face choices are accessible text
-equivalents for simple visual marks, not image capture or facial data.
+Gateway and World selections exist only in temporary page memory and clear on
+reset, skip, routing onward, or reload. The public bundle must not collect or
+request names, email addresses, face images, photos, exact age or birth date,
+location, sensitive data, repository source contents, secrets, or operational
+configuration. The gateway's face choices are accessible text equivalents for
+simple visual marks, not image capture or facial data.
 
 Do not add analytics, tracking, accounts, profiling, network scanning,
 automatic content intake, automatic publication, automatic GitHub actions, or
@@ -38,6 +39,25 @@ Future ecosystem and store domains are not public destinations unless an owner
 verifies their availability, ownership, content, privacy, and safety. Until
 then, any reference is a non-clickable future owner-verified route, never a
 redirect or commerce claim.
+
+## Companion repository reconciliation
+
+Universe is the only canonical public bundle and
+`wenevergonnaclose.com` is its only canonical public entry. This
+reconciliation records source boundaries without importing companion source
+contents or representing internal material as live:
+
+| Companion scope | Reconciliation decision | Owner action before any future public use |
+|---|---|---|
+| `wholedonuts-sunshine` public repository | Metadata and provenance only. Its repository has no detected license or documented reuse grant, so its text, code, imagery, configuration, Pages fallback, and templates are not copied or treated as canonical. | Confirm the original source and explicit reuse scope, then approve a separately reviewed derivative if appropriate. |
+| `WHNutz` | Excluded pending rights, privacy, safety, and provenance review. Canonical templates that happen to match are already shipped from Universe; differing source bundles, creative assets, funnel, authentication, and operations material are not migrated. | Record a written rights and safety decision for any proposed sanitized derivative. |
+| `wholedonuts-merch-platform` | Excluded from the public bundle. No verified public HTTPS storefront is configured; dashboard, catalog, order, provider, API, deployment, and asset surfaces are not public routes. | Verify a live destination, ownership, rights, privacy, operational readiness, and truthful consumer terms before considering a clearly labeled link. |
+
+The public site may cite the [Sunshine repository](https://github.com/thewholedonuts-beep/wholedonuts-sunshine)
+only as an attributable source reference. It must keep the canonical site and
+same-site routes as the visitor destination, never an older companion Pages
+deployment. This does not imply that every internal asset or capability is
+available to the public.
 
 ## Human-reviewed source curation
 

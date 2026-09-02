@@ -78,16 +78,16 @@ window.WHNUTZ_REVIEW_QUEUE_EXCLUSIONS=[
   {
     source:'WHNutz public-tracked inventory',
     reviewStatus:'excluded pending rights and privacy review',
-    reason:'No high-confidence metadata-only candidates were found. The inventory lacks explicit reuse rights and may contain operational, contact, payment, or privacy concerns.'
+    reason:'The three matching +U templates are already represented by canonical Universe metadata. All differing source bundles, creative assets, operations, authentication, contact, payment, and privacy surfaces remain excluded until explicit rights and safety review.'
   },
   {
-    source:'Sunshine logo.svg and stick-figures.svg',
+    source:'Sunshine public-site content and creative assets',
     reviewStatus:'excluded pending rights grant',
-    reason:'A written asset-reuse grant is required before either creative asset can be eligible.'
+    reason:'The Sunshine repository has no detected license or documented reuse grant. Its code, text, Pages fallback, logo.svg, and stick-figures.svg are not copied or linked as canonical public content; only the listed metadata references remain pending owner review.'
   },
   {
     source:'Merch platform inventory',
     reviewStatus:'excluded pending sanitized derivative',
-    reason:'All merch content and assets remain excluded: functional code and operational materials lack reuse grants and can contain commercial, endpoint, infrastructure, provider, or security context.'
+    reason:'No verified public HTTPS storefront is configured. All merch code, assets, dashboard, catalog, order, provider, API, deployment, and operational materials remain excluded pending owner review of a sanitized derivative and a truthful live destination.'
   }
 ];
