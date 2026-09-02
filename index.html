@@ -15,10 +15,10 @@
     {"@context":"https://schema.org","@type":"WebSite","name":"Whole Donuts Universe","url":"https://wenevergonnaclose.com/","description":"A welcoming place for practical guides, creative exploration, and community paths."}
   </script>
   <title>Whole Donuts Universe | Find a useful next step</title>
-  <link rel="stylesheet" href="styles.css?v=universe-prototype1">
+  <link rel="stylesheet" href="styles.css?v=privacy-entry-1">
 </head>
 <body>
-  <a class="skip-link" href="#age-gate">Skip the figure field and choose an age path</a>
+  <a class="skip-link" href="#table">Skip onboarding and browse the table</a>
   <section class="universe-gateway" id="home" aria-labelledby="universe-gateway-title">
     <div class="entry-backdrop" aria-hidden="true">
       <div class="overflow-hand hand-left"><span></span><span></span><span></span><span></span></div>
@@ -42,99 +42,69 @@
           <a href="#tnc"><strong>The Nurtured Chef</strong><span>Visit the food and care path.</span></a>
           <a class="entry-guide-link" href="guide.html"><strong>How it fits together</strong><span>Open the short ecosystem guide.</span></a>
         </nav>
-        <section class="age-gate" id="age-gate" aria-labelledby="age-gate-title">
-          <h2 id="age-gate-title">Or choose a direction for a guided start.</h2>
-          <div class="figure-choice-grid" role="group" aria-label="Choose an anonymous entry path">
-            <button class="figure-choice" type="button" data-entry-choice="learn" aria-label="Learn">
-              <span class="figure-choice-art figure-choice-standing" aria-hidden="true"><span></span></span>
-              <span>Find a guide</span>
-            </button>
-            <button class="figure-choice" type="button" data-entry-choice="share" aria-label="Share from experience">
-              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
-              <span>Share what helped</span>
-            </button>
-            <button class="figure-choice" type="button" data-entry-choice="help" aria-label="Help">
-              <span class="figure-choice-art figure-choice-seated" aria-hidden="true"><span></span></span>
-              <span>Support the work</span>
-            </button>
-            <button class="figure-choice" type="button" data-entry-choice="explore" aria-label="Explore">
-              <span class="figure-choice-art figure-choice-reaching" aria-hidden="true"><span></span></span>
-              <span>Look around</span>
-            </button>
+        <section class="onboarding" id="onboarding" aria-labelledby="onboarding-title">
+          <p class="eyebrow" id="onboarding-progress">OPTIONAL WELCOME · 1 OF 4</p>
+          <h2 id="onboarding-title">Make a little space that feels like yours.</h2>
+          <p class="onboarding-privacy">These choices stay only in this browser. We never ask for a birth date, exact age, name, email, photo, location, or account. Nothing is sent anywhere.</p>
+          <div class="onboarding-step" data-onboarding-step="1">
+            <h3>Choose an age range only.</h3>
+            <div class="onboarding-option-grid" role="group" aria-label="Choose an age range">
+              <button type="button" data-age-range="Under 13">Under 13</button>
+              <button type="button" data-age-range="13 to 17">13 to 17</button>
+              <button type="button" data-age-range="18 or older">18 or older</button>
+              <button type="button" data-age-range="Rather not say">Rather not say</button>
+            </div>
           </div>
-          <p class="figure-choice-text">Choose a direction to receive a few optional suggestions. You can also use any of the direct links above.</p>
+          <div class="onboarding-step" data-onboarding-step="2" hidden>
+            <h3>Pick a stick-figure shape.</h3>
+            <div class="onboarding-option-grid avatar-options" role="group" aria-label="Choose a character shape">
+              <button type="button" data-avatar="standing"><span class="onboarding-figure standing" aria-hidden="true"></span>Standing</button>
+              <button type="button" data-avatar="reaching"><span class="onboarding-figure reaching" aria-hidden="true"></span>Reaching</button>
+              <button type="button" data-avatar="seated"><span class="onboarding-figure seated" aria-hidden="true"></span>Seated</button>
+            </div>
+          </div>
+          <div class="onboarding-step" data-onboarding-step="3" hidden>
+            <h3>Choose a simple expression.</h3>
+            <div class="onboarding-option-grid expression-options" role="group" aria-label="Choose an expression">
+              <button type="button" data-expression="smile"><span aria-hidden="true">:)</span>Smile</button>
+              <button type="button" data-expression="calm"><span aria-hidden="true">—</span>Calm</button>
+              <button type="button" data-expression="curious"><span aria-hidden="true">?</span>Curious</button>
+            </div>
+          </div>
+          <div class="onboarding-step" data-onboarding-step="4" hidden>
+            <h3>Choose one or more interests.</h3>
+            <p class="step-note">Choose any that fit today. This is only for your browser-local welcome.</p>
+            <div class="interest-options" role="group" aria-label="Choose interests">
+              <label><input type="checkbox" value="Creative making"> Creative making</label>
+              <label><input type="checkbox" value="Learning"> Learning</label>
+              <label><input type="checkbox" value="Food and care"> Food and care</label>
+              <label><input type="checkbox" value="Community"> Community</label>
+              <label><input type="checkbox" value="Nature and play"> Nature and play</label>
+            </div>
+            <div class="onboarding-actions">
+              <button type="button" id="onboarding-back">Back</button>
+              <button type="button" id="finish-onboarding">Open my welcome rewards</button>
+            </div>
+          </div>
+          <div class="onboarding-rewards" id="onboarding-rewards" hidden aria-live="polite">
+            <p class="eyebrow">FIRST-LEVEL REWARDS</p>
+            <h3>Your welcome set is unlocked.</h3>
+            <p id="onboarding-reward-copy"></p>
+            <div class="reward-grid">
+              <article class="reward-card"><span class="logo-reward" aria-hidden="true">+U</span><strong>Open-table logo</strong><span>A bright welcome mark.</span></article>
+              <article class="reward-card"><span class="badge-reward" id="avatar-reward" aria-hidden="true">+U</span><strong>Local welcome badge</strong><span>Made from your chosen shape.</span></article>
+              <article class="reward-card"><span class="expression-reward" id="expression-reward" aria-hidden="true"></span><strong>Expression card</strong><span>Your selected simple expression.</span></article>
+            </div>
+            <div class="onboarding-actions">
+              <a class="button primary" href="#table" id="browse-table">Browse the community table</a>
+              <button type="button" id="reset-onboarding">Clear local choices and start over</button>
+            </div>
+          </div>
+          <div class="onboarding-actions onboarding-skip">
+            <button type="button" id="skip-onboarding">Skip and browse without saving choices</button>
+          </div>
+          <p class="gateway-status" id="table-navigation-status" aria-live="polite">Onboarding is optional. Direct links above always work.</p>
         </section>
-        <div class="welcome-step" data-question="4" data-key="pace" hidden>
-          <p>Choose your pace.</p>
-          <div class="answer-grid">
-            <button type="button" data-answer="guided">Guide me</button>
-            <button type="button" data-answer="steady">I will take my time</button>
-          </div>
-        </div>
-        <section id="positive-path" hidden aria-live="polite">
-          <p>Create your positive path now. Press =U and let us guide you.</p>
-          <button type="button" id="begin-positive-path" aria-label="Begin my positive path">=U</button>
-        </section>
-        <section class="age-gate" id="age-eligibility" aria-labelledby="age-eligibility-title" hidden>
-          <h2 id="age-eligibility-title">Age eligibility</h2>
-          <p>This local age screen is not identity verification. A birth date is used only in this browser to choose an age-appropriate path, then cleared immediately.</p>
-          <form id="age-eligibility-form">
-            <label for="youth-birth-date">Birth date</label>
-            <input id="youth-birth-date" type="date" inputmode="numeric" aria-describedby="youth-age-note" required>
-            <p id="youth-age-note">It is not stored, sent, or attached to a profile, pass, or account.</p>
-            <button type="submit">Enter</button>
-          </form>
-          <div id="under-13-notice" hidden aria-live="polite">
-            <h3>This table is not set up for under 13.</h3>
-            <p>No birth date or other information was kept. Please ask a parent or guardian before using online community features.</p>
-            <button type="button" id="restart-age-gate">Start over</button>
-          </div>
-          <p id="age-gate-status" class="gateway-status" aria-live="polite"></p>
-        </section>
-        <section class="welcome-gate entry-welcome" id="welcome-gate" aria-labelledby="welcome-title" hidden>
-          <p class="eyebrow" id="welcome-progress">Question 1 of 3</p>
-          <h2 id="welcome-title">Three questions. One useful start.</h2>
-          <p id="youth-path-note" class="youth-path-note" hidden>Your youth path stays anonymous and low-data. Payment, store, member, and ambassador paths are not shown here.</p>
-          <div class="welcome-step" data-question="1" data-key="intent" hidden>
-            <p>What do you need right now?</p>
-            <div class="answer-grid">
-              <button type="button" data-answer="learn">Learn</button>
-              <button type="button" data-answer="share">Share from experience</button>
-              <button type="button" data-answer="help">Help</button>
-              <button type="button" data-answer="explore">Explore</button>
-            </div>
-          </div>
-          <div class="welcome-step" data-question="2" data-key="branch" hidden>
-            <p>Which experience feels relevant?</p>
-            <div class="answer-grid">
-              <button type="button" data-answer="awd">Whole Donuts</button>
-              <button type="button" data-answer="tnc">The Nurtured Chef</button>
-              <button type="button" data-answer="table">The shared community table</button>
-            </div>
-          </div>
-          <div class="welcome-step" data-question="3" data-key="entry" hidden>
-            <p>How would you like to begin?</p>
-            <div class="answer-grid">
-              <button type="button" data-answer="counter">Guided Counter</button>
-              <button type="button" data-answer="table">Shared Table</button>
-            </div>
-          </div>
-          <div class="welcome-result" id="welcome-result" aria-live="polite" hidden>
-            <strong>Your first useful start is ready.</strong>
-            <span></span>
-            <div class="entry-result-actions">
-              <a class="button primary" id="outcome-primary" href="#community-counter"></a>
-              <a class="button" id="outcome-next" href="#home"></a>
-            </div>
-            <div id="age-result-confirmation" class="age-result-confirmation" hidden aria-live="polite">
-              <p id="age-result-status" tabindex="-1"></p>
-              <button type="button" id="continue-to-outcome">Continue to your selected path</button>
-            </div>
-            <p class="progressive-next-note">Try something. Keep what helps. Choose what is next, change direction, reset, or leave. Nothing is required.</p>
-            <button type="button" id="restart-welcome">Ask me again</button>
-          </div>
-        </section>
-        <p class="gateway-status" id="table-navigation-status" aria-live="polite">Answer three questions to enter the table anonymously.</p>
       </div>
     </div>
   </section>
@@ -276,7 +246,7 @@
           <div class="new-school-actions">
             <a href="#template-library">Explore free +U learning guides</a>
             <a href="CRUMB_PROTOCOL.md" data-dashboard-effort="compass">Read the reviewed Crumb Protocol</a>
-            <a href="#welcome-gate">Start the anonymous welcome</a>
+            <a href="#onboarding">Start the anonymous welcome</a>
           </div>
           <p class="new-school-note">It is not enrollment, a credential, certification, identity requirement, financial opportunity, donation reward, or automated path. The Dashboard remains anonymous and local to this browser after the voluntary welcome.</p>
         </section>
@@ -522,7 +492,7 @@
       <p>Explore the Whole Donuts universe, community, and store. Come back to the Counter whenever you want another course.</p>
       <div class="actions">
         <a class="button primary" href="#home">Return to the +U gateway</a>
-        <a class="button primary" href="#welcome-gate">Start the Community welcome</a>
+        <a class="button primary" href="#onboarding">Start the Community welcome</a>
         <a class="button store" href="https://wholedonuts.buzz" target="_blank" rel="noopener noreferrer">Visit the Whole Donuts store ↗</a>
         <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
@@ -535,7 +505,7 @@
       <p>Choose the chef experience, the foundation, or the Nutur3d Chef store. Everything returns to the community table.</p>
       <div class="actions">
         <a class="button primary" href="#home">Return to the +U gateway</a>
-        <a class="button primary" href="#welcome-gate">Start the Community welcome</a>
+        <a class="button primary" href="#onboarding">Start the Community welcome</a>
         <a class="button store" href="https://thenutur3dchef.com" target="_blank" rel="noopener noreferrer">Visit the Nutur3d Chef store ↗</a>
         <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
       </div>
@@ -548,6 +518,6 @@
   <script src="auth-config.js"></script>
   <script src="storefront-config.js"></script>
   <script type="module" src="auth.js"></script>
-  <script src="app.js?v=universe-prototype1"></script>
+  <script src="app.js?v=privacy-entry-1"></script>
 </body>
 </html>

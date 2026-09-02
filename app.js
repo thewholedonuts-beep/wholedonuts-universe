@@ -265,6 +265,7 @@ function renderLaunchWindow(state=launchWindowState()){
 
 function resetLaunchPresentation(message){
   safeRemove(launchWindowKey);
+  resetDashboard();
   resetWelcome();
   donationPurposeInputs.forEach(input=>input.checked=false);
   syncDonationHub();
@@ -298,7 +299,7 @@ function completeLaunchInteraction(){
 }
 
 function isLaunchEligibleRoute(id){
-  return ['awd','tnc','donuts-new-school','welcome-gate','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
+  return ['awd','tnc','donuts-new-school','onboarding','plusu-dashboard','template-library','crumb-workshop','ambassador-path','community-counter'].includes(id);
 }
 function isYouthRestrictedRoute(id){
   return ['awd','tnc','ambassador-path','donation-access-hub','plusu-dashboard'].includes(id);
@@ -317,12 +318,7 @@ function focusRouteTarget(id){
 }
 
 function syncBranch({focus=false}={}){
-  let id=location.hash.slice(1);
-  if((ageMode==='youth'||ageMode==='under13')&&isYouthRestrictedRoute(id)){
-    id='table';
-    history.replaceState(null,'','#table');
-    if(navigationStatus)navigationStatus.textContent='This youth path stays with the low-data community table.';
-  }
+  const id=location.hash.slice(1);
   if(id&&id!=='home'&&id!=='age-gate')document.body.classList.add('entered');
   if(focus&&isLaunchEligibleRoute(id)&&!prepareLaunchInteraction())return;
   links.forEach(a=>a.classList.toggle('active',a.dataset.branch===id));
@@ -390,297 +386,143 @@ menuButtons.forEach((button,index)=>button.addEventListener('keydown',event=>{
 const dateLabel=document.querySelector('#daily-date');
 if(dateLabel)dateLabel.textContent=new Intl.DateTimeFormat(undefined,{weekday:'long',month:'long',day:'numeric'}).format(new Date());
 
-const gate=document.querySelector('#welcome-gate');
-const counter=document.querySelector('#community-counter');
-const steps=[...document.querySelectorAll('[data-question]')];
-const welcomeResult=document.querySelector('#welcome-result');
-const outcomePrimary=document.querySelector('#outcome-primary');
-const outcomeNext=document.querySelector('#outcome-next');
-const ageResultConfirmation=document.querySelector('#age-result-confirmation');
-const ageResultStatus=document.querySelector('#age-result-status');
-const continueToOutcome=document.querySelector('#continue-to-outcome');
-const ageGate=document.querySelector('#age-gate');
-const ageGateStatus=document.querySelector('#age-gate-status');
-const ageEligibility=document.querySelector('#age-eligibility');
-const youthAgeForm=document.querySelector('#age-eligibility-form');
-const youthBirthDate=document.querySelector('#youth-birth-date');
-const under13Notice=document.querySelector('#under-13-notice');
-const youthPathNote=document.querySelector('#youth-path-note');
-const positivePath=document.querySelector('#positive-path');
-const beginPositivePath=document.querySelector('#begin-positive-path');
-const welcomeAnswers={};
-let ageMode=null;
+const onboardingKey='plusu-entry-onboarding';
+const onboarding=document.querySelector('#onboarding');
+const onboardingSteps=[...document.querySelectorAll('[data-onboarding-step]')];
+const onboardingProgress=document.querySelector('#onboarding-progress');
+const onboardingRewards=document.querySelector('#onboarding-rewards');
+const onboardingRewardCopy=document.querySelector('#onboarding-reward-copy');
+const avatarReward=document.querySelector('#avatar-reward');
+const expressionReward=document.querySelector('#expression-reward');
+const onboardingBack=document.querySelector('#onboarding-back');
+const finishOnboarding=document.querySelector('#finish-onboarding');
+const skipOnboarding=document.querySelector('#skip-onboarding');
+const onboardingSkipActions=document.querySelector('.onboarding-skip');
+const resetOnboarding=document.querySelector('#reset-onboarding');
+const interestInputs=[...document.querySelectorAll('.interest-options input')];
+const onboardingChoices={ageRange:null,avatar:null,expression:null,interests:[]};
+const allowedAgeRanges=['Under 13','13 to 17','18 or older','Rather not say'];
+const allowedAvatars=['standing','reaching','seated'];
+const allowedExpressions=['smile','calm','curious'];
+const expressionMarks={smile:':)',calm:'—',curious:'?'};
 
-const counterCourses={
-  learn:'bites',
-  share:'bites',
-  help:'biggies',
-  explore:'bits'
-};
-const tableOutcomes={
-  learn:{
-    href:'#template-library',
-    action:'Open the +U Library',
-    detail:'Begin with the existing next-step template and guide.'
-  },
-  share:{
-    href:'#crumb-workshop',
-    action:'Open the reviewed Crumb Saver path',
-    detail:'Begin with the protocol, contribution template, and public contact guidance. This static site does not submit a crumb.'
-  },
-  help:{
-    href:'#ambassador-path',
-    action:'Open the Ambassador Path',
-    detail:'Begin with the existing community, skill, and project guidance without a promise of enrollment or benefit.'
-  },
-  explore:{
-    href:'world/',
-    action:'Open the Figure Studio',
-    detail:'Begin with the existing +U world and return to the table when ready.'
-  }
-};
-const youthTableOutcomes={
-  learn:tableOutcomes.learn,
-  share:{
-    href:'#template-library',
-    action:'Open the +U Library',
-    detail:'Begin with the existing share-a-crumb template. This youth path does not collect a submission.'
-  },
-  help:{
-    href:'#community-counter',
-    action:'Open the Community Counter',
-    detail:'Begin with the existing guided community learning menu without a payment or member path.'
-  },
-  explore:tableOutcomes.explore
-};
-const branchNext={
-  awd:{href:'#awd',label:'Next: open Whole Donuts'},
-  tnc:{href:'#tnc',label:'Next: open The Nurtured Chef'},
-  table:{href:'#donuts-new-school',label:'Next: open Donuts New School'}
-};
+function savedOnboardingChoices(){
+  const saved=safeGet(onboardingKey);
+  if(!saved)return null;
+  try{
+    const choices=JSON.parse(saved);
+    if(!choices||choices.v!==1||!allowedAgeRanges.includes(choices.ageRange)||!allowedAvatars.includes(choices.avatar)||!allowedExpressions.includes(choices.expression)||!Array.isArray(choices.interests))return null;
+    const interests=choices.interests.filter(interest=>interestInputs.some(input=>input.value===interest));
+    if(!interests.length)return null;
+    return {
+      ageRange:choices.ageRange,
+      avatar:choices.avatar,
+      expression:choices.expression,
+      interests
+    };
+  }catch(e){return null}
+}
 
-function showAgeGate(message=''){
-  ageMode=null;
-  document.body.classList.remove('adult-mode','youth-mode','entered');
-  if(ageGate)ageGate.hidden=false;
-  if(gate)gate.hidden=true;
-  steps.forEach(step=>step.hidden=true);
-  if(positivePath)positivePath.hidden=true;
-  if(ageEligibility)ageEligibility.hidden=true;
-  if(youthAgeForm)youthAgeForm.hidden=false;
-  if(under13Notice)under13Notice.hidden=true;
-  if(youthBirthDate)youthBirthDate.value='';
-  if(youthPathNote)youthPathNote.hidden=true;
-  if(ageGateStatus)ageGateStatus.textContent=message;
-}
-function beginWelcome(){
-  if(ageGate)ageGate.hidden=true;
-  if(gate)gate.hidden=false;
-  if(youthPathNote)youthPathNote.hidden=true;
-  showQuestion(1);
-  focusQuestion(1);
-}
-function showAgeEligibility(){
-  if(gate)gate.hidden=true;
-  if(ageEligibility)ageEligibility.hidden=false;
-  if(under13Notice)under13Notice.hidden=true;
-  if(youthBirthDate)youthBirthDate.value='';
-  if(ageGateStatus)ageGateStatus.textContent='';
-  if(youthBirthDate)youthBirthDate.focus();
-}
-function ageFromDate(value){
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return null;
-  const [year,month,day]=value.split('-').map(Number);
-  const date=new Date(year,month-1,day);
-  if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;
-  const today=new Date();
-  let age=today.getFullYear()-year;
-  if(today.getMonth()<month-1||(today.getMonth()===month-1&&today.getDate()<day))age-=1;
-  return age>=0?age:null;
-}
-document.querySelectorAll('[data-entry-choice]').forEach(button=>button.addEventListener('click',()=>{
-  welcomeAnswers.intent=button.dataset.entryChoice;
-  if(ageGate)ageGate.hidden=true;
-  if(gate)gate.hidden=false;
-  showQuestion(2);
-  focusQuestion(2);
-}));
-if(youthAgeForm)youthAgeForm.addEventListener('submit',event=>{
-  event.preventDefault();
-  const age=ageFromDate(youthBirthDate?youthBirthDate.value:'');
-  if(youthBirthDate){
-    youthBirthDate.value='';
-    youthBirthDate.blur();
+function showOnboardingStep(stepNumber,{focus=false}={}){
+  onboardingSteps.forEach(step=>step.hidden=Number(step.dataset.onboardingStep)!==stepNumber);
+  if(onboardingRewards)onboardingRewards.hidden=true;
+  if(onboardingSkipActions)onboardingSkipActions.hidden=false;
+  if(onboardingProgress)onboardingProgress.textContent='OPTIONAL WELCOME · '+stepNumber+' OF 4';
+  if(focus){
+    const step=onboardingSteps.find(item=>Number(item.dataset.onboardingStep)===stepNumber);
+    const button=step?step.querySelector('button,input'):null;
+    if(button)button.focus();
   }
-  if(age===null){
-    if(ageGateStatus)ageGateStatus.textContent='Enter a valid birth date to calculate eligibility. It was not kept.';
+}
+
+function renderChoiceStates(){
+  document.querySelectorAll('[data-age-range]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.ageRange===onboardingChoices.ageRange)));
+  document.querySelectorAll('[data-avatar]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.avatar===onboardingChoices.avatar)));
+  document.querySelectorAll('[data-expression]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.expression===onboardingChoices.expression)));
+  interestInputs.forEach(input=>input.checked=onboardingChoices.interests.includes(input.value));
+}
+
+function renderOnboardingRewards({focus=false}={}){
+  onboardingSteps.forEach(step=>step.hidden=true);
+  if(onboardingRewards)onboardingRewards.hidden=false;
+  if(onboardingSkipActions)onboardingSkipActions.hidden=true;
+  if(onboardingProgress)onboardingProgress.textContent='OPTIONAL WELCOME · COMPLETE';
+  if(onboardingRewardCopy)onboardingRewardCopy.textContent='Your '+onboardingChoices.avatar+' figure and '+onboardingChoices.expression+' expression unlocked these three local visual rewards. Interests selected: '+onboardingChoices.interests.join(', ')+'.';
+  if(avatarReward)avatarReward.dataset.avatar=onboardingChoices.avatar;
+  if(expressionReward)expressionReward.textContent=expressionMarks[onboardingChoices.expression];
+  if(focus&&document.querySelector('#browse-table'))document.querySelector('#browse-table').focus();
+}
+
+function saveOnboardingChoices(){
+  safeSet(onboardingKey,JSON.stringify({v:1,...onboardingChoices}));
+}
+
+function finishEntryOnboarding(){
+  if(!onboardingChoices.interests.length){
+    if(navigationStatus)navigationStatus.textContent='Choose at least one interest, or use Skip to browse without saving choices.';
+    if(interestInputs[0])interestInputs[0].focus();
     return;
   }
-  if(age<13){
-    ageMode='under13';
-    youthAgeForm.hidden=true;
-    if(under13Notice)under13Notice.hidden=false;
-    if(ageGateStatus)ageGateStatus.textContent='The birth date was used only for this local calculation and was cleared.';
-    return;
-  }
-  ageMode=age>17?'adult':'youth';
-  document.body.classList.toggle('adult-mode',ageMode==='adult');
-  document.body.classList.toggle('youth-mode',ageMode==='youth');
-  if(ageEligibility)ageEligibility.hidden=true;
-  if(youthPathNote)youthPathNote.hidden=ageMode!=='youth';
-  finishWelcome({ageConfirmed:true});
-});
-const restartAgeGate=document.querySelector('#restart-age-gate');
-if(restartAgeGate)restartAgeGate.addEventListener('click',()=>showAgeGate());
-
-function showQuestion(number){
-  steps.forEach(step=>step.hidden=Number(step.dataset.question)!==number);
-  const progress=document.querySelector('#welcome-progress');
-  if(progress)progress.textContent=number<=4?'Touch '+number+' of 4':'Your positive path is ready';
-}
-function focusQuestion(number){
-  const step=steps.find(item=>Number(item.dataset.question)===number);
-  const button=step&&step.querySelector('button');
-  if(button)button.focus();
-}
-function finishWelcome({scroll=true,ageConfirmed=false}={}){
-  const branch=welcomeAnswers.branch;
-  const intent=welcomeAnswers.intent||'explore';
-  const entry=welcomeAnswers.entry||'counter';
-  const youth=ageMode==='youth';
-  const course=counterCourses[intent]||'bits';
-  const outcome=entry==='counter'
-    ?{
-      href:'#community-counter',
-      action:'Open the guided Counter',
-      detail:'Begin the existing '+course.toUpperCase()+' menu course for '+intent+'.'
-    }
-    :(youth?youthTableOutcomes:tableOutcomes)[intent];
-  openCourse(course);
-  if(youth)safeRemove('plusu-welcome');else saveJourney();
-  gate.classList.add('complete');
-  steps.forEach(step=>step.hidden=true);
-  welcomeResult.hidden=false;
-  counter.hidden=false;
-  if(youth){
-    if(dashboard)dashboard.hidden=true;
-  }else beginDashboard();
+  saveOnboardingChoices();
   document.body.classList.add('entered');
-  const branchWords=branch==='awd'?'Whole Donuts':branch==='tnc'?'The Nurtured Chef':'the shared community table';
-  welcomeResult.querySelector('strong').textContent=outcome.action+'.';
-  welcomeResult.querySelector('span').textContent=outcome.detail+' Your selected experience: '+branchWords+'.';
-  if(outcomePrimary){
-    outcomePrimary.href=outcome.href;
-    outcomePrimary.textContent=outcome.action;
-  }
-  if(outcomeNext){
-    const next=youth
-      ?{href:'#table',label:'Next: stay with the shared community table'}
-      :(branchNext[branch]||branchNext.table);
-    outcomeNext.href=next.href;
-    outcomeNext.textContent=next.label;
-    outcomeNext.hidden=false;
-  }
-  if(ageResultConfirmation)ageResultConfirmation.hidden=!ageConfirmed;
-  if(ageResultStatus&&ageConfirmed)ageResultStatus.textContent='Age path selected locally. Your birth date was cleared and your selected path is ready.';
-  showQuestion(5);
-  if(scroll){
-    welcomeResult.scrollIntoView({behavior:'smooth',block:'center'});
-    focusRenderedOutcome();
-  }
+  renderOnboardingRewards({focus:true});
+  if(navigationStatus)navigationStatus.textContent='Your browser-local welcome rewards are ready. You can browse or clear them at any time.';
 }
-function focusRenderedOutcome(){
-  const target=outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')?outcomePrimary:null;
-  const fallback=continueToOutcome&&continueToOutcome.isConnected&&!continueToOutcome.hidden&&!continueToOutcome.disabled?continueToOutcome:null;
-  const focus=()=>{
-    if(target)target.focus({preventScroll:true});
-    if(target&&document.activeElement===target)return;
-    if(fallback)fallback.focus({preventScroll:true});
-  };
-  requestAnimationFrame(()=>requestAnimationFrame(focus));
-  setTimeout(focus,0);
-  setTimeout(focus,50);
-}
-if(continueToOutcome)continueToOutcome.addEventListener('click',()=>{
-  if(outcomePrimary&&outcomePrimary.isConnected&&!outcomePrimary.hidden&&!outcomePrimary.matches(':disabled')){
-    outcomePrimary.focus({preventScroll:true});
-    outcomePrimary.click();
-  }
-});
-function saveJourney(){
-  const journey={
-    branch:welcomeAnswers.branch||'table',
-    course:counterCourses[welcomeAnswers.intent]||'bits',
-    intent:welcomeAnswers.intent||'explore'
-  };
-  safeSet('plusu-welcome',JSON.stringify(journey));
-  renderJourneyOffers(journey);
-  dispatchEvent(new CustomEvent('plusu:journey',{detail:journey}));
-}
-function renderJourneyOffers(journey){
-  if(!journeyOfferTitle||!journeyOfferCopy)return;
-  const branch=journey.branch==='awd'?'Whole Donuts':journey.branch==='tnc'?'The Nurtured Chef':'+U';
-  const intent={
-    learn:'a practical resource to explore',
-    share:'a reviewed way to carry useful knowledge forward',
-    help:'a way to support the community',
-    explore:'room to look around at your own pace'
-  }[journey.intent]||'a next step that fits today';
-  journeyOfferTitle.textContent=branch+' picks, made for your '+journey.course+' appetite.';
-  journeyOfferCopy.textContent='Try something, keep what helps, and choose what is next. Start with '+intent+' whenever you are; nothing is required.';
-  renderVirtualStore(journey,branch,intent);
-}
-function renderVirtualStore(journey,branch,intent){
-  if(!virtualStoreTitle||!virtualStoreCopy||!featuredProductTitle||!featuredProductCopy)return;
-  const featured={
-    learn:['Open Water Poster','A calm wall piece for keeping a good question close.'],
-    share:['Table Tote','For tools, notes, and the work you are ready to make real.'],
-    help:['4 ALL Everyday Tee','A soft, simple way to show that there is room at the table.'],
-    explore:['Counter Mug','For slow starts, fresh air, and finding your next step at your own pace.']
-  }[journey.intent]||['Everyday Tee','Soft, simple, and ready for the long way home.'];
-  virtualStoreTitle.textContent='Made by +U, 4 ALL - a little '+branch+' for your '+journey.course+' appetite.';
-  virtualStoreCopy.textContent='Since you came here for '+intent+', we pulled a few gentle ideas toward that direction. Browse at your own pace; this is a future Shopify + Printful collection, with no merchandise order or payment collected here.';
-  featuredProductTitle.textContent=featured[0];
-  featuredProductCopy.textContent=featured[1];
-  if(templateLibraryCopy){
-    templateLibraryCopy.textContent='You said you came for '+intent+'. Start with a guide, make it your own, and keep only what helps. The library grows as the community leaves useful crumbs.';
-  }
-}
-document.querySelectorAll('[data-answer]').forEach(button=>{
-  button.addEventListener('click',()=>{
-    if(!prepareLaunchInteraction())return;
-    const step=button.closest('[data-question]');
-    welcomeAnswers[step.dataset.key]=button.dataset.answer;
-    const next=Number(step.dataset.question)+1;
-    if(next>4){
-      steps.forEach(step=>step.hidden=true);
-      if(positivePath)positivePath.hidden=false;
-      if(beginPositivePath)beginPositivePath.focus();
-    }
-    else{
-      showQuestion(next);
-      focusQuestion(next);
-    }
-    completeLaunchInteraction();
-  });
-});
-
-if(menuButtons.length)openCourse('bits');
-showAgeGate();
 
 function resetWelcome(){
-  safeRemove('plusu-welcome');
-  safeRemove(dashboardKey);
-  Object.keys(welcomeAnswers).forEach(key=>delete welcomeAnswers[key]);
-  welcomeResult.hidden=true;
-  counter.hidden=true;
-  if(dashboard)dashboard.hidden=true;
-  gate.classList.remove('complete');
-  showAgeGate();
-  ageGate.scrollIntoView({behavior:'smooth'});
+  safeRemove(onboardingKey);
+  onboardingChoices.ageRange=null;
+  onboardingChoices.avatar=null;
+  onboardingChoices.expression=null;
+  onboardingChoices.interests=[];
+  renderChoiceStates();
+  showOnboardingStep(1);
+  document.body.classList.remove('entered');
+  if(navigationStatus)navigationStatus.textContent='Local welcome choices and rewards were cleared. Nothing was sent anywhere.';
+  if(onboarding){
+    onboarding.scrollIntoView({behavior:'smooth',block:'start'});
+    const firstChoice=document.querySelector('[data-age-range]');
+    if(firstChoice)firstChoice.focus({preventScroll:true});
+  }
 }
-const restart=document.querySelector('#restart-welcome');
-if(restart)restart.addEventListener('click',resetWelcome);
+
+document.querySelectorAll('[data-age-range]').forEach(button=>button.addEventListener('click',()=>{
+  onboardingChoices.ageRange=button.dataset.ageRange;
+  renderChoiceStates();
+  showOnboardingStep(2,{focus:true});
+}));
+document.querySelectorAll('[data-avatar]').forEach(button=>button.addEventListener('click',()=>{
+  onboardingChoices.avatar=button.dataset.avatar;
+  renderChoiceStates();
+  showOnboardingStep(3,{focus:true});
+}));
+document.querySelectorAll('[data-expression]').forEach(button=>button.addEventListener('click',()=>{
+  onboardingChoices.expression=button.dataset.expression;
+  renderChoiceStates();
+  showOnboardingStep(4,{focus:true});
+}));
+interestInputs.forEach(input=>input.addEventListener('change',()=>{
+  onboardingChoices.interests=interestInputs.filter(item=>item.checked).map(item=>item.value);
+}));
+if(onboardingBack)onboardingBack.addEventListener('click',()=>showOnboardingStep(3,{focus:true}));
+if(finishOnboarding)finishOnboarding.addEventListener('click',finishEntryOnboarding);
+if(skipOnboarding)skipOnboarding.addEventListener('click',()=>{
+  document.body.classList.add('entered');
+  if(navigationStatus)navigationStatus.textContent='Browsing without saving welcome choices.';
+  location.hash='table';
+});
+if(resetOnboarding)resetOnboarding.addEventListener('click',resetWelcome);
+
+if(menuButtons.length)openCourse('bits');
+const savedChoices=savedOnboardingChoices();
+if(savedChoices){
+  Object.assign(onboardingChoices,savedChoices);
+  renderChoiceStates();
+  document.body.classList.add('entered');
+  renderOnboardingRewards();
+}else{
+  showOnboardingStep(1);
+}
 
 const passButton=document.querySelector('#make-pass');
 const passCard=document.querySelector('#pass-card');
@@ -797,5 +639,4 @@ if(copyPassLink)copyPassLink.addEventListener('click',async()=>{
 });
 
 addEventListener('hashchange',()=>syncBranch({focus:true}));
-if(beginPositivePath)beginPositivePath.addEventListener('click',showAgeEligibility);
 syncBranch({focus:location.hash.length>1});

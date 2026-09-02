@@ -10,7 +10,15 @@ The repository root contains the static GitHub Pages bundle for
 - `index.html`, `guide.html`, `styles.css`, and `app.js` provide the public
   Whole Donuts entry, optional ecosystem guide, and +U experience.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
-- The public site keeps its welcome choices, +U pass, and last-visit data in
+- The optional four-step welcome keeps only an age range, a simple original
+  stick-figure choice, an expression, selected interest categories, and its
+  visual welcome rewards in the visitor's browser under
+  `plusu-entry-onboarding`. It never asks for a birth date, exact age, name,
+  email, photo, location, or account, and sends nothing to a service. Visitors
+  can skip the welcome without saving choices or clear its local choices and
+  rewards at any time. Existing site links remain available without completing
+  the welcome.
+- The public site separately keeps its existing +U pass and last-visit data in
   the visitor's browser. A valid `?u=` link can restore a pass, and QR images
   are requested only when the visitor explicitly asks for one.
 
@@ -95,13 +103,10 @@ defines classification, preserve-before-remove provenance, reviewed learning
 loops, and staged legacy retirement. It prohibits automatic publishing,
 deletion, payment, credential import, and private-data import.
 
-## Anonymous +U Dashboard
+## Browser-local welcome rewards
 
-After the voluntary three-question welcome flow, the public entry can display
-an abstract, faceless +U figure. It stores only a minimal anonymous local
-accessory record in that browser and unlocks accessories through non-financial
-exploration of the entry experience. It does not create a sign-in, profile,
-unique identifier, server record, payment record, recipient tracking, or
-reward entitlement. Resetting the Dashboard removes that local progress and
-restarts the welcome flow; a +U pass remains a device-local return link, not an
-identity.
+Completing the optional range-only welcome unlocks original open-table,
+local-badge, and expression visual cards in that browser. These are not
+financial rewards, entitlements, referral credit, or a reason to provide an
+email. Clearing the welcome removes this local state; a +U pass remains a
+device-local return link, not an identity.
