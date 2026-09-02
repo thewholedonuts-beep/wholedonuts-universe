@@ -193,78 +193,154 @@ const journeyProgress=document.querySelector('#entry-progress');
 const journeyBack=document.querySelector('#journey-back');
 const journeyRestart=document.querySelector('#journey-restart');
 const journeyCompanions=[...document.querySelectorAll('.journey-companion')];
-const journeyDestinationStatus=document.querySelector('#journey-destination-status');
+const characterGroups=document.querySelector('#character-groups');
+const entryRouteTitle=document.querySelector('#entry-route-title');
+const entryRouteCopy=document.querySelector('#entry-route-copy');
+const entryRouteLink=document.querySelector('#entry-route-link');
 const counter=document.querySelector('#community-counter');
 const journeyTitles={
-  1:'Choose a broad age range.',
-  2:'Choose a face for this moment.',
-  3:'Choose what would help most.',
-  4:'Choose where to try first.'
+  1:'Choose a stick figure for today.',
+  2:'What would help most right now?',
+  3:'Here is a useful first route.'
 };
-const journeyVariants={
-  youth:['style-curious','style-bright','style-brave','style-playful','style-inventive','style-steady','style-hopeful','style-friendly','style-focused','style-growing','style-open','style-gentle','style-ready','style-explorer'],
-  adult:['style-grounded','style-reflective','style-resourceful','style-creative','style-patient','style-capable','style-courageous','style-welcoming','style-practical','style-forward','style-prepared','style-determined','style-connected','style-purposeful']
+const journeyCharacters={
+  youth:[
+    ['curious','Curious','style-curious'],['bright','Bright','style-bright'],['brave','Brave','style-brave'],['playful','Playful','style-playful'],['inventive','Inventive','style-inventive'],['steady','Steady','style-steady'],['hopeful','Hopeful','style-hopeful'],['friendly','Friendly','style-friendly'],['focused','Focused','style-focused'],['growing','Growing','style-growing'],['open','Open','style-open'],['gentle','Gentle','style-gentle'],['ready','Ready','style-ready'],['explorer','Explorer','style-explorer']
+  ],
+  adult:[
+    ['grounded','Grounded','style-grounded'],['reflective','Reflective','style-reflective'],['resourceful','Resourceful','style-resourceful'],['creative','Creative','style-creative'],['patient','Patient','style-patient'],['capable','Capable','style-capable'],['courageous','Courageous','style-courageous'],['welcoming','Welcoming','style-welcoming'],['practical','Practical','style-practical'],['forward','Forward','style-forward'],['prepared','Prepared','style-prepared'],['determined','Determined','style-determined'],['connected','Connected','style-connected'],['purposeful','Purposeful','style-purposeful']
+  ]
 };
-const journeyState={side:null,face:null,need:null,step:1};
+const journeyRoutes={
+  'next-step':{
+    title:'Start with the free +U course.',
+    copy:'Use the print-ready next-step, share-what-helped, and build-your-table worksheets at your own pace.',
+    href:'course.html',
+    linkText:'Open the free +U course'
+  },
+  'make-something':{
+    title:'Make something in +U World.',
+    copy:'Use the optional visual studio to explore a pose and color, then return to The Table whenever you want.',
+    href:'world/',
+    linkText:'Open +U World'
+  },
+  'shared-guide':{
+    title:'Start with the +U Library.',
+    copy:'Choose an editable public guide for a next step, a useful crumb, or a small community table.',
+    href:'#template-library',
+    linkText:'Open the +U Library'
+  }
+};
+const journeyState={side:null,character:null,variant:null,need:null,step:1};
 
 function setJourneyCompanion(){
-  if(!journeyState.side)return;
-  const variant=journeyVariants[journeyState.side][Math.max(0,journeyState.step-2)%journeyVariants[journeyState.side].length];
+  const variant=journeyState.variant||'';
   journeyCompanions.forEach(companion=>companion.className='journey-companion entry-variant '+variant);
+}
+
+function createJourneyFigure(){
+  const figure=document.createElement('span');
+  figure.className='entry-figure';
+  figure.setAttribute('aria-hidden','true');
+  ['figure-head','figure-body','figure-limb arm-left','figure-limb arm-right','figure-limb leg-left','figure-limb leg-right'].forEach(className=>{
+    const part=document.createElement('span');
+    part.className=className;
+    figure.append(part);
+  });
+  return figure;
+}
+
+function buildCharacterChoices(){
+  if(!characterGroups)return;
+  characterGroups.replaceChildren();
+  Object.entries(journeyCharacters).forEach(([side,characters])=>{
+    const group=document.createElement('section');
+    group.className='character-group character-group-'+side;
+    const title=document.createElement('h3');
+    title.textContent=side==='youth'?'Youth figures':'Adult figures';
+    const description=document.createElement('p');
+    description.textContent='Choose a visual starting point. This is not an age or identity record.';
+    const grid=document.createElement('div');
+    grid.className='character-grid';
+    characters.forEach(([id,label,variant])=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='character-choice '+variant;
+      button.dataset.entryCharacter=id;
+      button.dataset.entrySide=side;
+      button.dataset.entryVariant=variant;
+      button.setAttribute('aria-pressed','false');
+      button.setAttribute('aria-label',(side==='youth'?'Youth figure: ':'Adult figure: ')+label);
+      const visual=document.createElement('span');
+      visual.className='entry-variant';
+      visual.append(createJourneyFigure());
+      const text=document.createElement('span');
+      text.className='character-choice-label';
+      text.textContent=label;
+      button.append(visual,text);
+      grid.append(button);
+    });
+    group.append(title,description,grid);
+    characterGroups.append(group);
+  });
+}
+
+function selectJourneyCharacter(button){
+  journeyState.side=button.dataset.entrySide;
+  journeyState.character=button.dataset.entryCharacter;
+  journeyState.variant=button.dataset.entryVariant;
+  document.querySelectorAll('[data-entry-character]').forEach(choice=>choice.setAttribute('aria-pressed',String(choice===button)));
+  setJourneyCompanion();
+  showJourneyStep(2,{focus:true});
+}
+
+function showJourneyRoute(){
+  const route=journeyRoutes[journeyState.need];
+  if(!route)return;
+  if(entryRouteTitle)entryRouteTitle.textContent=route.title;
+  if(entryRouteCopy)entryRouteCopy.textContent=route.copy;
+  if(entryRouteLink){
+    entryRouteLink.href=route.href;
+    entryRouteLink.textContent=route.linkText;
+  }
 }
 
 function showJourneyStep(step,{focus=false}={}){
   journeyState.step=step;
   journeySteps.forEach(item=>item.hidden=Number(item.dataset.journeyStep)!==step);
-  if(journeyProgress)journeyProgress.textContent='STEP '+step+' OF 4';
+  if(journeyProgress)journeyProgress.textContent='STEP '+step+' OF 3';
   if(journeyTitle)journeyTitle.textContent=journeyTitles[step];
   if(journeyBack)journeyBack.hidden=step===1;
   setJourneyCompanion();
   if(focus){
     const activeStep=journeySteps.find(item=>Number(item.dataset.journeyStep)===step);
-    const choice=activeStep?activeStep.querySelector('button'):null;
+    const choice=activeStep?activeStep.querySelector('button,a'):null;
     if(choice)choice.focus();
   }
 }
 
 function restartJourney({focus=false}={}){
   journeyState.side=null;
-  journeyState.face=null;
+  journeyState.character=null;
+  journeyState.variant=null;
   journeyState.need=null;
+  document.querySelectorAll('[data-entry-character]').forEach(choice=>choice.setAttribute('aria-pressed','false'));
   showJourneyStep(1,{focus});
 }
 
-document.querySelectorAll('[data-entry-side]').forEach(button=>button.addEventListener('click',()=>{
-  journeyState.side=button.dataset.entrySide;
-  showJourneyStep(2,{focus:true});
-}));
-document.querySelectorAll('[data-entry-face]').forEach(button=>button.addEventListener('click',()=>{
-  journeyState.face=button.dataset.entryFace;
-  showJourneyStep(3,{focus:true});
-}));
 document.querySelectorAll('[data-entry-need]').forEach(button=>button.addEventListener('click',()=>{
   journeyState.need=button.dataset.entryNeed;
-  showJourneyStep(4,{focus:true});
-}));
-document.querySelectorAll('[data-entry-destination]').forEach(button=>button.addEventListener('click',()=>{
-  const target=document.getElementById(button.dataset.entryDestination);
-  if(!target)return;
-  if(journeyDestinationStatus){
-    journeyDestinationStatus.textContent=button.dataset.entryMessage;
-    journeyDestinationStatus.hidden=false;
-    if(target.classList.contains('anchor-target'))target.after(journeyDestinationStatus);
-    else target.prepend(journeyDestinationStatus);
-  }
-  restartJourney();
-  location.hash=button.dataset.entryDestination;
-  if(journeyDestinationStatus){
-    requestAnimationFrame(()=>journeyDestinationStatus.scrollIntoView({behavior:'smooth',block:'start'}));
-  }
+  showJourneyRoute();
+  showJourneyStep(3,{focus:true});
 }));
 if(journeyBack)journeyBack.addEventListener('click',()=>{
-  if(journeyState.step===2)journeyState.side=null;
-  if(journeyState.step===3)journeyState.face=null;
-  if(journeyState.step===4)journeyState.need=null;
+  if(journeyState.step===2){
+    journeyState.side=null;
+    journeyState.character=null;
+    journeyState.variant=null;
+    document.querySelectorAll('[data-entry-character]').forEach(choice=>choice.setAttribute('aria-pressed','false'));
+  }
+  if(journeyState.step===3)journeyState.need=null;
   showJourneyStep(journeyState.step-1,{focus:true});
 });
 if(journeyRestart)journeyRestart.addEventListener('click',()=>restartJourney({focus:true}));
@@ -273,6 +349,8 @@ document.querySelectorAll('[data-skip-gateway]').forEach(link=>link.addEventList
   restartJourney();
   if(counter)counter.hidden=false;
 }));
+buildCharacterChoices();
+document.querySelectorAll('[data-entry-character]').forEach(button=>button.addEventListener('click',()=>selectJourneyCharacter(button)));
 showJourneyStep(1);
 
 function focusRouteTarget(id){

@@ -99,7 +99,7 @@ body{
   position:relative;
   z-index:1;
   display:grid;
-  grid-template-columns:minmax(13rem,22rem) minmax(0,1fr);
+  grid-template-columns:minmax(0,1fr);
   align-items:center;
   gap:clamp(1.5rem,5vw,5rem);
   width:min(100%,88rem);
@@ -281,6 +281,33 @@ body{
 }
 .entry-journey h2{margin:0;font:700 clamp(1.8rem,4vw,3rem)/1 Georgia,serif}
 .journey-step{display:grid;justify-items:start;gap:1rem}
+.gateway-panels{display:none}
+.character-groups{display:grid;gap:1rem;width:100%}
+.character-group{padding:1rem;border:2px solid var(--ink);border-radius:1rem}
+.character-group-youth{background:#f5e5eb}
+.character-group-adult{background:#dce9d9}
+.character-group h3{margin:0;font:700 1.35rem/1 Georgia,serif}
+.character-group>p{margin:.45rem 0 .9rem;font-size:.88rem;line-height:1.4}
+.character-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.5rem}
+.character-choice{
+   display:grid;
+   justify-items:center;
+   gap:.35rem;
+   min-height:7rem;
+   padding:.55rem .2rem;
+   border:2px solid var(--ink);
+   border-radius:.75rem;
+   background:#fffaf0;
+   color:var(--ink);
+   font:700 .75rem/1.1 Inter,ui-sans-serif,system-ui,sans-serif;
+   cursor:pointer
+}
+.character-choice:hover,.character-choice:focus-visible{background:var(--gold)}
+.character-choice[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--berry)}
+.character-choice .entry-variant{min-height:4.8rem}
+.character-choice .entry-figure{transform:scale(.72);transform-origin:center}
+.character-choice-label{display:block;max-width:100%;overflow-wrap:anywhere}
+.character-loading{margin:0;padding:1rem;border:2px dashed var(--ink);background:#fffaf0;font-weight:700}
 .side-choice{
    appearance:none;
    width:100%;
@@ -336,6 +363,13 @@ body{
 .journey-options button:hover{background:var(--gold)}
 .journey-options button span{font:900 2rem/1 Georgia,serif}
 .journey-options button small{font:inherit;font-weight:600}
+.entry-route-result{display:grid;gap:.9rem;width:100%;padding:clamp(1rem,3vw,1.5rem);border:2px solid var(--ink);border-radius:1rem;background:#dce9d9}
+.entry-route-result .eyebrow,.entry-route-result h3,.entry-route-result p{margin:0}
+.entry-route-result h3{font:700 clamp(1.6rem,3vw,2.5rem)/1 Georgia,serif}
+.entry-route-result p{max-width:52rem;line-height:1.5}
+.entry-route-alternatives{display:flex;flex-wrap:wrap;gap:.6rem}
+.entry-route-alternatives a{padding:.55rem .7rem;border:2px solid var(--ink);border-radius:999px;background:#fffaf0;color:var(--ink);font-weight:800;text-decoration:none}
+.entry-route-alternatives a:hover,.entry-route-alternatives a:focus-visible{background:var(--gold)}
 .journey-actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
 .journey-actions button,.journey-actions a{
    min-height:2.8rem;
@@ -398,7 +432,7 @@ body{
 .entry-direct-links strong{font:700 1.15rem Georgia,serif}
 .entry-direct-links span{margin-top:.25rem;font-size:.9rem;line-height:1.35}
 .entry-direct-links .entry-guide-link{grid-column:1 / -1;background:#dce9d9}
-.stick-field{position:relative;width:min(100%,22rem);height:28rem;margin:auto;border:0;border-radius:0;background:transparent}
+.stick-field{display:none}
 .field-figure{position:absolute;width:3.2rem;height:6rem;border-left:3px solid var(--ink);transform-origin:center bottom}
 .field-figure::before{content:'';position:absolute;top:-1.6rem;left:-.85rem;width:1.6rem;height:1.6rem;border:3px solid var(--ink);border-radius:50%;background:#fffaf0}
 .field-figure::after{content:'';position:absolute;top:1.3rem;left:-1.5rem;width:3rem;height:2.5rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);clip-path:polygon(0 0,100% 48%,0 100%,10% 48%)}
@@ -1487,8 +1521,8 @@ footer a{color:var(--ink);font-weight:900}
   .entry-jack{opacity:.3}
   .universe-shell{width:100%;min-width:0;grid-template-columns:1fr;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
   .universe-copy{width:100%;min-width:0;overflow-wrap:anywhere}
-  .stick-field{width:min(13rem,65vw);height:17rem}
-  .gateway-panels{grid-template-columns:1fr}
+  .character-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .character-choice{min-height:6.5rem}
   .entry-style-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .entry-style{min-height:8rem}
   .companion-field{grid-template-columns:repeat(7,minmax(0,1fr));min-height:7.5rem}
