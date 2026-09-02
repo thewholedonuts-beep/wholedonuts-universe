@@ -21,6 +21,27 @@ The repository root contains the static GitHub Pages bundle for
 - The public site separately keeps its existing +U pass and last-visit data in
   the visitor's browser. A valid `?u=` link can restore a pass, and QR images
   are requested only when the visitor explicitly asks for one.
+- The browser-only +U review queue renders the small, curated
+  `review-queue-manifest.js` list already shipped with the site. It has no
+  filesystem access, GitHub API access, network scanning, automatic
+  publishing, or automatic merging. Every candidate is review-only and shows
+  its source reference, category, provenance, rights status, review status,
+  and manual next step. The queue also documents excluded sources and why they
+  are not eligible.
+
+### Refreshing the review queue
+
+Maintainers refresh the queue through the normal local/repository workflow:
+
+1. Review a public, tracked source manually and edit
+   `review-queue-manifest.js` locally.
+2. Keep each candidate's `title`, `source`, `category` (`draft`, `image`, or
+   `crumb`), `provenance`, `rights`, `reviewStatus`, and `nextStep` accurate
+   and specific. Record uncertain or ineligible sources in
+   `WHNUTZ_REVIEW_QUEUE_EXCLUSIONS` with a clear reason.
+3. Review and merge the manifest change normally. A human must complete every
+   stated next step; the site never discovers candidates, changes sources,
+   publishes material, or merges work automatically.
 
   The Fresh Launch Window stores only a versioned local start timestamp and
   completed anonymous interaction count: `{"v":1,"startedAt":"...","count":0}`.

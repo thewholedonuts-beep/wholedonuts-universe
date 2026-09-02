@@ -21,6 +21,13 @@ const templateLibraryCopy=document.querySelector('#template-library-copy');
 const storefrontStatus=document.querySelector('#storefront-status');
 const storefrontActions=document.querySelector('#storefront-actions');
 const storefrontConfig=window.WHNUTZ_STOREFRONT_CONFIG||{};
+const reviewQueueList=document.querySelector('#review-queue-list');
+const reviewQueueExclusions=document.querySelector('#review-queue-exclusions');
+const reviewQueueFilter=document.querySelector('#review-queue-filter');
+const reviewQueueStatus=document.querySelector('#review-queue-status');
+const reviewQueueManifest=Array.isArray(window.WHNUTZ_REVIEW_QUEUE_MANIFEST)?window.WHNUTZ_REVIEW_QUEUE_MANIFEST:[];
+const reviewQueueExclusionManifest=Array.isArray(window.WHNUTZ_REVIEW_QUEUE_EXCLUSIONS)?window.WHNUTZ_REVIEW_QUEUE_EXCLUSIONS:[];
+const reviewQueueCategories=['draft','image','crumb'];
 const dashboard=document.querySelector('#plusu-dashboard');
 const dashboardProgress=document.querySelector('#dashboard-progress');
 const dashboardUnlocks=document.querySelector('#dashboard-unlocks');
@@ -57,6 +64,71 @@ function renderStorefrontHandoff(){
   storefrontActions.append(storefrontCta);
 }
 renderStorefrontHandoff();
+
+function validReviewCandidate(candidate){
+  return candidate
+    &&typeof candidate.title==='string'
+    &&typeof candidate.source==='string'
+    &&reviewQueueCategories.includes(candidate.category)
+    &&typeof candidate.provenance==='string'
+    &&typeof candidate.rights==='string'
+    &&typeof candidate.reviewStatus==='string'
+    &&typeof candidate.nextStep==='string';
+}
+
+function reviewQueueDetail(label,value){
+  const detail=document.createElement('p');
+  const heading=document.createElement('strong');
+  heading.textContent=label+': ';
+  detail.append(heading,value);
+  return detail;
+}
+
+function renderReviewQueue(){
+  if(!reviewQueueList)return;
+  const category=reviewQueueFilter?reviewQueueFilter.value:'all';
+  const candidates=reviewQueueManifest.filter(validReviewCandidate).filter(candidate=>category==='all'||candidate.category===category);
+  reviewQueueList.replaceChildren();
+  candidates.forEach(candidate=>{
+    const card=document.createElement('article');
+    const title=document.createElement('h4');
+    title.textContent=candidate.title;
+    card.className='review-candidate';
+    card.append(
+      title,
+      reviewQueueDetail('Source reference',candidate.source),
+      reviewQueueDetail('Category',candidate.category),
+      reviewQueueDetail('Provenance',candidate.provenance),
+      reviewQueueDetail('Rights status',candidate.rights),
+      reviewQueueDetail('Review status',candidate.reviewStatus),
+      reviewQueueDetail('Manual next step',candidate.nextStep)
+    );
+    reviewQueueList.append(card);
+  });
+  if(reviewQueueStatus)reviewQueueStatus.textContent=candidates.length+' review-only '+(candidates.length===1?'candidate is':'candidates are')+' shown. No action is automatic.';
+}
+
+function renderReviewQueueExclusions(){
+  if(!reviewQueueExclusions)return;
+  const exclusions=reviewQueueExclusionManifest.filter(item=>item&&typeof item.source==='string'&&typeof item.reviewStatus==='string'&&typeof item.reason==='string');
+  reviewQueueExclusions.replaceChildren();
+  exclusions.forEach(item=>{
+    const card=document.createElement('article');
+    const title=document.createElement('h4');
+    title.textContent=item.source;
+    card.className='review-candidate review-candidate-excluded';
+    card.append(
+      title,
+      reviewQueueDetail('Source status',item.reviewStatus),
+      reviewQueueDetail('Reason',item.reason)
+    );
+    reviewQueueExclusions.append(card);
+  });
+}
+
+if(reviewQueueFilter)reviewQueueFilter.addEventListener('change',renderReviewQueue);
+renderReviewQueue();
+renderReviewQueueExclusions();
 
 function dashboardState(){
   const saved=safeGet(dashboardKey);

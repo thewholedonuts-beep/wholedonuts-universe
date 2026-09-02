@@ -469,6 +469,43 @@ body:not(.entered) footer{display:none}
   background:var(--gold);
   font:900 2rem/1 Georgia,serif
 }
+.review-queue{
+  display:grid;
+  gap:.75rem;
+  margin-top:1.5rem;
+  padding:1.25rem;
+  border:2px solid var(--ink);
+  border-radius:1.25rem;
+  background:#eaf0e8
+}
+.review-queue h3{margin:0;font:700 clamp(1.6rem,3vw,2.3rem)/1.1 Georgia,serif}
+.review-queue p{max-width:58rem;margin:0;line-height:1.55}
+.review-queue select{
+  width:min(100%,18rem);
+  min-height:2.8rem;
+  padding:.5rem;
+  border:2px solid var(--ink);
+  border-radius:.5rem;
+  background:#fffaf0;
+  color:var(--ink);
+  font:inherit
+}
+.review-queue-list{display:grid;gap:.75rem}
+.review-candidate{
+  display:grid;
+  gap:.4rem;
+  padding:1rem;
+  border:1px solid #15130f55;
+  border-radius:.85rem;
+  background:var(--cream)
+}
+.review-candidate h4{margin:0;font:700 1.15rem/1.2 Georgia,serif}
+.review-candidate p{font-size:.94rem}
+.review-candidate strong{font-weight:900}
+.review-candidate code{overflow-wrap:anywhere}
+.review-candidate-excluded{background:#f5e5eb;border-color:#8b365080}
+.review-queue details{padding-top:.35rem;border-top:1px solid #15130f55}
+.review-queue summary{cursor:pointer;font-weight:900}
 @media(max-width:760px){
   .onboarding-option-grid,.reward-grid{grid-template-columns:1fr}
   .reward-card{min-height:0}

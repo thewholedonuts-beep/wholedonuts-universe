@@ -15,7 +15,7 @@
     {"@context":"https://schema.org","@type":"WebSite","name":"Whole Donuts Universe","url":"https://wenevergonnaclose.com/","description":"A welcoming place for practical guides, creative exploration, and community paths."}
   </script>
   <title>Whole Donuts Universe | Find a useful next step</title>
-  <link rel="stylesheet" href="styles.css?v=privacy-entry-1">
+  <link rel="stylesheet" href="styles.css?v=privacy-entry-review-1">
 </head>
 <body>
   <a class="skip-link" href="#table">Skip onboarding and browse the table</a>
@@ -190,6 +190,28 @@
           </form>
           <p id="crumb-status" aria-live="polite"></p>
           <p class="crumb-note">We do not publish private, identifying, financial, health, or harmful information. Read the <a href="CRUMB_PROTOCOL.md" data-dashboard-effort="compass">crumb protocol</a>.</p>
+        </section>
+        <section class="review-queue" id="review-queue" aria-labelledby="review-queue-title">
+          <p class="eyebrow">BROWSER-ONLY REVIEW QUEUE</p>
+          <h3 id="review-queue-title">A small, human-reviewed shortlist.</h3>
+          <p>This page renders only curated metadata references shipped with this site. It does not read files, call GitHub, scan a network, publish anything, or merge anything. Every candidate remains review-only while rights review is pending.</p>
+          <label for="review-queue-filter">Show candidates</label>
+          <select id="review-queue-filter">
+            <option value="all">All categories</option>
+            <option value="draft">Drafts</option>
+            <option value="image">Images</option>
+            <option value="crumb">Crumbs</option>
+          </select>
+          <p id="review-queue-status" aria-live="polite"></p>
+          <div class="review-queue-list" id="review-queue-list" aria-live="polite"></div>
+          <details>
+            <summary>Excluded sources and why</summary>
+            <div class="review-queue-list" id="review-queue-exclusions"></div>
+          </details>
+          <details>
+            <summary>How maintainers refresh this queue</summary>
+            <p>Edit the tracked <code>review-queue-manifest.js</code> file locally with approved public source metadata, review the change in the repository, and merge it through the normal human review process. The queue never discovers or updates candidates on its own.</p>
+          </details>
         </section>
       </section>
 
@@ -518,6 +540,7 @@
   <script src="auth-config.js"></script>
   <script src="storefront-config.js"></script>
   <script type="module" src="auth.js"></script>
-  <script src="app.js?v=privacy-entry-1"></script>
+  <script src="review-queue-manifest.js?v=review-queue-2"></script>
+  <script src="app.js?v=privacy-entry-review-2"></script>
 </body>
 </html>
