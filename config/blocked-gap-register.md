@@ -5,7 +5,7 @@ This private register is excluded from the Pages artifact.
 | Area | Status | Evidence or required owner decision |
 |---|---|---|
 | Mobile remediation | Partially evidenced; blocked from release | An immutable PR #14 snapshot was exercised in Edge touch/keyboard emulation at 320x568, 360x800, 390x844, and 412x915: no horizontal overflow; rail 0x0; backdrop non-intercepting; all four controls worked after normal scroll. Hash/direct routes, reduced motion, landscape, desktop, and storage-denied core entry have controlled Edge evidence. Physical-device and cross-engine evidence remains required. |
-| Served-version verification | Blocked from release | Validate `deploy-version.txt` against the merged commit through the custom domain in a controlled post-deploy procedure. |
+| Served-version verification | Blocked from release | PR #14's workflow now polls the custom-domain marker for the exact `${{ github.sha }}` for up to 10 minutes and fails on mismatch. A local HTTP/equality positive control passed; GitHub-hosted Bash and the actual custom-domain post-deploy comparison remain unexecuted. |
 | Movement trifold assets | Missing | `MovementTrifoldOUTSIDE.png` and `MovementTrifoldINSIDE.png` are not in reachable source; owner-provided rights-reviewed originals are required. |
 | Crumb Saver runtime | Unavailable | Public auth configuration has no runtime values; no submission may be enabled without approved credentials, data policy, and backend review. |
 | Merchandise | Planned only | Product artwork, rights records, vendor mapping, pricing, fulfillment, and customer data flow are not approved. |
