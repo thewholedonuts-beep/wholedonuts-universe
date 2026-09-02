@@ -44,6 +44,20 @@ full public content.
 **Why it matters:** The canonical stick-figure gateway remains the first screen
 without blocking direct access to the site.
 
+### Ecosystem direction map
+
+**What changed:** The public site now includes an ecosystem map that explains
+the canonical gateway, The Table, The Counter, guides, and World alongside the
+intended roles for future domains.
+
+**Why it matters:** Visitors can understand the wider direction without being
+sent to an unverified domain or told that a planned store, account, record, or
+service is live.
+
+**Optional next choices:** Use any available on-site path. Future domains
+become links only after owner verification and human privacy, safety, rights,
+accessibility, and destination review.
+
 ### Pages delivery
 
 **What changed:** The Pages workflow deploys the reviewed static bundle only
