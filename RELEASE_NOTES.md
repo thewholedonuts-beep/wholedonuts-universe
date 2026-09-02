@@ -8,8 +8,9 @@ suggestion optional.
 
 ### Whole Donuts entry
 
-**What changed:** The public entry now provides direct paths to the +U Library,
-+U World, Whole Donuts, The Nurtured Chef, and this optional ecosystem guide.
+**What changed:** The public entry now provides direct paths to community
+start-here, the +U Library, +U World, ambassador direction, reviewed crumbs,
+clearly marked external offerings, and the public system map.
 
 **Why it matters:** Visitors can choose a useful starting place without working
 through a required journey.
@@ -19,13 +20,14 @@ or return later. No action is required.
 
 ### Pages delivery
 
-**What changed:** The Pages workflow deploys the reviewed static bundle after a
-merge to `main`, retaining `wenevergonnaclose.com` in the deployed `CNAME`.
+**What changed:** The Pages workflow deploys the reviewed static bundle only
+after a maintainer manually dispatches it, retaining
+`wenevergonnaclose.com` in the deployed `CNAME`.
 
 **Why it matters:** The public site has one deployable source of truth.
 
-**Optional next choices:** Repository maintainers can review the workflow run
-and GitHub Pages domain status. Visitors do not need to do anything.
+**Optional next choices:** A maintainer can dispatch and review the workflow
+run after a human-reviewed merge. Visitors do not need to do anything.
 
 ### Operations reliability
 

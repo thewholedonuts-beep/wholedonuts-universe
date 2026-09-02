@@ -7,8 +7,9 @@ This repository is the consolidated home for the Whole Donuts Universe.
 The repository root contains the static GitHub Pages bundle for
 `wenevergonnaclose.com`:
 
-- `index.html`, `guide.html`, `styles.css`, and `app.js` provide the public
-  Whole Donuts entry, optional ecosystem guide, and +U experience.
+- `index.html`, `guide.html`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
+  provide the one public Whole Donuts entry, system map, curation policy, and
+  +U experience.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
 - The optional four-step welcome keeps only an age range, a simple original
   stick-figure choice, an expression, selected interest categories, and its
@@ -19,8 +20,8 @@ The repository root contains the static GitHub Pages bundle for
   rewards at any time. Existing site links remain available without completing
   the welcome.
 - The public site separately keeps its existing +U pass and last-visit data in
-  the visitor's browser. A valid `?u=` link can restore a pass, and QR images
-  are requested only when the visitor explicitly asks for one.
+  the visitor's browser. A valid `?u=` link can restore a pass; visitors can
+  open or copy that local return link without sending it to a QR service.
 - The browser-only +U review queue renders the small, curated
   `review-queue-manifest.js` list already shipped with the site. It has no
   filesystem access, GitHub API access, network scanning, automatic
@@ -68,8 +69,8 @@ Maintainers refresh the queue through the normal local/repository workflow:
   credentials, rank manipulation, and automatic publishing.
 
 The [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) publishes
-the reviewed public bundle after changes merge to `main`, or when dispatched
-manually. It stages only named public static files, including the exact
+the reviewed public bundle only when a maintainer dispatches it manually. It
+stages only named public static files, including the exact
 `CNAME`, and excludes Go operations configuration and local credentials. In
 **Settings -> Pages**, select **GitHub Actions** as the source and set the
 custom domain to `wenevergonnaclose.com`; GitHub provides the required DNS and
@@ -77,6 +78,14 @@ verification instructions. The workflow verifies the deployed revision through
 the GitHub Pages URL, so custom-domain DNS propagation does not make a valid
 deployment look failed. Any future domain or DNS change requires a separate
 reviewed operational change.
+
+### Public system and curation policy
+
+[`PUBLIC_SYSTEM.md`](PUBLIC_SYSTEM.md) is the public system map and maintainer
+curation policy. It identifies available local public paths, unavailable areas,
+external exits, the privacy boundary, and the human-only process for considering
+eligible original or permitted public material. It does not authorize
+collection, automated intake, publication, GitHub actions, or merges.
 
 ## Operations tooling
 
