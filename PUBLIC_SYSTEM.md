@@ -10,7 +10,7 @@ material.
 | Path | Available now | Boundary |
 |---|---|---|
 | Community start-here | Yes. The Table, The Counter, Whole Donuts path, and The Nurtured Chef path are public and optional. | No account, profile, enrollment, or personal-data requirement. |
-| Four-tap +U gateway | Yes. A broad Youth or Adult side, face-only feeling, bounded need, and first destination progressively route to available on-site content. | All choices are temporary page state only: never stored, submitted, tracked, or used as a profile. |
+| Four-tap +U gateway | Yes. It is the first screen: a broad Youth or Adult side, face-only feeling, bounded need, and first destination progressively route to available on-site content. A visible Skip to the full site control immediately reaches The Table and reveals its progressive content. | All choices are temporary page state only: never stored, submitted, tracked, or used as a profile. |
 | +U Library | Yes. The tracked templates may be copied and adapted for personal use. | Do not add private, sensitive, or third-party material without permission. |
 | +U World | Yes. The visual studio is an optional public exploration path. | It does not create an account or collect a contribution. |
 | Donuts New School and Ambassador direction | Yes. They are open learning and leadership directions. | They are not enrollment, certification, employment, an application, or a guaranteed opportunity. |

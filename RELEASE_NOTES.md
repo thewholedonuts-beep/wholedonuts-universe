@@ -35,6 +35,15 @@ profile, stored free-text response, or hidden routing dead end.
 **Optional next choices:** Use the gateway, explore the World, reset its
 temporary settings, or follow any present on-site path.
 
+### Unblocked entry
+
+**What changed:** The gateway's Skip to the full site control is now always
+visible, keyboard-accessible, and immediately reveals and reaches The Table's
+full public content.
+
+**Why it matters:** The canonical stick-figure gateway remains the first screen
+without blocking direct access to the site.
+
 ### Pages delivery
 
 **What changed:** The Pages workflow deploys the reviewed static bundle only
