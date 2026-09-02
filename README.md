@@ -11,14 +11,14 @@ The repository root contains the static GitHub Pages bundle for
   provide the one public Whole Donuts entry, system map, curation policy, and
   +U experience.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
-- The optional four-step welcome keeps only an age range, a simple original
-  stick-figure choice, an expression, selected interest categories, and its
-  visual welcome rewards in the visitor's browser under
-  `plusu-entry-onboarding`. It never asks for a birth date, exact age, name,
-  email, photo, location, or account, and sends nothing to a service. Visitors
-  can skip the welcome without saving choices or clear its local choices and
-  rewards at any time. Existing site links remain available without completing
-  the welcome.
+- The +U gateway is a four-tap, progressive route: broad Youth or
+  Adult side, a face-only feeling, one of three bounded non-sensitive needs,
+  and an available on-site destination. Its 14 original Youth and 14 original
+  Adult stick-figure companions are visual-only. All four temporary choices
+  exist only in page memory, clear on restart, skip, back, or onward navigation,
+  and are never sent, tracked, or stored. The gateway never asks for an exact
+  age or birth date, name, email, face image, photo, location, account, or
+  sensitive information.
 - The public site separately keeps its existing +U pass and last-visit data in
   the visitor's browser. A valid `?u=` link can restore a pass; visitors can
   open or copy that local return link without sending it to a QR service.
@@ -43,15 +43,6 @@ Maintainers refresh the queue through the normal local/repository workflow:
 3. Review and merge the manifest change normally. A human must complete every
    stated next step; the site never discovers candidates, changes sources,
    publishes material, or merges work automatically.
-
-  The Fresh Launch Window stores only a versioned local start timestamp and
-  completed anonymous interaction count: `{"v":1,"startedAt":"...","count":0}`.
-  It counts successful local exploration steps, not visits, identities, page
-  loads, pass values, recipients, sharing outcomes, support, payment, or
-  purchase actions. Before the next eligible interaction at 12 hours, local
-  midnight, or 1,000 local interactions, it resets the welcome and Dashboard
-  presentation without removing the device-local +U pass. This is a per-browser
-  limit, never a global public metric.
 
   The `?u=` value is a private device-local +U return link only. It does not
   authenticate an operator, grant access, identify a person, activate a target,
@@ -132,11 +123,3 @@ The non-deployed [consolidation and learning model](config/consolidation-learnin
 defines classification, preserve-before-remove provenance, reviewed learning
 loops, and staged legacy retirement. It prohibits automatic publishing,
 deletion, payment, credential import, and private-data import.
-
-## Browser-local welcome rewards
-
-Completing the optional range-only welcome unlocks original open-table,
-local-badge, and expression visual cards in that browser. These are not
-financial rewards, entitlements, referral credit, or a reason to provide an
-email. Clearing the welcome removes this local state; a +U pass remains a
-device-local return link, not an identity.
