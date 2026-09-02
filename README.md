@@ -7,7 +7,8 @@ This repository is the consolidated home for the Whole Donuts Universe.
 The repository root contains the static GitHub Pages bundle for
 `wenevergonnaclose.com`:
 
-- `index.html`, `styles.css`, and `app.js` provide the +U experience.
+- `index.html`, `guide.html`, `styles.css`, and `app.js` provide the public
+  Whole Donuts entry, optional ecosystem guide, and +U experience.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
 - The public site keeps its welcome choices, +U pass, and last-visit data in
   the visitor's browser. A valid `?u=` link can restore a pass, and QR images
@@ -37,14 +38,16 @@ The repository root contains the static GitHub Pages bundle for
   requires human review of aggregate visibility and prohibits tracking, scraping,
   credentials, rank manipulation, and automatic publishing.
 
-The controlled cutover is complete: `wenevergonnaclose.com` is attached to
-Universe GitHub Pages and the legacy Sunshine repository is archived. The
-manual [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) stages
-only the public static files and excludes Go operations configuration and local
-credentials. Its `include_cname` input remains a deliberate release control;
-GitHub Actions deployments manage the custom-domain association in
-**Settings -> Pages**, not from the artifact's `CNAME` file. Any future domain
-or DNS change requires a separate reviewed operational change.
+The [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) publishes
+the reviewed public bundle after changes merge to `main`, or when dispatched
+manually. It stages only named public static files, including the exact
+`CNAME`, and excludes Go operations configuration and local credentials. In
+**Settings -> Pages**, select **GitHub Actions** as the source and set the
+custom domain to `wenevergonnaclose.com`; GitHub provides the required DNS and
+verification instructions. The workflow verifies the deployed revision through
+the GitHub Pages URL, so custom-domain DNS propagation does not make a valid
+deployment look failed. Any future domain or DNS change requires a separate
+reviewed operational change.
 
 ## Operations tooling
 

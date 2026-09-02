@@ -1,5 +1,20 @@
 # WholeDonut Funnel Management - Complete Setup Guide
 
+## Public GitHub Pages site
+
+The public entry is the repository-root static bundle. After a reviewed change
+merges to `main`, `.github/workflows/deploy-pages.yml` deploys it through
+GitHub Actions and includes the exact `CNAME` value:
+
+```text
+wenevergonnaclose.com
+```
+
+Before the first deployment, select **GitHub Actions** in **Settings -> Pages**,
+set `wenevergonnaclose.com` as the custom domain, and complete the DNS and
+domain-verification steps shown by GitHub. Do not add operations configuration,
+credentials, or service dependencies to the Pages artifact.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
