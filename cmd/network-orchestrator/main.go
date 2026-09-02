@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -141,10 +142,15 @@ func (nm *NetworkManager) ActivateNetwork(networkName string) error {
 	}
 
 	fmt.Printf("\n🚀 Activating network '%s'\n", networkName)
+	var failures []error
 	for _, funnelID := range network.Funnels {
 		if err := nm.manager.ActivateFunnel(funnelID); err != nil {
 			log.Printf("⚠️  Failed to activate funnel %s: %v", funnelID, err)
+			failures = append(failures, fmt.Errorf("%s: %w", funnelID, err))
 		}
+	}
+	if len(failures) > 0 {
+		return fmt.Errorf("failed to activate network %s: %w", networkName, errors.Join(failures...))
 	}
 	network.Status = "active"
 	fmt.Printf("✅ Network '%s' is now ACTIVE\n", networkName)
@@ -161,10 +167,15 @@ func (nm *NetworkManager) DeactivateNetwork(networkName string) error {
 	}
 
 	fmt.Printf("\n⏸️  Deactivating network '%s'\n", networkName)
+	var failures []error
 	for _, funnelID := range network.Funnels {
 		if err := nm.manager.DeactivateFunnel(funnelID); err != nil {
 			log.Printf("⚠️  Failed to deactivate funnel %s: %v", funnelID, err)
+			failures = append(failures, fmt.Errorf("%s: %w", funnelID, err))
 		}
+	}
+	if len(failures) > 0 {
+		return fmt.Errorf("failed to deactivate network %s: %w", networkName, errors.Join(failures...))
 	}
 	network.Status = "inactive"
 	fmt.Printf("✅ Network '%s' is now INACTIVE\n", networkName)
