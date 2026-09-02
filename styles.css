@@ -23,10 +23,11 @@ body{
   padding:.75rem 1rem;
   background:var(--ink);
   color:#fff;
-  transform:translateY(-200%);
-  transition:transform .2s
+  box-shadow:3px 3px 0 var(--gold);
+  font-weight:800;
+  text-decoration:none
 }
-.skip-link:focus{transform:translateY(0)}
+.skip-link:focus{outline:3px solid var(--green);outline-offset:3px}
 .universe-gateway{
   position:relative;
   overflow:hidden;

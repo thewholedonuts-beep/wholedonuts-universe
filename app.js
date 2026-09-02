@@ -269,6 +269,10 @@ if(journeyBack)journeyBack.addEventListener('click',()=>{
 });
 if(journeyRestart)journeyRestart.addEventListener('click',()=>restartJourney({focus:true}));
 document.querySelectorAll('.journey-actions a').forEach(link=>link.addEventListener('click',()=>restartJourney()));
+document.querySelectorAll('[data-skip-gateway]').forEach(link=>link.addEventListener('click',()=>{
+  restartJourney();
+  if(counter)counter.hidden=false;
+}));
 showJourneyStep(1);
 
 function focusRouteTarget(id){
