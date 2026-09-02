@@ -7,10 +7,12 @@ This repository is the consolidated home for the Whole Donuts Universe.
 The repository root contains the static GitHub Pages bundle for
 `wenevergonnaclose.com`:
 
-- `index.html`, `guide.html`, `ecosystem.html`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
+- `index.html`, `guide.html`, `ecosystem.html`, `course.html`, `course.js`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
   provide the one public Whole Donuts entry, system map, curation policy, and
-  +U experience. The ecosystem map distinguishes the available canonical
-  on-site routes from planned domains that require owner verification.
+  +U experience. The free course includes print-ready worksheets that use only
+  the existing public template language and text marks; it does not collect
+  responses. The ecosystem map distinguishes the available canonical on-site
+  routes from planned domains that require owner verification.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
 - The +U gateway is a four-tap, progressive route: broad Youth or
   Adult side, a face-only feeling, one of three bounded non-sensitive needs,
@@ -56,6 +58,11 @@ Maintainers refresh the queue through the normal local/repository workflow:
   metadata. The non-deployed [SEO Crumb Saver operating model](config/seo-crumb-saver-operating-model.md)
   requires human review of aggregate visibility and prohibits tracking, scraping,
   credentials, rank manipulation, and automatic publishing.
+
+  The non-deployed [Social Media Protocol](config/social-media-protocol.md)
+  provides the manual launch gate and factual course announcement copy. It uses
+  direct canonical links only and prohibits account connections, auto-posting,
+  tracking links, platform-data intake, and unreviewed media reuse.
 
 The [`deploy-pages` workflow](.github/workflows/deploy-pages.yml) publishes
 the reviewed public bundle only when a maintainer dispatches it manually. It

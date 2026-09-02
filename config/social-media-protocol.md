@@ -12,6 +12,38 @@ publishing, a human selects the relevant subject or brand destination rather
 than treating the shared +U entry as a replacement for distinct brands. Use a
 plain-language link that identifies the destination.
 
+For the free +U course, use only the direct canonical course URL:
+`https://wenevergonnaclose.com/course.html`. Do not use tracking parameters,
+shortened links, link-in-bio services, or unverified companion domains.
+
+## Manual launch readiness
+
+Before a responsible human creates or publishes from a platform account:
+
+1. Confirm that the canonical root and course URL are live, readable without an
+   account, and match the approved public content.
+2. Confirm that the post names the Whole Donuts Universe destination plainly
+   and does not claim a store, product, account, certification, enrollment,
+   submission channel, reward, donation benefit, or companion capability is
+   live.
+3. Use text-only publishing unless a separate image, video, logo, or other
+   media asset has documented rights, provenance, accessibility text, and human
+   approval. Do not reuse companion-repository material by implication.
+4. Publish manually from the responsible account. Keep native platform
+   analytics, messages, comments, credentials, moderation records, and
+   platform settings out of this repository.
+
+Approved course launch copy, subject to the responsible human's platform and
+timing review:
+
+> The free +U course has print-ready worksheets for choosing one next step,
+> sharing what helped, and building a table. No account or submission is
+> required: https://wenevergonnaclose.com/course.html
+
+The social preview metadata on the course page supports this direct link. It
+does not create or manage a social account, publish a post, add a tracker, or
+guarantee preview, reach, indexing, or platform availability.
+
 ## Approval and contribution review
 
 No content is published until a responsible human approves the platform,
