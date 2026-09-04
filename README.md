@@ -7,6 +7,10 @@ This repository is the consolidated home for the Whole Donuts Universe.
 The repository root contains the static GitHub Pages bundle for
 `wenevergonnaclose.com`:
 
+The public movement statement invites every visitor to "find a piece of peace"
+and try a new direction when part of life feels restrained. It is welcoming
+language, not a promise of treatment, recovery, or a guaranteed outcome.
+
 - `index.html`, `guide.html`, `ecosystem.html`, `course.html`, `course.js`, `PUBLIC_SYSTEM.md`, `styles.css`, and `app.js`
   provide the one public Whole Donuts entry, system map, curation policy, and
   +U experience. The free course includes print-ready worksheets that use only

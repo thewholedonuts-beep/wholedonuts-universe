@@ -1376,6 +1376,15 @@ main{margin-left:var(--rail)}
 .choice.tnc{background:var(--green)}
 .choice.awd{background:var(--berry)}
 .promise{max-width:60rem;font:600 1.05rem/1.7 Georgia,serif}
+.movement-statement{
+  max-width:48rem;
+  margin:1rem 0 1.5rem;
+  padding:1rem 1.2rem;
+  border-left:.5rem solid var(--gold);
+  background:#fffaf099;
+  font:600 clamp(1.1rem,2vw,1.35rem)/1.5 Georgia,serif
+}
+.movement-statement strong{color:var(--berry)}
 .branch p{max-width:42rem;font-size:1.25rem;line-height:1.6}
 .branch:nth-of-type(2){background:#ecdde1}
 .branch:nth-of-type(3){background:#dfe9de}
