@@ -58,6 +58,16 @@ Maintainers refresh the queue through the normal local/repository workflow:
   requires human review of aggregate visibility and prohibits tracking, scraping,
   credentials, rank manipulation, and automatic publishing.
 
+  The public `+U/u` invitation protocol accepts only exact, reviewed campaign
+  tokens from `campaign-protocol.js`. Temporary tokens change contextual copy and
+  one suggested on-site route; they never create tracking, registration, referral
+  acceptance, affiliation, payment, or reward proof. The first campaign group
+  expires automatically at `2026-09-06T14:11:44Z`. The learning and remembrance
+  group expires at `2026-09-11T14:34:45Z`. Remembrance routes are deliberately
+  separated from merchandise, support payments, and rewards. `FDNY` is used only
+  as a factual remembrance context and does not imply affiliation, endorsement,
+  trademark permission, or merchandise rights.
+
   The non-deployed [Social Media Protocol](config/social-media-protocol.md)
   provides the manual launch gate and factual course announcement copy. It uses
   direct canonical links only and prohibits account connections, auto-posting,
@@ -102,9 +112,9 @@ site. See [SETUP.md](SETUP.md) and [README_FUNNELS.md](README_FUNNELS.md) for
 operational setup; keep credentials in local environment files or GitHub
 Actions secrets, never in the repository.
 
-## Donation Access Hub and Rewards Center
+## Voluntary Support Access and Rewards Center
 
-The public Donation Access Hub is an interface and policy, not a payment
+The public voluntary-support hub is an interface and policy, not a payment
 processor, wallet, fund-transfer system, automatic billing system, or
 automatic allocation system. A visitor must select a voluntary support purpose,
 review the processor and payee, and affirm a final action before an external
@@ -118,6 +128,13 @@ universal public payment URL, so the same gate reveals only an instruction to
 open the official Chime app, enter the ChimeSign, and optionally copy it;
 copying never initiates a payment or transfer. No other provider is part of
 this model.
+
+Whole Donuts is an LLC, not a nonprofit. Public copy describes payments as
+voluntary support to Whole Donuts LLC, not as charitable donations, and no
+charitable tax receipt is provided. Support is not a purchase, investment, or
+automatic reward credit.
+The experience also recognizes time, skill, encouragement, sharing, trying, and
+showing up as useful crumbs without ranking anyone's worth by financial amount.
 
 Real accounting, charity or tax treatment, refunds, merchant-of-record
 responsibilities, and reward eligibility require decisions by the responsible

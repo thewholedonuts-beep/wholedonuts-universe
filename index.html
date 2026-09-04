@@ -35,6 +35,13 @@
         <p class="eyebrow">WHOLE DONUTS UNIVERSE</p>
         <h1 id="universe-gateway-title">Choose a way in.</h1>
         <p class="universe-lede">Start with one of 28 original stick figures, then choose what would help. Your answer opens a useful +U path and never becomes a profile.</p>
+        <aside class="campaign-invitation" id="campaign-invitation" aria-labelledby="campaign-invitation-title" hidden>
+          <p class="eyebrow">A CONTEXTUAL +U INVITATION</p>
+          <h2 id="campaign-invitation-title"></h2>
+          <p id="campaign-invitation-copy"></p>
+          <a id="campaign-invitation-route" href="#gateway">Choose your route</a>
+          <p id="campaign-invitation-note">This invitation changes only the words and suggested public route on this page. It creates no profile, affiliation, referral credit, reward, payment, or tracking record.</p>
+        </aside>
         <section class="entry-journey" aria-labelledby="entry-journey-title">
           <p class="eyebrow" id="entry-progress">STEP 1 OF 3</p>
           <h2 id="entry-journey-title">Choose a stick figure for today.</h2>
@@ -309,16 +316,17 @@
             <p id="journey-offers-copy">Try something, keep what helps, and choose what is next. Nothing is required.</p>
             <div class="journey-offer-actions">
               <a class="button primary" href="templates/plus-u-next-step-template.md">Get the free +U next-step template</a>
-              <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
+              <a class="button store" href="#donation-access-hub">Open voluntary support</a>
             </div>
             <p class="journey-offers-note"><strong>Keep the table growing:</strong> support can be money, time, skills, materials, or a useful connection. Optional support contributions are separate from store purchases and never required for access or recognition.</p>
             <p class="journey-offers-note">Choose any public path that fits today. Nothing is required or recorded by the gateway.</p>
           </section>
 
           <section class="donation-access-hub" id="donation-access-hub" aria-labelledby="donation-access-title">
-            <p class="eyebrow">DONATION ACCESS HUB</p>
-            <h3 id="donation-access-title">Choose your purpose before you leave the table.</h3>
-            <p>This is a voluntary support interface, not a payment processor or fund-transfer system. It never starts automatic payments, recurring billing, transfers, allocations, or background use of a payment method.</p>
+            <p class="eyebrow">VOLUNTARY SUPPORT ACCESS</p>
+            <h3 id="donation-access-title">Choose how you want to leave a crumb.</h3>
+            <p>Whole Donuts is an LLC, not a nonprofit. Financial support is voluntary and is not represented as a charitable or tax-deductible donation; no charitable tax receipt is provided. It is not a purchase, investment, or automatic reward credit. A crumb can also be time, skill, encouragement, sharing, trying, or simply showing up. No amount determines anyone’s belonging or worth.</p>
+            <p>This is a support interface, not a payment processor or fund-transfer system. It never starts automatic payments, recurring billing, transfers, allocations, or background use of a payment method.</p>
             <p><strong>Provider availability:</strong> Cash App and Chime to <strong>$wholedonuts</strong> are the only allowed manual provider routes for this operating model. Cash App has a consent-gated optional external exit. Chime has no universal public payment URL, so it is available only as an official-app instruction and copy control after the same confirmation.</p>
 
             <fieldset class="donation-purpose">
@@ -330,7 +338,7 @@
 
             <p class="donation-status" id="donation-status" aria-live="polite">Choose a purpose to review the optional payment details.</p>
             <div class="donation-disclosure" id="donation-disclosure" hidden>
-              <p><strong>Optional manual support routes:</strong> Cash App to <strong>$wholedonuts</strong>, or Chime by opening the official Chime app and entering <strong>$wholedonuts</strong> as the ChimeSign. This is not a store purchase, does not include merchandise, and does not create any tax-deductible receipt, investment return, currency value, ownership, or guaranteed benefit.</p>
+              <p><strong>Optional manual support routes for Whole Donuts LLC:</strong> Cash App to <strong>$wholedonuts</strong>, or Chime by opening the official Chime app and entering <strong>$wholedonuts</strong> as the ChimeSign. This is not a charitable donation or store purchase, does not include merchandise, and does not create any tax-deductible receipt, investment return, currency value, ownership, reward credit, or guaranteed benefit.</p>
               <p>This interface cannot issue a refund or collect a payment question. The selected provider and responsible payee handle optional support-payment questions under their terms. Store purchases, fulfillment, and refunds are handled by the separate merchant or store provider.</p>
               <label class="donation-confirmation"><input id="donation-confirmation" type="checkbox"> I chose this purpose, reviewed the payee, and want to reveal the optional manual payment choices.</label>
               <button id="reveal-donation-link" type="button" disabled>Reveal optional payment choices</button>
@@ -423,7 +431,7 @@
       <div class="actions">
         <a class="button primary" href="#gateway">Start at the +U gateway</a>
         <span class="button store" aria-label="Future owner-verified Whole Donuts store route">Future owner-verified store route</span>
-        <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
+        <a class="button store" href="#donation-access-hub">Open voluntary support</a>
       </div>
       <a class="back" href="#the-table">← Return to The Table</a>
     </section>
@@ -435,7 +443,7 @@
       <div class="actions">
         <a class="button primary" href="#gateway">Start at the +U gateway</a>
         <span class="button store" aria-label="Future owner-verified TNC store route">Future owner-verified store route</span>
-        <a class="button store" href="#donation-access-hub">Open the Donation Access Hub</a>
+        <a class="button store" href="#donation-access-hub">Open voluntary support</a>
       </div>
       <a class="back" href="#the-table">← Return to The Table</a>
     </section>
@@ -444,6 +452,7 @@
   <footer><span>+U Movement · Today’s menu and brochure are made by community.</span><a id="branch-store" href="#gateway">Return to the +U gateway</a><a href="ecosystem.html">Ecosystem map</a><a href="PUBLIC_SYSTEM.md">Public system map</a></footer>
   <noscript><p class="noscript-note">JavaScript is off, so the visual entry route is unavailable. You can still use the public paths and guide on this page.</p></noscript>
   <script src="review-queue-manifest.js?v=review-queue-2"></script>
-  <script src="app.js?v=entry-28-2"></script>
+  <script src="campaign-protocol.js?v=campaign-2026-09-04"></script>
+  <script src="app.js?v=entry-28-3"></script>
 </body>
 </html>
