@@ -94,6 +94,7 @@ select {
 .hero-copy,
 .mark-card,
 .field-panel,
+.support-gallery-panel,
 .unlock-panel {
   background: var(--panel);
   border: 1px solid var(--panel-border);
@@ -218,8 +219,79 @@ h1 {
 }
 
 .field-panel,
+.support-gallery-panel,
 .unlock-panel {
   padding: 1.5rem;
+}
+
+.support-gallery-panel {
+  grid-column: 1 / -1;
+}
+
+.support-symbol-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.support-symbol {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 7rem;
+  padding: 0.8rem;
+  border: 1px solid var(--panel-border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.support-symbol:hover:not(:disabled),
+.support-symbol:focus-visible,
+.support-symbol[aria-pressed="true"] {
+  border-color: var(--glow);
+  background: var(--glow-soft);
+}
+
+.support-symbol:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.support-symbol svg,
+.selected-support-symbol {
+  width: 4.5rem;
+  height: 5.25rem;
+  fill: none;
+  stroke: var(--aqua);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.support-symbol .symbol-shield,
+.selected-support-symbol .symbol-shield {
+  fill: rgba(141, 224, 210, 0.08);
+}
+
+.support-symbol span {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.support-symbol small,
+.support-gallery-note,
+.support-symbol-status {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.support-gallery-note,
+.support-symbol-status {
+  font-size: 0.88rem;
 }
 
 .panel-heading {
@@ -351,11 +423,32 @@ h1 {
 }
 
 .custom-figure {
+  position: relative;
   min-height: 136px;
   display: grid;
   place-items: center;
   border-radius: 16px;
   background: rgba(0, 0, 0, 0.18);
+}
+
+.custom-figure .selected-support-symbol {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  width: 3rem;
+  height: 3.5rem;
+}
+
+@media (max-width: 900px) {
+  .support-symbol-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .support-symbol-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .custom-figure svg {

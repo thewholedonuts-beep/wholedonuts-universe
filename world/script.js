@@ -8,8 +8,10 @@ const poseSelect = document.getElementById("poseSelect");
 const accentInput = document.getElementById("accentInput");
 const resetButton = document.getElementById("resetButton");
 const pageShell = document.querySelector(".page-shell");
+const supportButtons = [...document.querySelectorAll("[data-support-symbol]")];
+const supportSymbolStatus = document.getElementById("supportSymbolStatus");
 
-const defaultState = { completed: false, pose: "open", accent: "#ffb95e" };
+const defaultState = { completed: false, pose: "open", accent: "#ffb95e", supportSymbol: null };
 let state = { ...defaultState };
 const fieldFigures = [
   { x: 6, y: 50, scale: 1, tilt: "-4deg", pose: "open" },
@@ -94,6 +96,17 @@ function renderCustomFigure(state) {
   figure.style.height = "136px";
   figure.style.transform = "scale(1.15)";
   customFigure.appendChild(figure.firstElementChild);
+  if (state.supportSymbol) {
+    const source = supportButtons.find((button) => button.dataset.supportSymbol === state.supportSymbol);
+    const symbol = source?.querySelector("svg")?.cloneNode(true);
+    if (symbol) {
+      symbol.removeAttribute("role");
+      symbol.removeAttribute("aria-label");
+      symbol.setAttribute("aria-hidden", "true");
+      symbol.classList.add("selected-support-symbol");
+      customFigure.appendChild(symbol);
+    }
+  }
 }
 
 function applyState() {
@@ -101,6 +114,14 @@ function applyState() {
   accentInput.value = state.accent;
   poseSelect.disabled = !state.completed;
   accentInput.disabled = !state.completed;
+  supportButtons.forEach((button) => {
+    const selected = button.dataset.supportSymbol === state.supportSymbol;
+    button.disabled = !state.completed;
+    button.setAttribute("aria-pressed", String(selected));
+  });
+  supportSymbolStatus.textContent = state.supportSymbol
+    ? "Your original support symbol is part of this temporary figure."
+    : "No support symbol selected.";
   progressText.textContent = state.completed
     ? "The field is open. Your visual choices stay on this page until you reset or reload."
     : "The field is ready to explore.";
@@ -119,6 +140,15 @@ customizer.addEventListener("input", () => {
   state.pose = poseSelect.value;
   state.accent = accentInput.value;
   applyState();
+});
+supportButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!state.completed) return;
+    state.supportSymbol = state.supportSymbol === button.dataset.supportSymbol
+      ? null
+      : button.dataset.supportSymbol;
+    applyState();
+  });
 });
 resetButton.addEventListener("click", () => {
   state = { ...defaultState };

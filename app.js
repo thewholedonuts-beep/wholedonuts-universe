@@ -121,7 +121,7 @@ function renderCampaignInvitation(){
   if(campaignInvitationRoute)campaignInvitationRoute.href=campaign.route;
   if(campaignInvitationNote){
     campaignInvitationNote.textContent='This invitation changes only the words and suggested public route on this page. It creates no profile, affiliation, referral credit, reward, payment, or tracking record.';
-    if(campaign.sensitive)campaignInvitationNote.textContent+=' Remembrance context is never tied to merchandise, payment, or rewards.';
+    if(campaign.sensitive)campaignInvitationNote.textContent+=' Remembrance context is never tied to merchandise, payment, or rewards. This site is not treatment or crisis care. In the United States, call or text 988 for immediate support; veterans may call 988 and press 1.';
   }
 }
 renderCampaignInvitation();
