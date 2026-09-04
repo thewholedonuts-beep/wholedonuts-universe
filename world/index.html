@@ -175,6 +175,61 @@
           <div id="figureField" class="figure-field" aria-hidden="true"></div>
         </section>
 
+        <section class="support-gallery-panel" aria-labelledby="support-gallery-title">
+          <div class="panel-heading">
+            <p class="eyebrow">original support symbol gallery</p>
+            <h2 id="support-gallery-title">Carry a symbol of support.</h2>
+          </div>
+          <p class="panel-copy">
+            Choose an original, non-official symbol to place beside your temporary
+            figure. These designs express community support and do not copy an
+            agency, government, military branch, badge, seal, or uniform mark.
+          </p>
+          <p class="panel-copy">
+            Survivors and anyone living with loss or feeling that a piece is
+            missing are welcome to come to the whole, begin where they are, and
+            try one new direction. This visual studio is not treatment or crisis
+            care. In the United States, call or text <strong>988</strong> for
+            immediate support; veterans may call 988 and press 1.
+          </p>
+          <div class="support-symbol-grid" role="group" aria-label="Choose an optional support symbol">
+            <button type="button" class="support-symbol" data-support-symbol="public-safety" aria-pressed="false">
+              <svg viewBox="0 0 100 116" role="img" aria-label="Original public safety support shield">
+                <path class="symbol-shield" d="M50 6 88 20v32c0 26-15 45-38 57C27 97 12 78 12 52V20Z"></path>
+                <circle cx="50" cy="52" r="13"></circle>
+                <path d="M50 25v10M50 69v10M23 52h10M67 52h10"></path>
+              </svg>
+              <span><strong>Public safety</strong><small>Community protection and care</small></span>
+            </button>
+            <button type="button" class="support-symbol" data-support-symbol="fire-rescue" aria-pressed="false">
+              <svg viewBox="0 0 100 116" role="img" aria-label="Original fire and rescue support shield">
+                <path class="symbol-shield" d="M50 6 88 20v32c0 26-15 45-38 57C27 97 12 78 12 52V20Z"></path>
+                <path d="M51 27c7 13-5 17 2 27 4-6 9-8 13-12 7 18-1 37-16 37-13 0-22-9-18-22 3-9 12-13 19-30Z"></path>
+              </svg>
+              <span><strong>Fire and rescue</strong><small>Courage, response, and recovery</small></span>
+            </button>
+            <button type="button" class="support-symbol" data-support-symbol="civic-unity" aria-pressed="false">
+              <svg viewBox="0 0 100 116" role="img" aria-label="Original civic unity support shield">
+                <path class="symbol-shield" d="M50 6 88 20v32c0 26-15 45-38 57C27 97 12 78 12 52V20Z"></path>
+                <path d="M26 63c8-18 16-18 24 0 8-18 16-18 24 0M50 29v49"></path>
+              </svg>
+              <span><strong>Civic unity</strong><small>Shared freedom and responsibility</small></span>
+            </button>
+            <button type="button" class="support-symbol" data-support-symbol="service-veterans" aria-pressed="false">
+              <svg viewBox="0 0 100 116" role="img" aria-label="Original military families and veterans support shield">
+                <path class="symbol-shield" d="M50 6 88 20v32c0 26-15 45-38 57C27 97 12 78 12 52V20Z"></path>
+                <path d="m50 27 8 17 18 3-13 13 3 19-16-9-16 9 3-19-13-13 18-3Z"></path>
+              </svg>
+              <span><strong>Service and veterans</strong><small>Service, families, and resilience</small></span>
+            </button>
+          </div>
+          <p class="support-gallery-note">
+            Whole Donuts is not affiliated with or endorsed by NYPD, FDNY, the
+            United States government, the Department of Defense, or any military
+            branch. Selection grants no merchandise or trademark rights.
+          </p>
+        </section>
+
         <section class="unlock-panel" aria-labelledby="unlock-title">
           <div class="panel-heading">
             <p class="eyebrow">temporary visual play</p>
@@ -211,6 +266,7 @@
             <div class="home-figure-card">
               <p>Your temporary figure</p>
               <div id="customFigure" class="custom-figure" aria-hidden="true"></div>
+              <p id="supportSymbolStatus" class="support-symbol-status">No support symbol selected.</p>
             </div>
           </div>
         </section>

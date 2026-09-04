@@ -39,7 +39,7 @@
         fdny: ["fdny"],
         "freedom-tower": ["freedom tower", "freedom-tower"],
         "twin-towers": ["twin towers", "twin-towers"],
-        "we-never-forget": ["we never forget", "we-never-forget"]
+        "we-never-forget": ["we never forget", "we-never-forget", "never forget", "never-forget"]
       }
     }
   ];

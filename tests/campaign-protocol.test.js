@@ -21,6 +21,7 @@ test("accepts safe remembrance aliases", () => {
   assert.equal(protocol.resolve("Freedom Tower", now).token, "freedom-tower");
   assert.equal(protocol.resolve("Twin Towers", now).token, "twin-towers");
   assert.equal(protocol.resolve("We Never Forget", now).token, "we-never-forget");
+  assert.equal(protocol.resolve("Never Forget", now).token, "we-never-forget");
 });
 
 test("rejects arbitrary expressions and all expired tokens", () => {

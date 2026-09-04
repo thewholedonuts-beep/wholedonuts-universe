@@ -22,7 +22,12 @@ The repository root contains the static GitHub Pages bundle for
   or birth date, name, email, face image, photo, location, account, or sensitive
   information.
 - The optional +U World keeps visual pose and color choices only in page
-  memory. They clear on reset or reload and are never sent, tracked, or stored.
+  memory. Its support-symbol gallery adds four original, non-official choices
+  for public safety, fire and rescue, civic unity, and military families and
+  veterans. No symbol copies an agency badge, seal, uniform mark, government
+  emblem, or military-branch insignia; the gallery disclaims affiliation and
+  merchandise rights. All visual choices clear on reset or reload and are never
+  sent, tracked, or stored.
 - The browser-only +U review queue renders the small, curated
   `review-queue-manifest.js` list already shipped with the site. It has no
   filesystem access, GitHub API access, network scanning, automatic

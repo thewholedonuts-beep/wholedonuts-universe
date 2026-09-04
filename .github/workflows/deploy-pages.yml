@@ -29,6 +29,7 @@ jobs:
         run: |
           node --check app.js
           node --check campaign-protocol.js
+          node --check world/script.js
           node --test tests/campaign-protocol.test.js
 
       - name: Stage public site
