@@ -17,6 +17,11 @@ language, not a promise of treatment, recovery, or a guaranteed outcome.
   the existing public template language and text marks; it does not collect
   responses. The ecosystem map distinguishes the available canonical on-site
   routes from planned domains that require owner verification.
+- The public +U Library includes a Movement Launch Brief for schools, companies,
+  boards, teams, community groups, and personal projects. It requires independent
+  authority verification before organizational affiliation is claimed and
+  separates youth safety, remembrance, sports marks, voluntary support, commerce,
+  rewards, and campaign expiration.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
 - The +U gateway starts with 28 original visual stick figures: 14 broad Youth
   figures and 14 broad Adult figures. One visual choice and one of three bounded
