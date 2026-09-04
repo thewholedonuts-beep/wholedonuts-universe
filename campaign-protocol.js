@@ -7,6 +7,12 @@
 
   const campaigns = [
     {
+      expiresAt: null,
+      entries: {
+        professional: ["professional", "pro", "partnership", "sponsor inquiry"]
+      }
+    },
+    {
       expiresAt: "2026-09-06T14:11:44Z",
       entries: {
         whole: ["whole"],
@@ -45,6 +51,11 @@
   ];
 
   const context = {
+    professional: {
+      label: "Professional and partnership inquiry",
+      message: "Enter through the +U gateway, understand the movement, then open the professional side to define a proposal for human review.",
+      route: "#gateway"
+    },
     whole: {
       label: "Whole",
       message: "Bring one useful part of your experience to the whole.",
@@ -162,7 +173,7 @@
     if (!normalized) return null;
     const timestamp = now instanceof Date ? now.getTime() : new Date(now || Date.now()).getTime();
     for (const campaign of campaigns) {
-      if (timestamp >= Date.parse(campaign.expiresAt)) continue;
+      if (campaign.expiresAt && timestamp >= Date.parse(campaign.expiresAt)) continue;
       for (const [token, aliases] of Object.entries(campaign.entries)) {
         if (aliases.includes(normalized)) {
           return {

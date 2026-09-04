@@ -23,6 +23,19 @@ language, not a promise of treatment, recovery, or a guaranteed outcome.
   separates youth safety, remembrance, sports marks, voluntary support, commerce,
   rewards, and campaign expiration.
 - `CNAME` declares `wenevergonnaclose.com` as the custom domain.
+- `pro/` is the canonical Whole Donuts Professional workspace. It gives
+  authorized organizations a clear path from the public gateway to the Movement
+  Launch Brief, authority verification, rights review, approved distribution,
+  and campaign closeout. The `wholedonuts.pro` domain currently uses an obsolete,
+  insecure forward. Its registrar must update that forward to an HTTPS 301 redirect
+  into the canonical gateway at
+  `https://wenevergonnaclose.com/?u=professional`; see
+  `config/wholedonuts-pro-routing.md`.
+  Prior purchases or voluntary support never create partnership authority.
+  A single verified voluntary-support payment of $250 or more enters a private
+  contributor-impact reporting path. Public recognition requires separate explicit
+  consent. This remains manual until verified payment events, secure contact
+  handling, and consent records are connected to production infrastructure.
 - The +U gateway starts with 28 original visual stick figures: 14 broad Youth
   figures and 14 broad Adult figures. One visual choice and one of three bounded
   non-sensitive needs lead to a present on-site course, World, or Library route.

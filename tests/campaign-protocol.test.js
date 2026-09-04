@@ -48,3 +48,13 @@ test("never preserves an expired campaign in an invitation", () => {
   );
   assert.equal(url, "https://wenevergonnaclose.com/");
 });
+
+test("keeps the professional gateway invitation available without bypassing entry", () => {
+  const campaign = protocol.resolve("sponsor inquiry", new Date("2030-01-01T00:00:00Z"));
+  assert.equal(campaign.token, "professional");
+  assert.equal(campaign.route, "#gateway");
+  assert.equal(
+    protocol.invitationUrl("https://wenevergonnaclose.com/", campaign, new Date("2030-01-01T00:00:00Z")),
+    "https://wenevergonnaclose.com/?u=professional"
+  );
+});

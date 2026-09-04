@@ -34,10 +34,11 @@ jobs:
 
       - name: Stage public site
         run: |
-          mkdir -p _site/world _site/templates
+          mkdir -p _site/world _site/pro _site/templates
           cp index.html guide.html ecosystem.html course.html course.js styles.css app.js campaign-protocol.js review-queue-manifest.js storefront-config.js robots.txt sitemap.xml CNAME _site/
           cp CRUMB_PROTOCOL.md WHOLE_DONUTS_GUIDE.md PUBLIC_SYSTEM.md RELEASE_NOTES.md _site/
           cp world/index.html world/script.js world/styles.css _site/world/
+          cp pro/index.html pro/styles.css _site/pro/
           cp templates/*.md _site/templates/
           printf '%s\n' "$GITHUB_SHA" > _site/deploy-version.txt
 
