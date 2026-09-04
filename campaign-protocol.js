@@ -190,6 +190,7 @@
   function invitationUrl(baseUrl, campaign, now) {
     const url = new URL(baseUrl);
     const active = campaign && resolve(campaign.token, now);
+    url.pathname = "/";
     url.search = "";
     url.hash = "";
     if (active) url.searchParams.set("u", active.token);
