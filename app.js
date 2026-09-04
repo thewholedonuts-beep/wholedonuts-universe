@@ -92,7 +92,43 @@ const chimeCopyStatus=document.querySelector('#chime-copy-status');
 const shareInvitationButton=document.querySelector('#share-invitation');
 const copyInvitationButton=document.querySelector('#copy-invitation');
 const shareInvitationStatus=document.querySelector('#share-invitation-status');
-const invitationUrl='https://wenevergonnaclose.com/';
+const inviteProtocol=window.WholeDonutsInviteProtocol;
+const initialCampaign=inviteProtocol?inviteProtocol.fromSearch(window.location.search):null;
+const campaignInvitation=document.querySelector('#campaign-invitation');
+const campaignInvitationTitle=document.querySelector('#campaign-invitation-title');
+const campaignInvitationCopy=document.querySelector('#campaign-invitation-copy');
+const campaignInvitationRoute=document.querySelector('#campaign-invitation-route');
+const campaignInvitationNote=document.querySelector('#campaign-invitation-note');
+
+function currentCampaign(){
+  return initialCampaign&&inviteProtocol?inviteProtocol.resolve(initialCampaign.token):null;
+}
+
+function currentInvitationUrl(){
+  const campaign=currentCampaign();
+  return inviteProtocol
+    ?inviteProtocol.invitationUrl('https://wenevergonnaclose.com/',campaign)
+    :'https://wenevergonnaclose.com/';
+}
+
+function renderCampaignInvitation(){
+  if(!campaignInvitation)return;
+  const campaign=currentCampaign();
+  campaignInvitation.hidden=!campaign;
+  if(!campaign)return;
+  if(campaignInvitationTitle)campaignInvitationTitle.textContent=campaign.label;
+  if(campaignInvitationCopy)campaignInvitationCopy.textContent=campaign.message;
+  if(campaignInvitationRoute)campaignInvitationRoute.href=campaign.route;
+  if(campaignInvitationNote){
+    campaignInvitationNote.textContent='This invitation changes only the words and suggested public route on this page. It creates no profile, affiliation, referral credit, reward, payment, or tracking record.';
+    if(campaign.sensitive)campaignInvitationNote.textContent+=' Remembrance context is never tied to merchandise, payment, or rewards.';
+  }
+}
+renderCampaignInvitation();
+if(initialCampaign){
+  const remaining=Date.parse(initialCampaign.expiresAt)-Date.now();
+  if(remaining>0)setTimeout(renderCampaignInvitation,Math.min(remaining+50,2147483647));
+}
 
 function selectedDonationPurpose(){
   const selected=donationPurposeInputs.find(input=>input.checked);
@@ -155,6 +191,7 @@ function setShareInvitationStatus(message){
 }
 
 async function copyInvitation(){
+  const invitationUrl=currentInvitationUrl();
   if(!navigator.clipboard||!navigator.clipboard.writeText){
     setShareInvitationStatus('Copy is unavailable in this browser. You can share https://wenevergonnaclose.com/ directly.');
     return;
@@ -171,6 +208,8 @@ if(copyInvitationButton)copyInvitationButton.addEventListener('click',()=>{
   copyInvitation();
 });
 if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=>{
+  const activeCampaign=currentCampaign();
+  const invitationUrl=currentInvitationUrl();
   if(!navigator.share){
     setShareInvitationStatus('Native sharing is unavailable in this browser. Use Copy invitation link instead.');
     return;
@@ -178,7 +217,9 @@ if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=
   try{
     await navigator.share({
       title:'+U Movement',
-      text:'Every crumb becomes part of the whole. Join the +U table.',
+      text:activeCampaign
+        ?activeCampaign.label+': '+activeCampaign.message
+        :'Every crumb becomes part of the whole. Join the +U table.',
       url:invitationUrl
     });
     setShareInvitationStatus('Invitation shared. No recipient, referral, reward, or payment record was created.');
