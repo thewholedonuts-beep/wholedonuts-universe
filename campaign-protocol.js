@@ -36,7 +36,10 @@
         "cool-new-trends": ["cool new trends", "cool-new-trends"],
         "create-ur-merch": ["create ur merch", "create-ur-merch"],
         hero: ["hero", "heroes"],
-        fdny: ["fdny"]
+        fdny: ["fdny"],
+        "freedom-tower": ["freedom tower", "freedom-tower"],
+        "twin-towers": ["twin towers", "twin-towers"],
+        "we-never-forget": ["we never forget", "we-never-forget"]
       }
     }
   ];
@@ -114,6 +117,24 @@
       label: "FDNY remembrance",
       message: "A respectful route honoring service and community courage. Whole Donuts is not affiliated with or endorsed by FDNY.",
       route: "course.html",
+      sensitive: true
+    },
+    "freedom-tower": {
+      label: "Freedom Tower remembrance",
+      message: "Reflect on resilience, renewal, and the responsibility to carry community care forward.",
+      route: "course.html",
+      sensitive: true
+    },
+    "twin-towers": {
+      label: "Twin Towers remembrance",
+      message: "Remember those affected through reflection, learning, service, and care for one another.",
+      route: "course.html",
+      sensitive: true
+    },
+    "we-never-forget": {
+      label: "We never forget",
+      message: "Honor memory with compassion and one constructive act of service.",
+      route: "templates/plus-u-share-a-crumb-template.md",
       sensitive: true
     }
   };
