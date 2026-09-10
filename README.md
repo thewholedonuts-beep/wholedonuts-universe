@@ -62,7 +62,9 @@ language, not a promise of treatment, recovery, or a guaranteed outcome.
   contributor-impact reporting path. Public recognition requires separate explicit
   consent. This remains manual until verified payment events, secure contact
   handling, and consent records are connected to production infrastructure.
-- The +U gateway starts with 28 original visual stick figures: 14 broad Youth
+- The +U gateway starts with direct Learn, Create, and Explore links to the free
+  course, World, and Library. No account or figure choice is required. An optional
+  expandable journey preserves 28 original visual stick figures: 14 broad Youth
   figures and 14 broad Adult figures. One visual choice and one of three bounded
   non-sensitive needs lead to a present on-site course, World, or Library route.
   Both temporary choices clear on restart, skip, back, or onward navigation and
