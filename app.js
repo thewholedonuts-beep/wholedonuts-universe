@@ -85,8 +85,8 @@ const donationExit=document.querySelector('#donation-exit');
 const donationExitCopy=document.querySelector('#donation-exit-copy');
 const donationProcessorLink=document.querySelector('#donation-processor-link');
 const donationStatus=document.querySelector('#donation-status');
-const donationProcessorUrl='https://cash.app/$wholedonuts';
-const chimeSign='$wholedonuts';
+const donationProcessorUrl=window.WholeDonutsLaunch.validateDonationUrl(window.WholeDonutsLaunchConfig.donationUrl);
+const chimeSign=window.WholeDonutsLaunchConfig.chimeSign;
 const copyChimeSignButton=document.querySelector('#copy-chime-sign');
 const chimeCopyStatus=document.querySelector('#chime-copy-status');
 const shareInvitationButton=document.querySelector('#share-invitation');
@@ -197,7 +197,7 @@ async function copyInvitation(){
     return;
   }
   try{
-    await navigator.clipboard.writeText(invitationUrl);
+    await navigator.clipboard.writeText(currentCampaign()?.sensitive ? invitationUrl : invitationUrl+' · Optional Cash App support: '+donationProcessorUrl+' · Chime: '+chimeSign+' (official app)');
     setShareInvitationStatus('Invitation link copied. It contains no personal or referral information.');
   }catch(e){
     setShareInvitationStatus('The invitation link could not be copied. You can share https://wenevergonnaclose.com/ directly.');
@@ -211,15 +211,15 @@ if(shareInvitationButton)shareInvitationButton.addEventListener('click',async()=
   const activeCampaign=currentCampaign();
   const invitationUrl=currentInvitationUrl();
   if(!navigator.share){
-    setShareInvitationStatus('Native sharing is unavailable in this browser. Use Copy invitation link instead.');
+    await copyInvitation();
     return;
   }
   try{
     await navigator.share({
       title:'+U Movement',
       text:activeCampaign
-        ?activeCampaign.label+': '+activeCampaign.message
-        :'Every crumb becomes part of the whole. Join the +U table.',
+        ?activeCampaign.label+': '+activeCampaign.message+(activeCampaign.sensitive?'':' · Optional support: '+donationProcessorUrl+' · Chime: '+chimeSign+' (official app)')
+        :'Every crumb becomes part of the whole. Join the +U table. Optional support: '+donationProcessorUrl+' · Chime: '+chimeSign+' (official app)',
       url:invitationUrl
     });
     setShareInvitationStatus('Invitation shared. No recipient, referral, reward, or payment record was created.');

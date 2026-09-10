@@ -100,8 +100,9 @@ integrations:
     tertiary: activecampaign
     
   payments:
-    primary: stripe
-    backup: paypal
+    automatic_processing: false
+    allowed_manual_providers: [cash_app, chime]
+    support_config: launch-config.js
     
   analytics:
     - google_analytics

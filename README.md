@@ -1,5 +1,31 @@
 # Whole Donuts Universe
 
+## Launch Center
+
+`launch.html` adds ten owner-operated launch actions to the existing +U entry.
+The shared `launch-config.js` supplies the owner-confirmed Cash App route and
+manual ChimeSign, both for **$wholedonuts**. These are the only supported payment
+providers. There is no automatic payment processor. No browser-local override or
+URL parameter can replace the recipient, and no new account details are needed.
+
+The Launch Center prepares X, Facebook, LinkedIn, native sharing with copy
+fallback, a pre-surgery request, an outreach email, a standalone donor page, and
+a locally generated support QR. X opens prefilled; Facebook and LinkedIn open
+the ecosystem link and require pasting the provided message. Email actions open
+the user's mail app. Nothing posts or sends automatically. Chime always requires
+manual entry in its official app. The QR library is qrcode-generator 1.4.4 by
+Kazuhiko Arase, distributed under the MIT license with its header preserved.
+
+The existing public support consent gate and sensitive-campaign separation are
+preserved. TNC/AWD return paths remain available; no unverified store is promoted
+as live. Inactive operations examples reference the shared config and do not
+enable automated payment gateways.
+
+Validate with `node --test tests/campaign-protocol.test.js tests/launch-center.test.js`.
+After merging, run the existing **Deploy public Pages site** workflow. It stages
+the launch files and QR library alongside the existing allowlisted public bundle.
+The canonical route is `https://wenevergonnaclose.com/launch.html` after deployment.
+
 This repository is the consolidated home for the Whole Donuts Universe.
 
 ## Public site
