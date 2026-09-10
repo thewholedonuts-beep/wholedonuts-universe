@@ -424,7 +424,7 @@ function syncAudience(id){
   const details=document.querySelector('#optional-entry');
   const heading=document.querySelector('#universe-gateway-title');
   const prompt=document.querySelector('#audience-prompt');
-  if(heading)heading.textContent=activeAudience==='youth'?'Youth · Your way into +U':activeAudience==='adult'?'Adults · Your way into +U':'Choose a way in.';
+  if(heading)heading.textContent=activeAudience==='youth'?'Youth · Your way into +U':activeAudience==='adult'?'Adults · Your way into +U':'There is room for +U.';
   if(prompt)prompt.textContent=activeAudience?'Choose one of your 14 figures, or go straight to Learn, Create, or Explore.':'Choose Youth or Adults to see your 14 stick figures.';
   if(details&&['awd','tnc','youth','adults'].includes(id))details.open=true;
   document.title=activeAudience==='youth'?'Youth | Whole Donuts +U':activeAudience==='adult'?'Adults | The Nurtured Chef +U':'Whole Donuts Universe | Find a useful next step';

@@ -1617,3 +1617,16 @@ footer a{color:var(--ink);font-weight:900}
 .journey-step[hidden], .character-group[hidden] { display: none !important; }
 .audience-entry { display:flex; flex-wrap:wrap; gap:.75rem; margin:1rem 0; }
 .audience-entry a { padding:.75rem 1rem; border:1px solid currentColor; border-radius:1rem; }
+
+.entrance-motto{font-weight:800;letter-spacing:.1em;font-size:.8rem;margin:1.5rem 0}
+.destination-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1.5rem 0}
+.destination-cards a{display:flex;flex-direction:column;gap:.9rem;padding:1.6rem;border:2px solid var(--ink);border-radius:1rem;background:var(--gold);color:var(--ink);text-decoration:none;box-shadow:5px 5px 0 var(--ink)}
+.destination-cards a:nth-child(2){background:var(--cream)}
+.destination-cards strong{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.1}
+.destination-cards span{font-size:1rem;line-height:1.5}.destination-cards .eyebrow{font-size:.75rem}
+.destination-cards b{margin-top:auto;font-size:.95rem;overflow-wrap:anywhere}
+.destination-cards a:hover{transform:translateY(-2px)}
+.destination-cards a:focus-visible,.entrance-links a:focus-visible{outline:3px solid var(--berry);outline-offset:5px}
+.entrance-note{font-size:1rem;line-height:1.6}.entrance-links{display:flex;flex-wrap:wrap;gap:1rem;font-size:1rem;margin:1.5rem 0}
+.entrance-links a{color:var(--ink);text-underline-offset:4px}
+@media(max-width:650px){.destination-cards{grid-template-columns:1fr}.destination-cards a{padding:1.2rem}}
