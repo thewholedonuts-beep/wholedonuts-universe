@@ -172,3 +172,12 @@ DNS are separate reviewed production operations.
 2. Map all subdomain routing
 3. Set up automated deployment
 4. Configure monitoring and alerts
+
+
+## Youth and adult entrances — September 10, 2026
+
+- https://wholedonuts.app/ forwards to https://wenevergonnaclose.com/#awd and opens only the 14 youth figures.
+- https://thenurturedchef.com/ forwards to https://wenevergonnaclose.com/#tnc and opens only the 14 adult figures.
+- These are separate entrances into the shared +U site. Existing HTTPS forwarding changes the browser address to the canonical domain.
+- #youth and #adults are equivalent aliases; #gateway returns to the shared entrance.
+- Figure choice is optional and records no verified age. Learn, Create, Explore, and branch/store navigation remain shared.
