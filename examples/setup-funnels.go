@@ -67,7 +67,8 @@ func main() {
 	funnel2Config := map[string]interface{}{
 		"emailProvider": "mailchimp",
 		"trackingID":    "checkout-buzz",
-		"paymentGateway": "stripe",
+		"paymentGateway": "none", // No automatic payment processing.
+		"supportConfig": "launch-config.js", // Manual Cash App or Chime only; not a checkout.
 	}
 
 	funnel2, err := manager.CreateFunnel(
