@@ -10,11 +10,11 @@ material.
 | Path | Available now | Boundary |
 |---|---|---|
 | Community start-here | Yes. The Table, The Counter, Whole Donuts path, and The Nurtured Chef path are public and optional. | No account, profile, enrollment, or personal-data requirement. |
-| 28-figure +U gateway | Yes. It is the first screen: choose one original visual figure from a broad Youth or Adult group, then choose a bounded need. The page offers a present on-site route: course, World, or Library. A visible Skip to the full site control immediately reaches The Table and reveals its progressive content. | Both choices are temporary page state only: never stored, submitted, tracked, or used as a profile. The figures are visual choices, not a face image, exact age, or identity record. |
+| 28-figure +U gateway | Optional. The first screen offers direct Learn (course), Create (World), and Explore (Library) links. Expand “Choose a stick figure instead” to choose one original visual figure from a broad Youth or Adult group, then choose a bounded need. The page offers a present on-site route: course, World, or Library. A visible Skip to the full site control immediately reaches The Table and reveals its progressive content. | Both choices are temporary page state only: never stored, submitted, tracked, or used as a profile. The figures are visual choices, not a face image, exact age, or identity record. |
 | +U Library and free course | Yes. The tracked templates may be copied and adapted for personal use, and the self-directed +U course provides print-ready worksheets. | It creates no account, response record, submission, certification, or public contribution. Do not add private, sensitive, or third-party material without permission. |
 | +U World | Yes. The visual studio is an optional public exploration path. | It does not create an account or collect a contribution. |
 | Ecosystem map | Yes. It explains the canonical entry, available on-site paths, and intended future domain roles. | Planned domains remain non-clickable until a human verifies destination, ownership, rights, privacy, safety, accessibility, and a return path. |
-| Social-media launch | Prepared for a responsible human to publish direct canonical links after production review. | No social account, platform URL, embed, credential, tracker, automatic post, cross-post, direct-message intake, or recipient record is part of this public bundle. |
+| Launch Center | Live at `launch.html`: The Nurturer Movement profile, $2,500 goal, ten launch actions, standalone donor-page download, and locally generated support QR. | Cash App and manual Chime to $wholedonuts only. X opens prefilled; Facebook and LinkedIn open share windows with copyable text; emails open the mail client. No automatic sending, account creation, payment processing, recipient records, or funds-raised claims. |
 | Donuts New School and Ambassador direction | Yes. They are open learning and leadership directions. | They are not enrollment, certification, employment, an application, or a guaranteed opportunity. |
 | Reviewed crumb process | Preparation only. The protocol and template are public. | The static site has no submission runtime; publication is always human-reviewed. |
 | Browser-only review queue | Yes. It renders curated metadata already shipped with the site. | It cannot scan, ingest, publish, merge, or access repositories or networks. |
@@ -33,7 +33,7 @@ simple visual marks, not image capture or facial data.
 
 Do not add analytics, tracking, accounts, profiling, network scanning,
 automatic content intake, automatic publication, automatic GitHub actions, or
-automatic merges. Do not add external assets or dependencies. A future
+automatic merges. The QR generator is bundled locally; it does not contact an external QR service. Do not introduce unreviewed external assets or dependencies. A future
 capability is not public until it is explicitly implemented, reviewed, and
 truthfully labeled.
 
@@ -44,7 +44,7 @@ redirect or commerce claim.
 
 The non-deployed [Social Media Protocol](config/social-media-protocol.md)
 defines the human-only launch gate and approved, factual course announcement
-copy. It permits direct canonical links only after a production review; it does
+copy. The owner-authorized Launch Center additionally offers platform share URLs and prepared voluntary-support messages using the shared payment configuration. The protocol does
 not authorize account creation, publishing, analytics, tracking, or importing
 platform data into this repository.
 
