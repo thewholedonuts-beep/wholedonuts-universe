@@ -82,3 +82,11 @@ test('every local launch asset exists and is staged by Pages, with no forbidden 
   }
   const app=fs.readFileSync(path.join(root,'app.js'),'utf8');assert.match(app,/WholeDonutsLaunchConfig.donationUrl/);assert.match(app,/activeCampaign.sensitive/);
 });
+
+test('movement profile and goal propagate without changing payment recipients', () => {
+  const a=core.assets(config,config.donationUrl);
+  assert.equal(config.movement.username,'nurturermovement');
+  assert.equal(config.movement.goalAmount,2500);
+  for(const text of [a.profile,a.request,a.outreach,core.donorPage(config,config.donationUrl)]) {assert.ok(text.includes(config.movement.displayName));assert.ok(text.includes(config.movement.bio));assert.ok(text.includes('$2,500'));assert.ok(text.includes(config.movement.goalLabel));}
+  const b=browser();assert.equal(b.elements.get('movement-bio').textContent,config.movement.bio);assert.equal(b.elements.get('support-link').value,'https://cash.app/$wholedonuts');
+});

@@ -20,6 +20,11 @@
   }
   function render() {
     const a = core.assets(config, value);
+    byId('movement-name').textContent = config.movement.displayName;
+    byId('movement-username').textContent = '@' + config.movement.username;
+    byId('movement-bio').textContent = config.movement.bio;
+    byId('movement-goal').textContent = a.goal + ' — ' + config.movement.goalLabel;
+    byId('profile-copy').value = a.profile;
     byId('donation-url').value = value;
     for (const [id, url] of Object.entries({'launch-x':a.x,'launch-facebook':a.facebook,'launch-linkedin':a.linkedin,'request-email':a.requestEmail,'outreach-email':a.outreachEmail})) {
       const link = byId(id); link.setAttribute('aria-disabled', String(!value));
@@ -44,6 +49,7 @@
     core.validateDonationUrl(config.donationUrl);
     status('Verified: the shared destination is https://cash.app/$wholedonuts. Chime uses $wholedonuts in the official app.');
   });
+  byId('copy-profile').addEventListener('click', () => copy(byId('profile-copy').value, byId('profile-copy')));
   byId('copy-chime').addEventListener('click', () => copy(config.chimeSign));
 
   document.querySelectorAll('[data-copy]').forEach(button => button.addEventListener('click', () => {
