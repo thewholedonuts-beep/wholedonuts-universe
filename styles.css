@@ -1612,3 +1612,8 @@ footer a{color:var(--ink);font-weight:900}
 .direct-entry a:focus-visible,.optional-entry summary:focus-visible{outline:3px solid var(--berry);outline-offset:4px}
 .optional-entry{margin-top:1.25rem}.optional-entry summary{cursor:pointer;padding:1rem 0;font-size:1rem;font-weight:700}
 @media(max-width:650px){.direct-entry{grid-template-columns:1fr}.direct-entry a{padding:.85rem 1rem;gap:.2rem}.direct-entry strong{font-size:1.3rem}}
+
+/* Keep hidden journey steps out of grid and flex layouts. */
+.journey-step[hidden], .character-group[hidden] { display: none !important; }
+.audience-entry { display:flex; flex-wrap:wrap; gap:.75rem; margin:1rem 0; }
+.audience-entry a { padding:.75rem 1rem; border:1px solid currentColor; border-radius:1rem; }
