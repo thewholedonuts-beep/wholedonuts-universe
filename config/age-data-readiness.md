@@ -1,4 +1,4 @@
-# Age and optional data readiness
+ # Age and optional data readiness
 
 This private operational document is not part of the Pages artifact. The public
 landing gate uses only a current-browser, in-memory adult/youth mode. A youth
