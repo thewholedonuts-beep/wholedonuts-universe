@@ -1,4 +1,4 @@
-name: Deploy public Pages site
+ name: Deploy public Pages site
 
 on:
   workflow_dispatch:
