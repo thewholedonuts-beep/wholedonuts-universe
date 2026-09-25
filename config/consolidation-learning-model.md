@@ -1,4 +1,4 @@
-# Consolidation and learning model
+ # Consolidation and learning model
 
 This is the operating model for making Whole Donuts Universe the verified
 system of record for ecosystem material. It does not claim that every legacy
