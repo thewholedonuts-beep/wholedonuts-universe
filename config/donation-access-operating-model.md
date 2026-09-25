@@ -1,4 +1,4 @@
-# Donation Access Hub operating model
+ # Donation Access Hub operating model
 
 This operational guidance is not deployed in the GitHub Pages artifact. Keep
 entity-specific accounting records, provider configuration, and eligibility
