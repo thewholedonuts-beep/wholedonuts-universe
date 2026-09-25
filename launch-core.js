@@ -1,4 +1,4 @@
-(function(root) {
+ (function(root) {
   'use strict';
   function validateDonationUrl(value) {
     const text = String(value || '').trim();
