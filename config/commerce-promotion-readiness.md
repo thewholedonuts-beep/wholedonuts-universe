@@ -1,4 +1,4 @@
-# Commerce and promotion readiness policy
+ # Commerce and promotion readiness policy
 
 This is a non-deployed policy for decisions that must remain access-controlled
 until a responsible entity authorizes them. It creates no price, discount,
