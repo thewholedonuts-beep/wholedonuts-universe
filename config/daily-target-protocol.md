@@ -1,4 +1,4 @@
-# +U/u Daily Target Protocol
+ # +U/u Daily Target Protocol
 
 This non-deployed policy describes safe daily SEO and learning targets for the
 static Universe architecture. It contains no target list, keyword, query,
