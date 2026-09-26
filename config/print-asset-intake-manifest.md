@@ -1,4 +1,4 @@
-# Print-asset recovery and approval manifest
+ # Print-asset recovery and approval manifest
 
 This internal, non-deployed manifest defines how an owner-supplied or recovered
 candidate becomes eligible for a future print proof. It contains no asset,
