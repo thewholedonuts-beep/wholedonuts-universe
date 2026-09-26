@@ -1,4 +1,4 @@
-const coursePrintButtons = [...document.querySelectorAll("[data-print-section]")];
+ const coursePrintButtons = [...document.querySelectorAll("[data-print-section]")];
 
 function clearPrintSection() {
   document.body.removeAttribute("data-print-section");
