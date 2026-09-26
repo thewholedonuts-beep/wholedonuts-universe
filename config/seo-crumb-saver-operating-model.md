@@ -1,4 +1,4 @@
-# SEO Crumb Saver operating model
+ # SEO Crumb Saver operating model
 
 This non-deployed protocol guides human-reviewed organic discovery. It is not
 an analytics service, submission backend, visitor profile, rank-manipulation
