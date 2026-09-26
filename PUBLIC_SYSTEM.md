@@ -1,4 +1,4 @@
-# Whole Donuts Universe public system
+ # Whole Donuts Universe public system
 
 `https://wenevergonnaclose.com/` is the single public entry for Whole Donuts
 Universe. This document is the source-of-truth map for what the public site
