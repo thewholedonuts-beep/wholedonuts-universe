@@ -1,4 +1,4 @@
-const links=[...document.querySelectorAll('[data-branch]')];
+ const links=[...document.querySelectorAll('[data-branch]')];
 const store=document.querySelector('#branch-store');
 const stores={
   awd:['Explore Whole Donuts','#awd'],
