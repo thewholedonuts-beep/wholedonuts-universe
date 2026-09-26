@@ -1,4 +1,4 @@
-module github.com/thewholedonuts-beep/wholedonuts-universe
+ module github.com/thewholedonuts-beep/wholedonuts-universe
 
 go 1.21
 
