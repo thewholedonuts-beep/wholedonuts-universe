@@ -1,4 +1,4 @@
-# +U Movement Launch Brief
+ # +U Movement Launch Brief
 
 Use this template to explain the goal, purpose, safeguards, and next action for a
 movement you support or are authorized to represent. Completing the template does
