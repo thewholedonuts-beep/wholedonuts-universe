@@ -1,4 +1,4 @@
-(function (root, factory) {
+ (function (root, factory) {
   const protocol = factory();
   if (typeof module === "object" && module.exports) module.exports = protocol;
   if (root) root.WholeDonutsInviteProtocol = protocol;
