@@ -1,4 +1,4 @@
-# Vendor, affiliate, and sponsorship evaluation policy
+ # Vendor, affiliate, and sponsorship evaluation policy
 
 This is an internal, non-deployed evaluation policy. It selects no vendor,
 affiliate, sponsor, product, price, checkout, customer-data flow, or public
