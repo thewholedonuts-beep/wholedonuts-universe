@@ -1,4 +1,4 @@
-# Future comfort-wear concept catalog
+ # Future comfort-wear concept catalog
 
 This is an internal, non-deployed description catalog. It does not create a
 product listing, vendor connection, checkout, price, fulfillment promise, or
