@@ -1,4 +1,4 @@
-## Direct entry and current launch documentation
+ ## Direct entry and current launch documentation
 
 The homepage now opens with Learn, Create, and Explore. The existing 28-figure journey remains optional in an expandable section. Existing TNC/AWD routes, support gates, and privacy boundaries are preserved. The public system map now documents the live Launch Center and its Cash App/Chime-only sharing and download behavior. No registration, tracking, store, DNS, or database changes.
 
