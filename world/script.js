@@ -1,4 +1,4 @@
-const figureField = document.getElementById("figureField");
+ const figureField = document.getElementById("figureField");
 const customFigure = document.getElementById("customFigure");
 const enterButton = document.getElementById("enterButton");
 const progressText = document.getElementById("progressText");
