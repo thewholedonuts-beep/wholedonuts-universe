@@ -1,4 +1,4 @@
-# WholeDonut Funnel Management - Complete Setup Guide
+ # WholeDonut Funnel Management - Complete Setup Guide
 
 ## Public GitHub Pages site
 
