@@ -1,4 +1,4 @@
-# Whole Donuts: the whole picture
+ # Whole Donuts: the whole picture
 
 Whole Donuts is a place to turn lived experience, practical knowledge, creative work, and community support into a next step that someone else can use. It starts at `wenevergonnaclose.com`, the one public entry for the +U experience.
 
