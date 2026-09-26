@@ -1,4 +1,4 @@
-# Social Media Protocol
+ # Social Media Protocol
 
 This operating guidance is not deployed in the GitHub Pages artifact. Future
 platform accounts, credentials, provider configuration, and moderation records
