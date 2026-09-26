@@ -1,4 +1,4 @@
-window.WHNUTZ_REVIEW_QUEUE_MANIFEST=[
+ window.WHNUTZ_REVIEW_QUEUE_MANIFEST=[
   {
     title:'+U Next-Step Template',
     source:'templates/plus-u-next-step-template.md',
